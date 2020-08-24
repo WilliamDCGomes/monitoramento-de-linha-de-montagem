@@ -54,6 +54,11 @@ public class LoginScreen extends javax.swing.JFrame {
 
         buttonLogin.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         buttonLogin.setText("LOGAR");
+        buttonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLoginActionPerformed(evt);
+            }
+        });
 
         buttonControlPanel.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         buttonControlPanel.setText("PAÍNEL DE CONTROLE");
@@ -116,6 +121,12 @@ public class LoginScreen extends javax.swing.JFrame {
         ConfirmationScreen confirmationScreen = new ConfirmationScreen();
         confirmationScreen.setVisible(true);
     }//GEN-LAST:event_buttonControlPanelActionPerformed
+
+    private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        WorkerScreen workerScreen = new WorkerScreen();
+        this.dispose();
+        workerScreen.setVisible(true);
+    }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
      * @param args the command line arguments
