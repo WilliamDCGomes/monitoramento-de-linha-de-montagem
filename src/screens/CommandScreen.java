@@ -67,6 +67,11 @@ public class CommandScreen extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel6.setText("ATRASOS");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jLabel7.setText("EXPORTAR TABELA COMPARATIVA");
@@ -160,6 +165,11 @@ public class CommandScreen extends javax.swing.JFrame {
         DailyPlanningScreen dailyPlanningScreen = new DailyPlanningScreen();
         dailyPlanningScreen.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        CheckDelayScreen checkDelayScreen = new CheckDelayScreen();
+        checkDelayScreen.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
