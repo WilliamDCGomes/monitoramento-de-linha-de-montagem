@@ -190,7 +190,8 @@ public class CommandScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCadastreNewStationMouseClicked
 
     private void txtEditStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEditStationMouseClicked
-        
+        EditStation editStation = new EditStation();
+        editStation.setVisible(true);
     }//GEN-LAST:event_txtEditStationMouseClicked
 
     /**
