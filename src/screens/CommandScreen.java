@@ -30,64 +30,74 @@ public class CommandScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        txtCadastreNewStation = new javax.swing.JLabel();
+        txtControlPanel = new javax.swing.JLabel();
+        txtEditStation = new javax.swing.JLabel();
+        txtChangePasswordControlPanel = new javax.swing.JLabel();
+        txtInsertDayPlan = new javax.swing.JLabel();
+        txtDelay = new javax.swing.JLabel();
+        txtExportTable = new javax.swing.JLabel();
+        txtHourHistoric = new javax.swing.JLabel();
+        buttonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Paínel de Controle");
         setResizable(false);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel2.setText("CADASTRAR UMA NOVA LINHA");
-
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("PAÍNEL DE CONTROLE");
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel3.setText("EDITAR LINHAS");
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel4.setText("MUDAR SENHA DO PAÍNEL DE CONTROLE");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel5.setText("INSERIR PLANEJAMENTO DIÁRIO");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtCadastreNewStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtCadastreNewStation.setText("CADASTRAR UMA NOVA ESTAÇÃO");
+        txtCadastreNewStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                txtCadastreNewStationMouseClicked(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel6.setText("ATRASOS");
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtControlPanel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        txtControlPanel.setText("PAÍNEL DE CONTROLE");
+
+        txtEditStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtEditStation.setText("EDITAR ESTAÇÕES");
+        txtEditStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                txtEditStationMouseClicked(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel7.setText("EXPORTAR TABELA COMPARATIVA");
+        txtChangePasswordControlPanel.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtChangePasswordControlPanel.setText("MUDAR SENHA DO PAÍNEL DE CONTROLE");
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jLabel8.setText("HISTÓRICO DE HORÁRIOS");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtInsertDayPlan.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtInsertDayPlan.setText("INSERIR PLANEJAMENTO DIÁRIO");
+        txtInsertDayPlan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                txtInsertDayPlanMouseClicked(evt);
             }
         });
 
-        jButton1.setText("LOGOUT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txtDelay.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtDelay.setText("ATRASOS");
+        txtDelay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDelayMouseClicked(evt);
+            }
+        });
+
+        txtExportTable.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtExportTable.setForeground(new java.awt.Color(255, 0, 0));
+        txtExportTable.setText("EXPORTAR TABELA COMPARATIVA");
+
+        txtHourHistoric.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtHourHistoric.setText("HISTÓRICO DE HORÁRIOS");
+        txtHourHistoric.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtHourHistoricMouseClicked(evt);
+            }
+        });
+
+        buttonLogout.setText("LOGOUT");
+        buttonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonLogoutActionPerformed(evt);
             }
         });
 
@@ -97,49 +107,49 @@ public class CommandScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(txtControlPanel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(buttonLogout)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDelay)
+                            .addComponent(txtExportTable)
+                            .addComponent(txtInsertDayPlan)
+                            .addComponent(txtHourHistoric, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addComponent(txtChangePasswordControlPanel)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)))
+                                .addComponent(txtEditStation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCadastreNewStation)))
                         .addContainerGap(25, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(txtControlPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2))
+                    .addComponent(txtInsertDayPlan)
+                    .addComponent(txtCadastreNewStation))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3))
+                    .addComponent(txtDelay)
+                    .addComponent(txtEditStation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel4))
+                    .addComponent(txtHourHistoric)
+                    .addComponent(txtChangePasswordControlPanel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jLabel7)
+                .addComponent(txtExportTable)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(buttonLogout)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -147,7 +157,7 @@ public class CommandScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
         int confirma = JOptionPane.showConfirmDialog(null, "DESEJA FAZER LOGOUT?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
         if(confirma==JOptionPane.YES_OPTION){
             LoginScreen loginScreen = new LoginScreen();
@@ -157,22 +167,31 @@ public class CommandScreen extends javax.swing.JFrame {
             }
             loginScreen.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonLogoutActionPerformed
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void txtInsertDayPlanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInsertDayPlanMouseClicked
         DailyPlanningScreen dailyPlanningScreen = new DailyPlanningScreen();
         dailyPlanningScreen.setVisible(true);
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_txtInsertDayPlanMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void txtDelayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDelayMouseClicked
         CheckDelayScreen checkDelayScreen = new CheckDelayScreen();
         checkDelayScreen.setVisible(true);
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_txtDelayMouseClicked
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void txtHourHistoricMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHourHistoricMouseClicked
         HourHistoricScreen hourHistoricScreen = new HourHistoricScreen();
         hourHistoricScreen.setVisible(true);
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_txtHourHistoricMouseClicked
+
+    private void txtCadastreNewStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCadastreNewStationMouseClicked
+        CadastreNewStation cadastreNewStation = new CadastreNewStation();
+        cadastreNewStation.setVisible(true);
+    }//GEN-LAST:event_txtCadastreNewStationMouseClicked
+
+    private void txtEditStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEditStationMouseClicked
+        
+    }//GEN-LAST:event_txtEditStationMouseClicked
 
     /**
      * @param args the command line arguments
@@ -210,14 +229,14 @@ public class CommandScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton buttonLogout;
+    private javax.swing.JLabel txtCadastreNewStation;
+    private javax.swing.JLabel txtChangePasswordControlPanel;
+    private javax.swing.JLabel txtControlPanel;
+    private javax.swing.JLabel txtDelay;
+    private javax.swing.JLabel txtEditStation;
+    private javax.swing.JLabel txtExportTable;
+    private javax.swing.JLabel txtHourHistoric;
+    private javax.swing.JLabel txtInsertDayPlan;
     // End of variables declaration//GEN-END:variables
 }
