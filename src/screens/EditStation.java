@@ -5,6 +5,8 @@
  */
 package screens;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author willi
@@ -40,6 +42,7 @@ public class EditStation extends javax.swing.JFrame {
         buttonLocale = new javax.swing.JButton();
         txtOldPassword = new javax.swing.JLabel();
         inputOldPassword = new javax.swing.JPasswordField();
+        buttonDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Estação");
@@ -76,6 +79,13 @@ public class EditStation extends javax.swing.JFrame {
 
         inputOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
+        buttonDelete.setText("APAGAR");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,7 +102,11 @@ public class EditStation extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonSave)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(buttonSave)
+                                .addGap(44, 44, 44)
+                                .addComponent(buttonDelete)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,13 +152,20 @@ public class EditStation extends javax.swing.JFrame {
                     .addComponent(txtConfirmPassword)
                     .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(buttonSave)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSave)
+                    .addComponent(buttonDelete))
                 .addGap(45, 45, 45))
         );
 
         setSize(new java.awt.Dimension(416, 476));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        JOptionPane.showMessageDialog(null, "ESTAÇÃO APAGADA COM SUCESSO");
+        this.dispose();
+    }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +203,7 @@ public class EditStation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonLocale;
     private javax.swing.JButton buttonSave;
     private javax.swing.JPasswordField inputConfirmPassword;

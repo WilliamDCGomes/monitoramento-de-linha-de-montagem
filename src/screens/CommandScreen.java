@@ -65,6 +65,11 @@ public class CommandScreen extends javax.swing.JFrame {
 
         txtChangePasswordControlPanel.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtChangePasswordControlPanel.setText("MUDAR SENHA DO PAÍNEL DE CONTROLE");
+        txtChangePasswordControlPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtChangePasswordControlPanelMouseClicked(evt);
+            }
+        });
 
         txtInsertDayPlan.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtInsertDayPlan.setText("INSERIR PLANEJAMENTO DIÁRIO");
@@ -193,6 +198,11 @@ public class CommandScreen extends javax.swing.JFrame {
         EditStation editStation = new EditStation();
         editStation.setVisible(true);
     }//GEN-LAST:event_txtEditStationMouseClicked
+
+    private void txtChangePasswordControlPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtChangePasswordControlPanelMouseClicked
+        ChangePasswordControlPanel changePasswordControlPanel = new ChangePasswordControlPanel();
+        changePasswordControlPanel.setVisible(true);
+    }//GEN-LAST:event_txtChangePasswordControlPanelMouseClicked
 
     /**
      * @param args the command line arguments

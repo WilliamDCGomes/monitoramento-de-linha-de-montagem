@@ -127,6 +127,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="MUDAR SENHA DO PA&#xcd;NEL DE CONTROLE"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtChangePasswordControlPanelMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtInsertDayPlan">
       <Properties>
