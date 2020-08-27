@@ -29,11 +29,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
     }
     int x =0;
     private void adicionar(){
-        String sql = "insert into station(login,passwors)values(MD5(MD5(MD5(?))),MD5(MD5(MD5(?))))";
+        String sql = "insert into station(login,passwors)values(?,MD5(MD5(MD5(?))))";
         try {
             Hash hash = new Hash();
             pst = conexao.prepareStatement(sql);
-            pst.setString(1,hash.DoHash(inputLogin.getText()));
+            pst.setString(1,inputLogin.getText());
             pst.setString(2,hash.DoHash(inputPassword.getText()));
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"ESTAÇÃO CADASTRADA COM SUCESSO");

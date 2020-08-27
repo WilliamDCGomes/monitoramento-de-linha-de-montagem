@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package screens;
-
+import commands.Hash;
+import conexaobd.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,14 +16,69 @@ import javax.swing.JOptionPane;
  * @author willi
  */
 public class EditStation extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form EditStation
      */
     public EditStation() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    boolean stationValid = false;
+    private void localeStation(){
+        String sqlnome = "select login from station where id = ?";
+        try {
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,inputNumberOfStation.getText());
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                inputLogin.setText(rs.getString(1));
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"ESTAÇÃO NÃO ENCONTRADA NO BANCO DE DADOS");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void checkStation(){
+        String sqlnome = "select * from station where id = ? and login = ? and passwors = MD5(MD5(MD5(?)))";
+        try {
+            Hash hash = new Hash();
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,inputNumberOfStation.getText());
+            pst.setString(2,inputLogin.getText());
+            pst.setString(3,hash.DoHash(inputOldPassword.getText()));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String x = (rs.getString(1));
+                stationValid=true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"INFORMAÇÕES NÃO CONFEREM COM A CADASTRADA NO BANCO DE DADOS");
+                stationValid=false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"ERRO AO SE CONECTAR COM O BANCO DE DADOS\n" + e);
+        }
+    }
+    private void updateStation(){
+        String sql = "update station set passwors=MD5(MD5(MD5(?))) where id=?";
+        try {
+            Hash hash = new Hash();
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1,hash.DoHash(inputPassword.getText()));
+            pst.setString(2,inputNumberOfStation.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"ESTAÇÃO ATUALIZADA COM SUCESSO");
+            stationValid=false;
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,7 +113,7 @@ public class EditStation extends javax.swing.JFrame {
         txtLogin.setText("LOGIN");
 
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtPassword.setText("SENHA");
+        txtPassword.setText("NOVA SENHA");
 
         inputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
@@ -71,8 +130,18 @@ public class EditStation extends javax.swing.JFrame {
         txtNewStation.setText("EDITAR ESTAÇÃO");
 
         buttonSave.setText("SALVAR");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
 
         buttonLocale.setText("LOCALIZAR");
+        buttonLocale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonLocaleActionPerformed(evt);
+            }
+        });
 
         txtOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtOldPassword.setText("ANTIGA SENHA");
@@ -135,7 +204,7 @@ public class EditStation extends javax.swing.JFrame {
                     .addComponent(inputNumberOfStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonLocale)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin)
                     .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -166,6 +235,32 @@ public class EditStation extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "ESTAÇÃO APAGADA COM SUCESSO");
         this.dispose();
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonLocaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLocaleActionPerformed
+        if(inputNumberOfStation.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "INFORME O NÚMERO DA ESTAÇÃO");
+        }
+        else{
+            localeStation();
+        }
+    }//GEN-LAST:event_buttonLocaleActionPerformed
+
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        if(inputNumberOfStation.getText().equals("")||inputLogin.getText().equals("")||inputOldPassword.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "POR FAVOR PREENCHA TODOS OS CAMPOS");
+        }
+        else{
+            checkStation();
+            if(stationValid == true){
+                if((inputPassword.getText().equals(inputConfirmPassword.getText()))){
+                    updateStation();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "CAMPOS DA NOVA SENHA NÃO CONFEREM");
+                }
+            }
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
      * @param args the command line arguments
