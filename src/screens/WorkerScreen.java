@@ -204,7 +204,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private javax.swing.ButtonGroup inputGroup;
     private javax.swing.JCheckBox inputWorkFinish;
     private javax.swing.JProgressBar outputBarTime;
-    private javax.swing.JLabel outputStation;
+    public static javax.swing.JLabel outputStation;
     private javax.swing.JLabel outputTime;
     private javax.swing.JLabel txtStation;
     private javax.swing.JLabel txtTimeToNextWork;

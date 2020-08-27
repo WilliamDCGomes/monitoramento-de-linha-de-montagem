@@ -5,6 +5,7 @@ import conexaobd.ModuloConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +27,28 @@ public class LoginScreen extends javax.swing.JFrame {
         initComponents();
         conexao = ModuloConexao.conector();
     }
-
+    public void logar(String login, String password){
+        String sql ="select id from station where login = MD5(MD5(MD5(?))) and passwors = MD5(MD5(MD5(?)))";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1, login);
+            pst.setString(2, password);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                int id = rs.getInt(1);
+                WorkerScreen workerScreen = new WorkerScreen();
+                this.dispose();
+                conexao.close();
+                workerScreen.setVisible(true);
+                workerScreen.outputStation.setText(Integer.toString(id));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "LOGIN OU SENHA INCORRETOS, REVISE OS CAMPOS DIGITADOS!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +60,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         txtDoLogin = new javax.swing.JLabel();
         txtLogin = new javax.swing.JLabel();
-        inoutLogin = new javax.swing.JTextField();
+        inputLogin = new javax.swing.JTextField();
         txtPassword = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
         buttonLogin = new javax.swing.JButton();
@@ -53,7 +75,7 @@ public class LoginScreen extends javax.swing.JFrame {
         txtLogin.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtLogin.setText("LOGIN");
 
-        inoutLogin.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        inputLogin.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
         txtPassword.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtPassword.setText("SENHA");
@@ -89,7 +111,7 @@ public class LoginScreen extends javax.swing.JFrame {
                             .addComponent(txtPassword))
                         .addGap(92, 92, 92)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inoutLogin)
+                            .addComponent(inputLogin)
                             .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonLogin)
@@ -109,7 +131,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin)
-                    .addComponent(inoutLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword)
@@ -131,13 +153,13 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonControlPanelActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        Hash hash = new Hash();
-        String login = hash.DoHash(inoutLogin.getText());
-        String password = hash.DoHash(inputPassword.getText());
-        System.out.println("Seu login: " + login + "\nSua senha: " + password);
-        WorkerScreen workerScreen = new WorkerScreen();
-        this.dispose();
-        workerScreen.setVisible(true);
+        if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+        }
+        else{
+            Hash hash = new Hash();
+            logar(hash.DoHash(inputLogin.getText()), hash.DoHash(inputPassword.getText()));
+        }
     }//GEN-LAST:event_buttonLoginActionPerformed
 
     /**
@@ -178,7 +200,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonControlPanel;
     private javax.swing.JButton buttonLogin;
-    private javax.swing.JTextField inoutLogin;
+    private javax.swing.JTextField inputLogin;
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JLabel txtDoLogin;
     private javax.swing.JLabel txtLogin;
