@@ -1,5 +1,10 @@
 package screens;
 
+import commands.Hash;
+import conexaobd.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +16,15 @@ package screens;
  * @author Alunos
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
 
     /**
@@ -123,6 +131,10 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonControlPanelActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        Hash hash = new Hash();
+        String login = hash.DoHash(inoutLogin.getText());
+        String password = hash.DoHash(inputPassword.getText());
+        System.out.println("Seu login: " + login + "\nSua senha: " + password);
         WorkerScreen workerScreen = new WorkerScreen();
         this.dispose();
         workerScreen.setVisible(true);

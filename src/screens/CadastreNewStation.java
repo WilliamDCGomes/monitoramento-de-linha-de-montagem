@@ -5,19 +5,55 @@
  */
 package screens;
 
+import commands.Hash;
+import conexaobd.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author willi
  */
 public class CadastreNewStation extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form CadastreNewLine
      */
     public CadastreNewStation() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    int x =0;
+    private void adicionar(){
+        String sql = "insert into station(login,passwors)values(MD5(MD5(MD5(?))),MD5(MD5(MD5(?))))";
+        try {
+            Hash hash = new Hash();
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,hash.DoHash(inputLogin.getText()));
+            pst.setString(2,hash.DoHash(inputPassword.getText()));
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"ESTAÇÃO CADASTRADA COM SUCESSO");
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void localeID(){
+        String sqlnome = "select id from station order by id desc limit 1";
+        try {
+            pst = conexao.prepareStatement(sqlnome);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                outputNumberOfStation.setText(Integer.toString(Integer.parseInt(rs.getString(1))+1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +76,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Estação");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtNewStation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtNewStation.setText("NOVA ESTAÇÃO");
@@ -67,6 +108,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         buttonSave.setText("SALVAR");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +169,26 @@ public class CadastreNewStation extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(401, 421));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            localeID();
+        }
+        
+    }//GEN-LAST:event_formWindowActivated
+
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        if(inputLogin.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS");
+        }
+        else if(inputPassword.getText().equals(inputConfirmPassword.getText())){
+            adicionar();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
      * @param args the command line arguments
