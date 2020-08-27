@@ -6,20 +6,44 @@
 package screens;
 
 import java.awt.Frame;
-
+import commands.Hash;
+import conexaobd.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Alunos
  */
 public class ConfirmationScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form ConfirmationScreen
      */
     public ConfirmationScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    boolean hasPassword;
+    int x = 0;
+    public void checkIfHasPassword(){
+        String sql ="select * from access_control_panel";
+        try {
+            pst=conexao.prepareStatement(sql);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                hasPassword=true;
+            }
+            else{
+                hasPassword=false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,6 +60,11 @@ public class ConfirmationScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtInsertAccessPassword.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtInsertAccessPassword.setText("INSIRA A SENHA DE ACESSO");
@@ -102,6 +131,13 @@ public class ConfirmationScreen extends javax.swing.JFrame {
         }
         commandScreen.setVisible(true);
     }//GEN-LAST:event_buttonEnterActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            checkIfHasPassword();
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
