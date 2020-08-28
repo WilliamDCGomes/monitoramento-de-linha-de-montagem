@@ -1,23 +1,85 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
-
+import commands.Hash;
+import conexaobd.ModuloConexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 /**
  *
  * @author willi
  */
 public class ChangePasswordControlPanel extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form ChangePasswordControlPanel
      */
     public ChangePasswordControlPanel() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    boolean hasPassword;
+    int x = 0;
+    public void checkIfHasPassword(){
+        String sql ="select * from access_control_panel";
+        try {
+            pst=conexao.prepareStatement(sql);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                hasPassword=true;
+            }
+            else{
+                hasPassword=false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void getOldPassword(){
+        String sqlnome = "select passwors from access_control_panel where passwors = MD5(MD5(MD5(?)))";
+        try {
+            Hash hash = new Hash();
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,hash.DoHash(inputOldPassword.getText()));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                updatePassword();
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"SENHA ANTIGA INCORRETA");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void addPassword(){
+        String sql = "insert into access_control_panel(id,passwors)values(1,MD5(MD5(MD5(?))))";
+        try {
+            Hash hash = new Hash();
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,hash.DoHash(inputNewPassword.getText()));
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"SENHA ATUALIZADA COM SUCESSO");
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void updatePassword(){
+        String sql = "update access_control_panel set passwors=MD5(MD5(MD5(?))) where id=1";
+        try {
+            Hash hash = new Hash();
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1,hash.DoHash(inputNewPassword.getText()));
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"SENHA ATUALIZADA COM SUCESSO");
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +100,11 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mudar Senha do Paínel de Controle");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtChangePassword.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtChangePassword.setText("MUDAR SENHA");
@@ -58,6 +125,11 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         buttonSave.setText("SALVAR");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,6 +182,28 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(463, 339));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            checkIfHasPassword();
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        if(inputOldPassword.getText().equals("")||inputNewPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+        }
+        else if(hasPassword==false&&(inputOldPassword.getText().equals("admin")||inputOldPassword.getText().equals("ADMIN"))){
+            addPassword();
+        }
+        else if(hasPassword==true){
+            getOldPassword();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "SENHA ANTIGA INCORRETA");
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
      * @param args the command line arguments
