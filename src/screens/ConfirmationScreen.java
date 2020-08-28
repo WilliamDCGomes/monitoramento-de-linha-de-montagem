@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import java.awt.Frame;
@@ -42,6 +37,28 @@ public class ConfirmationScreen extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void localeStation(){
+        String sqlnome = "select * from access_control_panel where passwors = MD5(MD5(MD5(?)))";
+        try {
+            Hash hash = new Hash();
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,hash.DoHash(inputPassword.getText()));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                Frame[] frames = getFrames(); 
+                CommandScreen commandScreen = new CommandScreen();
+                for (int i = 0; i < frames.length; i++){ 
+                    frames[i].dispose(); 
+                }
+                commandScreen.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"SENHA DE ACESSO INCORRETA");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
         }
     }
     /**
@@ -124,12 +141,23 @@ public class ConfirmationScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnterActionPerformed
-        Frame[] frames = getFrames(); 
-        CommandScreen commandScreen = new CommandScreen();
-        for (int i = 0; i < frames.length; i++){ 
-            frames[i].dispose(); 
+        if(inputPassword.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "DIGITE A SENHA DE ACESSO");
         }
-        commandScreen.setVisible(true);
+        else if(hasPassword==false&&(inputPassword.getText().equals("admin")||inputPassword.getText().equals("ADMIN"))){
+            Frame[] frames = getFrames(); 
+            CommandScreen commandScreen = new CommandScreen();
+            for (int i = 0; i < frames.length; i++){ 
+                frames[i].dispose(); 
+            }
+            commandScreen.setVisible(true);
+        }
+        else if(hasPassword==true){
+            localeStation();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "SENHA DE ACESSO INCORRETA");
+        }
     }//GEN-LAST:event_buttonEnterActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
