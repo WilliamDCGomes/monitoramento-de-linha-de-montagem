@@ -28,7 +28,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
     }
     int x =0;
-    private void adicionar(){
+    private void add(){
         String sql = "insert into station(login,passwors)values(?,MD5(MD5(MD5(?))))";
         try {
             Hash hash = new Hash();
@@ -183,7 +183,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS");
         }
         else if(inputPassword.getText().equals(inputConfirmPassword.getText())){
-            adicionar();
+            add();
         }
         else{
             JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");

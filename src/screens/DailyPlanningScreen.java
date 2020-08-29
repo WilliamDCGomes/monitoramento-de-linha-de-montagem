@@ -5,19 +5,49 @@
  */
 package screens;
 
+import functions.CheckInputDailyPlanning;
+import javax.swing.JOptionPane;
+import conexaobd.ModuloConexao;
+import functions.GetDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author willi
  */
 public class DailyPlanningScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form DailyPlanningScreen
      */
     public DailyPlanningScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    GetDate getDate = new GetDate();
+    int manyShotting;
+    private void add(int numberShotting, String start, String end){
+        String sql = "insert into planning(dats,shooting,beginning,ending)values(?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,getDate.informDate());
+            pst.setInt(2,numberShotting);
+            pst.setString(3,start);
+            pst.setString(4,end);
+            pst.executeUpdate();
+            manyShotting--;
+            if(manyShotting==0){
+                JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO INSERIDO COM SUCESSO");
+            }
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,267 +57,272 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
-        jFormattedTextField6 = new javax.swing.JFormattedTextField();
-        jFormattedTextField7 = new javax.swing.JFormattedTextField();
-        jFormattedTextField8 = new javax.swing.JFormattedTextField();
-        jFormattedTextField9 = new javax.swing.JFormattedTextField();
-        jFormattedTextField10 = new javax.swing.JFormattedTextField();
-        jFormattedTextField11 = new javax.swing.JFormattedTextField();
-        jFormattedTextField12 = new javax.swing.JFormattedTextField();
-        jFormattedTextField13 = new javax.swing.JFormattedTextField();
-        jFormattedTextField14 = new javax.swing.JFormattedTextField();
-        jFormattedTextField15 = new javax.swing.JFormattedTextField();
-        jFormattedTextField16 = new javax.swing.JFormattedTextField();
-        jFormattedTextField17 = new javax.swing.JFormattedTextField();
-        jFormattedTextField18 = new javax.swing.JFormattedTextField();
-        jFormattedTextField19 = new javax.swing.JFormattedTextField();
-        jFormattedTextField20 = new javax.swing.JFormattedTextField();
-        jFormattedTextField21 = new javax.swing.JFormattedTextField();
-        jFormattedTextField22 = new javax.swing.JFormattedTextField();
-        jFormattedTextField23 = new javax.swing.JFormattedTextField();
-        jFormattedTextField24 = new javax.swing.JFormattedTextField();
-        jFormattedTextField25 = new javax.swing.JFormattedTextField();
+        txtPlanningDay = new javax.swing.JLabel();
+        txtFirstShooting = new javax.swing.JLabel();
+        txtSecondShooting = new javax.swing.JLabel();
+        txtThirdShooting = new javax.swing.JLabel();
+        txtFourthShooting = new javax.swing.JLabel();
+        txtFifthShooting = new javax.swing.JLabel();
+        txtSixthShooting = new javax.swing.JLabel();
+        txtSeventhShooting = new javax.swing.JLabel();
+        txtEighthShooting = new javax.swing.JLabel();
+        txtNinthShooting = new javax.swing.JLabel();
+        txtTenthShooting = new javax.swing.JLabel();
+        txtEleventhShooting = new javax.swing.JLabel();
+        txtTwelfthShooting = new javax.swing.JLabel();
+        buttonSave = new javax.swing.JButton();
+        buttonImport = new javax.swing.JButton();
+        txtBeginning = new javax.swing.JLabel();
+        txtEnd = new javax.swing.JLabel();
+        inputEndFirstShooting = new javax.swing.JFormattedTextField();
+        inputBeginningFirstShooting = new javax.swing.JFormattedTextField();
+        inputBeginningSecondShooting = new javax.swing.JFormattedTextField();
+        inputBeginningThirdShooting = new javax.swing.JFormattedTextField();
+        inputBeginningFourthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningFifthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningSeventhShooting = new javax.swing.JFormattedTextField();
+        inputBeginningSixthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningEighthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningNinthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningTenthShooting = new javax.swing.JFormattedTextField();
+        inputBeginningEleventhShooting = new javax.swing.JFormattedTextField();
+        inputBeginningTwenlthShooting = new javax.swing.JFormattedTextField();
+        inputEndThirdShooting = new javax.swing.JFormattedTextField();
+        inputEndSecondShooting = new javax.swing.JFormattedTextField();
+        inputEndFourthShooting = new javax.swing.JFormattedTextField();
+        inputEndFifthShooting = new javax.swing.JFormattedTextField();
+        inputEndSixthShooting = new javax.swing.JFormattedTextField();
+        inputEndSeventhShooting = new javax.swing.JFormattedTextField();
+        inputEndEighthShooting = new javax.swing.JFormattedTextField();
+        inputEndNinthShooting = new javax.swing.JFormattedTextField();
+        inputEndTenthShooting = new javax.swing.JFormattedTextField();
+        inputEndEleventhShooting = new javax.swing.JFormattedTextField();
+        inputEndTwenlthShooting = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Planejamento");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("PLANEJAMENTO DO DIA");
+        txtPlanningDay.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtPlanningDay.setText("PLANEJAMENTO DO DIA");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel2.setText("1º RODAGEM");
+        txtFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFirstShooting.setText("1º RODAGEM");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel3.setText("2º RODAGEM");
+        txtSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSecondShooting.setText("2º RODAGEM");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel4.setText("3º RODAGEM");
+        txtThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtThirdShooting.setText("3º RODAGEM");
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel5.setText("4º RODAGEM");
+        txtFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFourthShooting.setText("4º RODAGEM");
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel6.setText("5º RODAGEM");
+        txtFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFifthShooting.setText("5º RODAGEM");
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel7.setText("6º RODAGEM");
+        txtSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSixthShooting.setText("6º RODAGEM");
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel8.setText("7º RODAGEM");
+        txtSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSeventhShooting.setText("7º RODAGEM");
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel9.setText("8º RODAGEM");
+        txtEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEighthShooting.setText("8º RODAGEM");
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel10.setText("9º RODAGEM");
+        txtNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNinthShooting.setText("9º RODAGEM");
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel11.setText("10º RODAGEM");
+        txtTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtTenthShooting.setText("10º RODAGEM");
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel12.setText("11º RODAGEM");
+        txtEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEleventhShooting.setText("11º RODAGEM");
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel13.setText("12º RODAGEM");
+        txtTwelfthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtTwelfthShooting.setText("12º RODAGEM");
 
-        jButton1.setText("SALVAR");
+        buttonSave.setText("SALVAR");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("IMPORTAR");
+        buttonImport.setText("IMPORTAR");
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel14.setText("INÍCIO");
+        txtBeginning.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtBeginning.setText("INÍCIO");
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel15.setText("FIM");
+        txtEnd.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEnd.setText("FIM");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField3.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField4.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField6.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField7.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField8.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField9.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField9.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField10.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField10.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField11.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField11.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField12.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField12.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField13.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField13.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField14.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputBeginningTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField14.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField15.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField15.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField16.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField16.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField17.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField17.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField18.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField18.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField19.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField19.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField20.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField20.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField21.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField21.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField22.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField22.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField23.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField23.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField24.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField24.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField25.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            inputEndTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField25.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,65 +332,65 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel14)
+                        .addComponent(txtBeginning)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
+                            .addComponent(txtNinthShooting)
+                            .addComponent(txtTenthShooting)
+                            .addComponent(txtEleventhShooting)
+                            .addComponent(txtTwelfthShooting)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(buttonSave)
                                 .addGap(45, 45, 45)
-                                .addComponent(jButton2))))
+                                .addComponent(buttonImport))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(txtSecondShooting)
+                            .addComponent(txtFirstShooting)
+                            .addComponent(txtThirdShooting)
+                            .addComponent(txtFourthShooting)
+                            .addComponent(txtFifthShooting)
+                            .addComponent(txtSixthShooting)
+                            .addComponent(txtSeventhShooting)
+                            .addComponent(txtEighthShooting))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField3)
-                            .addComponent(jFormattedTextField4)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField11, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField12, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField13, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
+                            .addComponent(inputBeginningFirstShooting)
+                            .addComponent(inputBeginningSecondShooting)
+                            .addComponent(inputBeginningThirdShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningFourthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningFifthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningSeventhShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningSixthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningEighthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningNinthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningTenthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningEleventhShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(inputBeginningTwenlthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(jLabel15)
+                        .addComponent(txtEnd)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jFormattedTextField1)
-                            .addComponent(jFormattedTextField16)
-                            .addComponent(jFormattedTextField15, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField17, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField19, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField21, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField22, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField23, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField25, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                            .addComponent(inputEndFirstShooting)
+                            .addComponent(inputEndSecondShooting)
+                            .addComponent(inputEndThirdShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndFourthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndFifthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndSixthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndSeventhShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndEighthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndNinthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndTenthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndEleventhShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                            .addComponent(inputEndTwenlthShooting, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                         .addGap(79, 79, 79))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(txtPlanningDay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -364,81 +399,260 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(txtPlanningDay)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15))
+                            .addComponent(txtBeginning)
+                            .addComponent(txtEnd))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFirstShooting)
+                            .addComponent(inputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSecondShooting)
+                            .addComponent(inputBeginningSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputEndSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtThirdShooting)
+                            .addComponent(inputBeginningThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFourthShooting)
+                            .addComponent(inputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
+                        .addComponent(txtFifthShooting))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jFormattedTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(inputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jFormattedTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSixthShooting)
+                    .addComponent(inputBeginningSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jFormattedTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSeventhShooting)
+                    .addComponent(inputBeginningSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jFormattedTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEighthShooting)
+                    .addComponent(inputBeginningEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jFormattedTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNinthShooting)
+                    .addComponent(inputBeginningNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jFormattedTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenthShooting)
+                    .addComponent(inputBeginningTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEleventhShooting)
+                    .addComponent(inputBeginningEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jFormattedTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTwelfthShooting)
+                    .addComponent(inputBeginningTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inputEndTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(buttonSave)
+                    .addComponent(buttonImport))
                 .addGap(99, 99, 99))
         );
 
         setSize(new java.awt.Dimension(522, 713));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        CheckInputDailyPlanning checkInputDailyPlanning = new CheckInputDailyPlanning();
+        if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndFirstShooting.getText().equals("  :  ")){
+            JOptionPane.showMessageDialog(null, "INSIRA AO MENOS UMA RODAGEM!");
+        }
+        else if(inputBeginningSecondShooting.getText().equals("  :  ")||inputEndSecondShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())){
+                manyShotting = 1;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningThirdShooting.getText().equals("  :  ")||inputEndThirdShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())){
+                manyShotting = 2;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningFourthShooting.getText().equals("  :  ")||inputEndFourthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())){
+                manyShotting = 3;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningFifthShooting.getText().equals("  :  ")||inputEndFifthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())){
+                manyShotting = 4;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningSixthShooting.getText().equals("  :  ")||inputEndSixthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())){
+                manyShotting = 5;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningSeventhShooting.getText().equals("  :  ")||inputEndSeventhShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())){
+                manyShotting = 6;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningEighthShooting.getText().equals("  :  ")||inputEndEighthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())){
+                manyShotting = 7;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningNinthShooting.getText().equals("  :  ")||inputEndNinthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())){
+                manyShotting = 8;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                add(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningTenthShooting.getText().equals("  :  ")||inputEndTenthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())){
+                manyShotting = 9;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                add(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                add(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningEleventhShooting.getText().equals("  :  ")||inputEndEleventhShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())){
+                manyShotting = 10;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                add(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                add(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+                add(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningTwenlthShooting.getText().equals("  :  ")||inputEndTwenlthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText())){
+                manyShotting = 11;
+                add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                add(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                add(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+                add(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+                add(11, inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTwenlthShooting.getText(), inputEndTwenlthShooting.getText())){
+            manyShotting = 12;
+            add(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+            add(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+            add(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+            add(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+            add(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+            add(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+            add(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+            add(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+            add(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+            add(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+            add(11, inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText());
+            add(12, inputBeginningTwenlthShooting.getText(), inputEndTwenlthShooting.getText());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,46 +690,46 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField10;
-    private javax.swing.JFormattedTextField jFormattedTextField11;
-    private javax.swing.JFormattedTextField jFormattedTextField12;
-    private javax.swing.JFormattedTextField jFormattedTextField13;
-    private javax.swing.JFormattedTextField jFormattedTextField14;
-    private javax.swing.JFormattedTextField jFormattedTextField15;
-    private javax.swing.JFormattedTextField jFormattedTextField16;
-    private javax.swing.JFormattedTextField jFormattedTextField17;
-    private javax.swing.JFormattedTextField jFormattedTextField18;
-    private javax.swing.JFormattedTextField jFormattedTextField19;
-    private javax.swing.JFormattedTextField jFormattedTextField20;
-    private javax.swing.JFormattedTextField jFormattedTextField21;
-    private javax.swing.JFormattedTextField jFormattedTextField22;
-    private javax.swing.JFormattedTextField jFormattedTextField23;
-    private javax.swing.JFormattedTextField jFormattedTextField24;
-    private javax.swing.JFormattedTextField jFormattedTextField25;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JFormattedTextField jFormattedTextField6;
-    private javax.swing.JFormattedTextField jFormattedTextField7;
-    private javax.swing.JFormattedTextField jFormattedTextField8;
-    private javax.swing.JFormattedTextField jFormattedTextField9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton buttonImport;
+    private javax.swing.JButton buttonSave;
+    private javax.swing.JFormattedTextField inputBeginningEighthShooting;
+    private javax.swing.JFormattedTextField inputBeginningEleventhShooting;
+    private javax.swing.JFormattedTextField inputBeginningFifthShooting;
+    private javax.swing.JFormattedTextField inputBeginningFirstShooting;
+    private javax.swing.JFormattedTextField inputBeginningFourthShooting;
+    private javax.swing.JFormattedTextField inputBeginningNinthShooting;
+    private javax.swing.JFormattedTextField inputBeginningSecondShooting;
+    private javax.swing.JFormattedTextField inputBeginningSeventhShooting;
+    private javax.swing.JFormattedTextField inputBeginningSixthShooting;
+    private javax.swing.JFormattedTextField inputBeginningTenthShooting;
+    private javax.swing.JFormattedTextField inputBeginningThirdShooting;
+    private javax.swing.JFormattedTextField inputBeginningTwenlthShooting;
+    private javax.swing.JFormattedTextField inputEndEighthShooting;
+    private javax.swing.JFormattedTextField inputEndEleventhShooting;
+    private javax.swing.JFormattedTextField inputEndFifthShooting;
+    private javax.swing.JFormattedTextField inputEndFirstShooting;
+    private javax.swing.JFormattedTextField inputEndFourthShooting;
+    private javax.swing.JFormattedTextField inputEndNinthShooting;
+    private javax.swing.JFormattedTextField inputEndSecondShooting;
+    private javax.swing.JFormattedTextField inputEndSeventhShooting;
+    private javax.swing.JFormattedTextField inputEndSixthShooting;
+    private javax.swing.JFormattedTextField inputEndTenthShooting;
+    private javax.swing.JFormattedTextField inputEndThirdShooting;
+    private javax.swing.JFormattedTextField inputEndTwenlthShooting;
+    private javax.swing.JLabel txtBeginning;
+    private javax.swing.JLabel txtEighthShooting;
+    private javax.swing.JLabel txtEleventhShooting;
+    private javax.swing.JLabel txtEnd;
+    private javax.swing.JLabel txtFifthShooting;
+    private javax.swing.JLabel txtFirstShooting;
+    private javax.swing.JLabel txtFourthShooting;
+    private javax.swing.JLabel txtNinthShooting;
+    private javax.swing.JLabel txtPlanningDay;
+    private javax.swing.JLabel txtSecondShooting;
+    private javax.swing.JLabel txtSeventhShooting;
+    private javax.swing.JLabel txtSixthShooting;
+    private javax.swing.JLabel txtTenthShooting;
+    private javax.swing.JLabel txtThirdShooting;
+    private javax.swing.JLabel txtTwelfthShooting;
     // End of variables declaration//GEN-END:variables
 }

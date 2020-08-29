@@ -30,44 +30,44 @@
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBeginning" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNinthShooting" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTenthShooting" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEleventhShooting" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTwelfthShooting" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSave" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonImport" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSecondShooting" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFirstShooting" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtThirdShooting" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFourthShooting" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFifthShooting" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSixthShooting" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSeventhShooting" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEighthShooting" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jFormattedTextField3" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField4" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField5" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField6" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField7" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField8" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField9" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField10" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField11" alignment="0" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField12" alignment="0" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField13" alignment="0" pref="103" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField14" alignment="0" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningFirstShooting" max="32767" attributes="0"/>
+                          <Component id="inputBeginningSecondShooting" max="32767" attributes="0"/>
+                          <Component id="inputBeginningThirdShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningFourthShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningFifthShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningSeventhShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningSixthShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningEighthShooting" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningNinthShooting" alignment="0" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningTenthShooting" alignment="0" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningEleventhShooting" alignment="0" pref="103" max="32767" attributes="0"/>
+                          <Component id="inputBeginningTwenlthShooting" alignment="0" pref="103" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -75,24 +75,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtEnd" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jFormattedTextField1" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField16" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField15" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField17" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField18" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField19" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField20" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField21" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField22" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField23" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField24" alignment="1" pref="102" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField25" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndFirstShooting" max="32767" attributes="0"/>
+                          <Component id="inputEndSecondShooting" max="32767" attributes="0"/>
+                          <Component id="inputEndThirdShooting" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndFourthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndFifthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndSixthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndSeventhShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndEighthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndNinthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndTenthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndEleventhShooting" alignment="1" pref="102" max="32767" attributes="0"/>
+                          <Component id="inputEndTwenlthShooting" alignment="1" pref="102" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   </Group>
@@ -100,7 +100,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <Component id="txtPlanningDay" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -111,90 +111,90 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPlanningDay" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtBeginning" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFirstShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputEndFirstShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputBeginningFirstShooting" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSecondShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputBeginningSecondShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputEndSecondShooting" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtThirdShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputBeginningThirdShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputEndThirdShooting" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtFourthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputBeginningFourthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputEndFourthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFifthShooting" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jFormattedTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="inputBeginningFifthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="inputEndFifthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField19" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSixthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningSixthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndSixthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField20" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSeventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningSeventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndSeventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField21" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEighthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningEighthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndEighthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField22" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNinthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningNinthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndNinthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField23" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTenthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningTenthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndTenthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField24" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEleventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningEleventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndEleventhShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField14" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextField25" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTwelfthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputBeginningTwenlthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="inputEndTwenlthShooting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonImport" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
@@ -202,7 +202,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="txtPlanningDay">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="24" style="0"/>
@@ -210,7 +210,7 @@
         <Property name="text" type="java.lang.String" value="PLANEJAMENTO DO DIA"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="txtFirstShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -218,7 +218,7 @@
         <Property name="text" type="java.lang.String" value="1&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="txtSecondShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -226,7 +226,7 @@
         <Property name="text" type="java.lang.String" value="2&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="txtThirdShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -234,7 +234,7 @@
         <Property name="text" type="java.lang.String" value="3&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="txtFourthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -242,7 +242,7 @@
         <Property name="text" type="java.lang.String" value="4&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
+    <Component class="javax.swing.JLabel" name="txtFifthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -250,7 +250,7 @@
         <Property name="text" type="java.lang.String" value="5&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="txtSixthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -258,7 +258,7 @@
         <Property name="text" type="java.lang.String" value="6&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
+    <Component class="javax.swing.JLabel" name="txtSeventhShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -266,7 +266,7 @@
         <Property name="text" type="java.lang.String" value="7&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="txtEighthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -274,7 +274,7 @@
         <Property name="text" type="java.lang.String" value="8&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JLabel" name="txtNinthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -282,7 +282,7 @@
         <Property name="text" type="java.lang.String" value="9&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="txtTenthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -290,7 +290,7 @@
         <Property name="text" type="java.lang.String" value="10&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
+    <Component class="javax.swing.JLabel" name="txtEleventhShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -298,7 +298,7 @@
         <Property name="text" type="java.lang.String" value="11&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
+    <Component class="javax.swing.JLabel" name="txtTwelfthShooting">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -306,17 +306,20 @@
         <Property name="text" type="java.lang.String" value="12&#xba; RODAGEM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
         <Property name="text" type="java.lang.String" value="SALVAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="buttonImport">
       <Properties>
         <Property name="text" type="java.lang.String" value="IMPORTAR"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel14">
+    <Component class="javax.swing.JLabel" name="txtBeginning">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -324,7 +327,7 @@
         <Property name="text" type="java.lang.String" value="IN&#xcd;CIO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
+    <Component class="javax.swing.JLabel" name="txtEnd">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="0"/>
@@ -332,7 +335,7 @@
         <Property name="text" type="java.lang.String" value="FIM"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndFirstShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -342,7 +345,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField3">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningFirstShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -352,7 +355,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField4">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningSecondShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -362,7 +365,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField5">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningThirdShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -372,7 +375,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField6">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningFourthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -382,7 +385,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField7">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningFifthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -392,7 +395,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField8">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningSeventhShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -402,7 +405,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField9">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningSixthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -412,7 +415,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField10">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningEighthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -422,7 +425,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField11">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningNinthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -432,7 +435,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField12">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningTenthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -442,7 +445,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField13">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningEleventhShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -452,7 +455,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField14">
+    <Component class="javax.swing.JFormattedTextField" name="inputBeginningTwenlthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -462,7 +465,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField15">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndThirdShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -472,7 +475,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField16">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndSecondShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -482,7 +485,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField17">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndFourthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -492,7 +495,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField18">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndFifthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -502,7 +505,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField19">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndSixthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -512,7 +515,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField20">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndSeventhShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -522,7 +525,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField21">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndEighthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -532,7 +535,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField22">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndNinthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -542,7 +545,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField23">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndTenthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -552,7 +555,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField24">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndEleventhShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
@@ -562,7 +565,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField25">
+    <Component class="javax.swing.JFormattedTextField" name="inputEndTwenlthShooting">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="##:##" subtype="-1" type="5"/>
