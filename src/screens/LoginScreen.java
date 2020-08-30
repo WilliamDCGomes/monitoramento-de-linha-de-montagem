@@ -2,6 +2,8 @@ package screens;
 
 import commands.Hash;
 import conexaobd.ModuloConexao;
+import functions.GetDate;
+import functions.GetYesterdayDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

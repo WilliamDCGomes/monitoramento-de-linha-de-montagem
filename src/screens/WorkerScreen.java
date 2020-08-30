@@ -7,20 +7,162 @@ package screens;
 
 import java.awt.Frame;
 import javax.swing.JOptionPane;
+import conexaobd.ModuloConexao;
+import functions.GetDate;
+import functions.GetHour;
+import functions.InputDelay;
+import functions.RemoveDelay;
+import functions.StartShotting;
+import functions.StationWorking;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
  * @author Alunos
  */
 public class WorkerScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    PreparedStatement pst2 = null;
+    ResultSet rs2 = null;
     /**
      * Creates new form WorkerScreen
      */
     public WorkerScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    StationWorking stationWorking = new StationWorking();
+    StartShotting startShotting = new StartShotting();
+    GetDate getDate = new GetDate();
+    GetHour getHour = new GetHour();
+    RemoveDelay removeDelay = new RemoveDelay();
+    public String reasonDelay;
+    public String typeDelay;
+    private int id;
+    private void finish(){
+        String sql = "update station set working=0 where id=?";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setInt(1,Integer.parseInt(outputStation.getText()));
+            pst.executeUpdate();
+            pst2=conexao.prepareStatement(sql);
+            pst2.setInt(1,Integer.parseInt(outputStation.getText()));
+            pst2.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void open(){
+        String sql = "update station set working=1 where id=?";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setInt(1,Integer.parseInt(outputStation.getText()));
+            pst.executeUpdate();
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getId(){
+        String sql ="select id from workfinish where dats = ? and station = ? and shot = ?";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1, getDate.informDate());
+            pst.setString(2, outputStation.getText());
+            pst.setInt(3, getShot());
+            rs= pst.executeQuery();
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void removeService(){
+        int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA RESETAR SUA EXECUÇÃO?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+        if(confirma==JOptionPane.YES_OPTION){
+            String sql = "delete from workfinish where id = ?";
+            try {
+                pst=conexao.prepareStatement(sql);
+                getId();
+                pst.setInt(1, id);
+                int apagado = pst.executeUpdate();
+                if(apagado>0){
+                    removeDelay.remove(id);
+                    open();
+                    groupWorkFinish.clearSelection();
+                    groupDelay.clearSelection();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    private void addService(){
+        String sql = "insert into workfinish(dats,beginning,ending,station,shot) values(?,?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,getDate.informDate());
+            pst.setString(2,getBegin(getShot()));
+            pst.setString(3,getHour.informHour());
+            pst.setString(4,outputStation.getText());
+            pst.setInt(5,getShot());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
+            finish();
+            if(stationWorking.hasStation()==false){
+                startShotting.keepProduction(getShot()+1, getHour.informHour());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private String getBegin(int shot){
+        String sql ="select beginning from presentShotting where dats = ? and shot = ?";
+        try {
+            pst2=conexao.prepareStatement(sql);
+            pst2.setString(1, getDate.informDate());
+            pst2.setInt(2, shot);
+            rs2= pst2.executeQuery();
+            if(rs2.next()){
+                return rs2.getString(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    private int getShot(){
+        String sql ="select shot from presentShotting where dats = ? order by id desc limit 1";
+        try {
+            pst2=conexao.prepareStatement(sql);
+            pst2.setString(1, getDate.informDate());
+            rs2= pst2.executeQuery();
+            if(rs2.next()){
+                return rs2.getInt(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return -1;
+    }
+    private void getDelay(){
+        String sql ="select reasonDelay, typeDelay from auxDelay order by id desc limit 1";
+        try {
+            pst2=conexao.prepareStatement(sql);
+            rs2= pst2.executeQuery();
+            if(rs2.next()){
+                reasonDelay = rs2.getString(1);
+                typeDelay = rs2.getString(2);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +172,8 @@ public class WorkerScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inputGroup = new javax.swing.ButtonGroup();
+        groupDelay = new javax.swing.ButtonGroup();
+        groupWorkFinish = new javax.swing.ButtonGroup();
         txtTimeToNextWork = new javax.swing.JLabel();
         outputTime = new javax.swing.JLabel();
         outputBarTime = new javax.swing.JProgressBar();
@@ -53,11 +196,16 @@ public class WorkerScreen extends javax.swing.JFrame {
 
         outputBarTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        inputGroup.add(inputWorkFinish);
+        groupWorkFinish.add(inputWorkFinish);
         inputWorkFinish.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputWorkFinish.setText("SERVIÇO FINALIZADO");
+        inputWorkFinish.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputWorkFinishActionPerformed(evt);
+            }
+        });
 
-        inputGroup.add(inputDelay);
+        groupDelay.add(inputDelay);
         inputDelay.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputDelay.setText("ATRASO");
         inputDelay.addActionListener(new java.awt.event.ActionListener() {
@@ -146,12 +294,11 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDelayActionPerformed
 
     private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
-        inputGroup.clearSelection();
-        
+        removeService();
     }//GEN-LAST:event_buttonResetActionPerformed
 
     private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
-        int confirma = JOptionPane.showConfirmDialog(null, "DESEJA FAZER LOGOUT?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+        int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA FAZER LOGOUT?\nCASO FAÇA SEM FINALIZAR O SERVIÇO, OS DADOS SERÃO PERDIDOS!","ATENÇÃO",JOptionPane.YES_NO_OPTION);
         if(confirma==JOptionPane.YES_OPTION){
             LoginScreen loginScreen = new LoginScreen();
             Frame[] frames = getFrames(); 
@@ -161,6 +308,18 @@ public class WorkerScreen extends javax.swing.JFrame {
             loginScreen.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogoutActionPerformed
+
+    private void inputWorkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWorkFinishActionPerformed
+        StartShotting startShotting = new StartShotting();
+        startShotting.startProduction();
+        
+        addService();
+        if(inputDelay.isSelected()){
+            InputDelay inputDelay = new InputDelay();
+            getDelay();
+            inputDelay.makeInput(reasonDelay,typeDelay);
+        }
+    }//GEN-LAST:event_inputWorkFinishActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,8 +359,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonReset;
+    private javax.swing.ButtonGroup groupDelay;
+    private javax.swing.ButtonGroup groupWorkFinish;
     private javax.swing.JCheckBox inputDelay;
-    private javax.swing.ButtonGroup inputGroup;
     private javax.swing.JCheckBox inputWorkFinish;
     private javax.swing.JProgressBar outputBarTime;
     public static javax.swing.JLabel outputStation;

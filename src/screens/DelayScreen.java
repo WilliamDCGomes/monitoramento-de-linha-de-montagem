@@ -5,19 +5,27 @@
  */
 package screens;
 
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import conexaobd.ModuloConexao;
 /**
  *
  * @author Alunos
  */
 public class DelayScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form DelayScreen
      */
     public DelayScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    public String station;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,46 +36,51 @@ public class DelayScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        txtReasonDelay = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        inputReasonDelay = new javax.swing.JTextArea();
+        txtTypeDelay = new javax.swing.JLabel();
+        inputType1 = new javax.swing.JRadioButton();
+        inputType2 = new javax.swing.JRadioButton();
+        inputType3 = new javax.swing.JRadioButton();
+        inputType4 = new javax.swing.JRadioButton();
+        buttonSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atraso");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("MOTIVO DO ATRASO");
+        txtReasonDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtReasonDelay.setText("MOTIVO DO ATRASO");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        inputReasonDelay.setColumns(20);
+        inputReasonDelay.setRows(5);
+        jScrollPane1.setViewportView(inputReasonDelay);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setText("TIPO DO ATRASO");
+        txtTypeDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtTypeDelay.setText("TIPO DO ATRASO");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jRadioButton1.setText("M1");
+        buttonGroup1.add(inputType1);
+        inputType1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        inputType1.setText("M1");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jRadioButton2.setText("M2");
+        buttonGroup1.add(inputType2);
+        inputType2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        inputType2.setText("M2");
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jRadioButton3.setText("M3");
+        buttonGroup1.add(inputType3);
+        inputType3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        inputType3.setText("M3");
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        jRadioButton4.setText("M4");
+        buttonGroup1.add(inputType4);
+        inputType4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        inputType4.setText("M4");
 
-        jButton1.setText("SALVAR");
+        buttonSave.setText("SALVAR");
+        buttonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,45 +89,86 @@ public class DelayScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
+                    .addComponent(buttonSave)
+                    .addComponent(txtTypeDelay)
+                    .addComponent(txtReasonDelay)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(inputType1)
+                            .addComponent(inputType2))
                         .addGap(89, 89, 89)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton3))))
+                            .addComponent(inputType4)
+                            .addComponent(inputType3))))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
+                .addComponent(txtReasonDelay)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(txtTypeDelay)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3))
+                    .addComponent(inputType1)
+                    .addComponent(inputType3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton4))
+                    .addComponent(inputType2)
+                    .addComponent(inputType4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(buttonSave)
                 .addGap(14, 14, 14))
         );
 
         setSize(new java.awt.Dimension(581, 429));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    private void addTemporary(String reasonDelay, String typeDelay){
+        String sql = "insert into auxDelay(reasonDelay,typeDelay) values(?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,reasonDelay);
+            pst.setString(2,typeDelay);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        boolean emptyInput=false;
+        if(inputReasonDelay.getText().equals("")){
+            emptyInput=true;
+        }
+        String reasonDelay = inputReasonDelay.getText();
+        String typeDelay = null;
+        if(inputType1.isSelected()&&emptyInput==false){
+            typeDelay = "1";
+            this.dispose();
+        }
+        else if(inputType2.isSelected()&&emptyInput==false){
+            typeDelay = "2";
+            this.dispose();
+        }
+        else if(inputType3.isSelected()&&emptyInput==false){
+            typeDelay = "3";
+            this.dispose();
+        }
+        else if(inputType4.isSelected()&&emptyInput==false){
+            typeDelay = "4";
+            this.dispose();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "PREENCHA O MOTIVO DO ATRASO E ESCOLHA O TIPO TAMBÉM");
+        }
+        if(typeDelay!=null){
+            addTemporary(reasonDelay, typeDelay);
+        }
+    }//GEN-LAST:event_buttonSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,14 +207,14 @@ public class DelayScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JButton buttonSave;
+    private javax.swing.JTextArea inputReasonDelay;
+    private javax.swing.JRadioButton inputType1;
+    private javax.swing.JRadioButton inputType2;
+    private javax.swing.JRadioButton inputType3;
+    private javax.swing.JRadioButton inputType4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel txtReasonDelay;
+    private javax.swing.JLabel txtTypeDelay;
     // End of variables declaration//GEN-END:variables
 }
