@@ -12,7 +12,7 @@ public class StationWorking {
         conexao = ModuloConexao.conector();
     }
     public boolean hasStation(){
-        String sql ="select * from station where working = 1";
+        String sql ="select * from stations where working = 1";
         try {
             pst=conexao.prepareStatement(sql);
             rs= pst.executeQuery();

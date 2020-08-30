@@ -44,7 +44,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     public String typeDelay;
     private int id;
     private void finish(){
-        String sql = "update station set working=0 where id=?";
+        String sql = "update stations set working=0 where id=?";
         try {
             pst=conexao.prepareStatement(sql);
             pst.setInt(1,Integer.parseInt(outputStation.getText()));
@@ -57,7 +57,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         }
     }
     private void open(){
-        String sql = "update station set working=1 where id=?";
+        String sql = "update stations set working=1 where id=?";
         try {
             pst=conexao.prepareStatement(sql);
             pst.setInt(1,Integer.parseInt(outputStation.getText()));

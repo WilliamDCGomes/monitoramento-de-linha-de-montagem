@@ -30,7 +30,7 @@ public class LoginScreen extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
     }
     public void logar(String login, String password){
-        String sql ="select id from station where login = ? and passwors = MD5(MD5(MD5(?)))";
+        String sql ="select id from stations where login = ? and passwors = MD5(MD5(MD5(?)))";
         try {
             pst=conexao.prepareStatement(sql);
             pst.setString(1, login);

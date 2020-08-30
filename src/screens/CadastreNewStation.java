@@ -20,6 +20,8 @@ public class CadastreNewStation extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    PreparedStatement pst2 = null;
+    ResultSet rs2 = null;
     /**
      * Creates new form CadastreNewLine
      */
@@ -29,12 +31,13 @@ public class CadastreNewStation extends javax.swing.JFrame {
     }
     int x =0;
     private void add(){
-        String sql = "insert into station(login,passwors)values(?,MD5(MD5(MD5(?))))";
+        String sql = "insert into stations(id,login,passwors)values(?,?,MD5(MD5(MD5(?))))";
         try {
             Hash hash = new Hash();
             pst = conexao.prepareStatement(sql);
-            pst.setString(1,inputLogin.getText());
-            pst.setString(2,hash.DoHash(inputPassword.getText()));
+            pst.setInt(1,Integer.parseInt(outputNumberOfStation.getText()));
+            pst.setString(2,inputLogin.getText());
+            pst.setString(3,hash.DoHash(inputPassword.getText()));
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"ESTAÇÃO CADASTRADA COM SUCESSO");
             this.dispose();
@@ -42,8 +45,22 @@ public class CadastreNewStation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    private boolean hasStation(){
+        String sqlnome = "select * from stations where id = ?";
+        try {
+            pst2 = conexao.prepareStatement(sqlnome);
+            pst2.setString(1,outputNumberOfStation.getText());
+            rs2 = pst2.executeQuery();
+            if (rs2.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return false;
+    }
     private void localeID(){
-        String sqlnome = "select id from station order by id desc limit 1";
+        String sqlnome = "select id from stations order by id desc limit 1";
         try {
             pst = conexao.prepareStatement(sqlnome);
             rs = pst.executeQuery();
@@ -96,7 +113,6 @@ public class CadastreNewStation extends javax.swing.JFrame {
 
         outputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputNumberOfStation.setText("1");
-        outputNumberOfStation.setEnabled(false);
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
@@ -173,6 +189,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
             x++;
+            inputLogin.requestFocus();
             localeID();
         }
         
@@ -183,7 +200,12 @@ public class CadastreNewStation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS");
         }
         else if(inputPassword.getText().equals(inputConfirmPassword.getText())){
-            add();
+            if(hasStation()){
+                JOptionPane.showMessageDialog(null, "ESSA ESTAÇÃO JÁ ESTÁ CADASTRADA NO BANCO DE DADOS");
+            }
+            else{
+                add();
+            }
         }
         else{
             JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");

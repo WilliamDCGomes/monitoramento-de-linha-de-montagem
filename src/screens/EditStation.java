@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 import commands.Hash;
 import conexaobd.ModuloConexao;
@@ -27,8 +22,28 @@ public class EditStation extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
     }
     boolean stationValid = false;
+    private void remove(){
+        int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA APAGAR ESSA ESTAÇÃO?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+        if(confirma==JOptionPane.YES_OPTION){
+            String sql = "delete from stations where id = ?";
+            try {
+                pst=conexao.prepareStatement(sql);
+                pst.setString(1, inputNumberOfStation.getText());
+                int apagado = pst.executeUpdate();
+                if(apagado>0){
+                    JOptionPane.showMessageDialog(null,"ESTAÇÃO APAGADA COM SUCESSO");
+                    this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"ESTAÇÃO NÃO CADASTRADA NO BANCO DE DADOS");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
     private void localeStation(){
-        String sqlnome = "select login from station where id = ?";
+        String sqlnome = "select login from stations where id = ?";
         try {
             pst = conexao.prepareStatement(sqlnome);
             pst.setString(1,inputNumberOfStation.getText());
@@ -44,7 +59,7 @@ public class EditStation extends javax.swing.JFrame {
         }
     }
     private void checkStation(){
-        String sqlnome = "select * from station where id = ? and login = ? and passwors = MD5(MD5(MD5(?)))";
+        String sqlnome = "select * from stations where id = ? and login = ? and passwors = MD5(MD5(MD5(?)))";
         try {
             Hash hash = new Hash();
             pst = conexao.prepareStatement(sqlnome);
@@ -65,7 +80,7 @@ public class EditStation extends javax.swing.JFrame {
         }
     }
     private void updateStation(){
-        String sql = "update station set passwors=MD5(MD5(MD5(?))) where id=?";
+        String sql = "update stations set passwors=MD5(MD5(MD5(?))) where id=?";
         try {
             Hash hash = new Hash();
             pst=conexao.prepareStatement(sql);
@@ -232,8 +247,7 @@ public class EditStation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
-        JOptionPane.showMessageDialog(null, "ESTAÇÃO APAGADA COM SUCESSO");
-        this.dispose();
+        remove();
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonLocaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLocaleActionPerformed
