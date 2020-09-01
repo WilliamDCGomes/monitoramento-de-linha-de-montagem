@@ -42,8 +42,8 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             manyShotting--;
             if(manyShotting==0){
                 JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO INSERIDO COM SUCESSO");
+                this.dispose();
             }
-            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

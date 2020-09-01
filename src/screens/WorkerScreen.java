@@ -8,15 +8,20 @@ package screens;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import conexaobd.ModuloConexao;
+import functions.BeginProdution;
+import functions.GetBeginOfDelay;
 import functions.GetDate;
 import functions.GetHour;
 import functions.InputDelay;
 import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
+import functions.TimeDifference;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.TimerTask;
+import javax.swing.Timer;
 
 /**
  *
@@ -43,6 +48,20 @@ public class WorkerScreen extends javax.swing.JFrame {
     public String reasonDelay;
     public String typeDelay;
     private int id;
+    int x = 0;
+    String beginTime;
+    String endTime;
+    private void setTime(){
+        TimeDifference timeDifference = new TimeDifference();
+        int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
+        int interval = 30000;  // intervalo no qual a tarefa será executada.
+        java.util.Timer timer = new java.util.Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                outputTime.setText(timeDifference.getDifference(getHour.informHour(), endTime));
+            }
+        }, delay, interval);
+    }
     private void finish(){
         String sql = "update stations set working=0 where id=?";
         try {
@@ -187,6 +206,11 @@ public class WorkerScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Linha de Montagem");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtTimeToNextWork.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtTimeToNextWork.setText("TEMPO RESTANTE ATÉ A RODAGEM");
@@ -320,6 +344,17 @@ public class WorkerScreen extends javax.swing.JFrame {
             inputDelay.makeInput(reasonDelay,typeDelay);
         }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+            BeginProdution beginProdution = new BeginProdution();
+            x++;
+            beginTime = beginProdution.getProduction(getShot());
+            endTime = getBeginOfDelay.getBegin(getShot());
+            setTime();
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

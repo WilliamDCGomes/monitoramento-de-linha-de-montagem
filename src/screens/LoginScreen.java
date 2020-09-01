@@ -4,6 +4,7 @@ import commands.Hash;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
 import functions.GetYesterdayDate;
+import functions.StartShotting;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -155,6 +156,9 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonControlPanelActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
+        StartShotting startShotting = new StartShotting();
+        startShotting.startProduction();
+        
         if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
             JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
         }
