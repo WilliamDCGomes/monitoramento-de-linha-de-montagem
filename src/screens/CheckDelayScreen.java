@@ -1,23 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
-
+import conexaobd.ModuloConexao;
+import functions.GetDate;
+import functions.GetYesterdayDate;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author willi
  */
 public class CheckDelayScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form CheckDelayScreen
      */
     public CheckDelayScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    int x=0;
+    GetDate getDate = new GetDate();
+    GetYesterdayDate getYesterdayDate= new GetYesterdayDate();
+    private void searchDelays(String begin, String end){
+        String sql = "select localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where dats between ? and ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,begin);
+            pst.setString(2,end);
+            inputFirstDateFilter.setText(getDate.informDate());
+            inputSecondDateFilter.setText(getDate.informDate());
+            rs=pst.executeQuery();
+            tableDelay.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void searchDelaysFilter(){
+        String sql = "select localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where (dats between ? and ?) and typeDelay = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,inputFirstDateFilter.getText());
+            pst.setString(2,inputSecondDateFilter.getText());
+            if(inputDelayReason.getSelectedItem().equals("M1")){
+                pst.setString(3,"M1");
+            }
+            else if(inputDelayReason.getSelectedItem().equals("M2")){
+                pst.setString(3,"M2");
+            }
+            else if(inputDelayReason.getSelectedItem().equals("M3")){
+                pst.setString(3,"M3");
+            }
+            else if(inputDelayReason.getSelectedItem().equals("M4")){
+                pst.setString(3,"M4");
+            }
+            rs=pst.executeQuery();
+            tableDelay.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +84,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atrasos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtDelay.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtDelay.setText("ATRASOS");
@@ -70,6 +121,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         inputFirstDateFilter.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputFirstDateFilter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputFirstDateFilterFocusGained(evt);
+            }
+        });
 
         try {
             inputSecondDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -77,8 +133,18 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         inputSecondDateFilter.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputSecondDateFilter.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputSecondDateFilterFocusGained(evt);
+            }
+        });
 
         buttonFilter.setText("FILTRAR");
+        buttonFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFilterActionPerformed(evt);
+            }
+        });
 
         inputDelayReason.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONAR", "M1", "M2", "M3", "M4" }));
@@ -134,6 +200,30 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(595, 513));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            searchDelays(getDate.informDate(), getDate.informDate());
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void buttonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFilterActionPerformed
+        if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+            searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
+        }
+        else{
+            searchDelaysFilter();
+        }
+    }//GEN-LAST:event_buttonFilterActionPerformed
+
+    private void inputFirstDateFilterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputFirstDateFilterFocusGained
+        inputFirstDateFilter.selectAll();
+    }//GEN-LAST:event_inputFirstDateFilterFocusGained
+
+    private void inputSecondDateFilterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSecondDateFilterFocusGained
+        inputSecondDateFilter.selectAll();
+    }//GEN-LAST:event_inputSecondDateFilterFocusGained
 
     /**
      * @param args the command line arguments

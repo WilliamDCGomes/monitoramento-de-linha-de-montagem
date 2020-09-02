@@ -14,7 +14,6 @@ public class TimeDifference {
             dif-=60;
             hour++;
         }
-        System.out.println(hour + ":" + dif);
         if(hour>0&&hour<10&&dif>0&&dif<10){
             return "0" + hour + ":0" + dif;
         }

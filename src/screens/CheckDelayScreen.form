@@ -11,6 +11,9 @@
     <SyntheticProperty name="generateSize" type="boolean" value="true"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowActivated" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -140,6 +143,9 @@
           <Font name="Dialog" size="15" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputFirstDateFilterFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="inputSecondDateFilter">
       <Properties>
@@ -150,11 +156,17 @@
           <Font name="Dialog" size="15" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="inputSecondDateFilterFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonFilter">
       <Properties>
         <Property name="text" type="java.lang.String" value="FILTRAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonFilterActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="inputDelayReason">
       <Properties>

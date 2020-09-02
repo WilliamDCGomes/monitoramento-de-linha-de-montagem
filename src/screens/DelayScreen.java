@@ -147,19 +147,19 @@ public class DelayScreen extends javax.swing.JFrame {
         String reasonDelay = inputReasonDelay.getText();
         String typeDelay = null;
         if(inputType1.isSelected()&&emptyInput==false){
-            typeDelay = "1";
+            typeDelay = "M1";
             this.dispose();
         }
         else if(inputType2.isSelected()&&emptyInput==false){
-            typeDelay = "2";
+            typeDelay = "M2";
             this.dispose();
         }
         else if(inputType3.isSelected()&&emptyInput==false){
-            typeDelay = "3";
+            typeDelay = "M3";
             this.dispose();
         }
         else if(inputType4.isSelected()&&emptyInput==false){
-            typeDelay = "4";
+            typeDelay = "M4";
             this.dispose();
         }
         else{
