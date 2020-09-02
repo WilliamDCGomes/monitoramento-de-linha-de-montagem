@@ -21,7 +21,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.TimerTask;
-import javax.swing.Timer;
 
 /**
  *
