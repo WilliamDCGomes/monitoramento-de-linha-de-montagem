@@ -7,6 +7,9 @@ public class TimeDifference {
         int minutesE = (Integer.parseInt(vetE[0])*60) + Integer.parseInt(vetE[1]);
         int dif = minutesE - minutesB;
         int hour = 0;
+        if(dif<0){
+            dif *= (-1);
+        }
         while(dif>=60){
             dif-=60;
             hour++;
