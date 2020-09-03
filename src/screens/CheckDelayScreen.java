@@ -2,7 +2,6 @@ package screens;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
 import functions.GetYesterdayDate;
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -150,6 +149,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONAR", "M1", "M2", "M3", "M4" }));
 
         buttonShow.setText("MOSTRAR");
+        buttonShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonShowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,6 +228,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     private void inputSecondDateFilterFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputSecondDateFilterFocusGained
         inputSecondDateFilter.selectAll();
     }//GEN-LAST:event_inputSecondDateFilterFocusGained
+
+    private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
+        ShowDelay showDelay = new ShowDelay();
+        showDelay.setVisible(true);
+    }//GEN-LAST:event_buttonShowActionPerformed
 
     /**
      * @param args the command line arguments
