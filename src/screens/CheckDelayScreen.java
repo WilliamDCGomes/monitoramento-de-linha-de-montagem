@@ -89,7 +89,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
 
-        txtDelay.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtDelay.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtDelay.setText("ATRASOS");
 
         tableDelay.setModel(new javax.swing.table.DefaultTableModel(
