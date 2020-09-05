@@ -26,7 +26,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     GetDate getDate = new GetDate();
     GetYesterdayDate getYesterdayDate= new GetYesterdayDate();
     private void searchDelays(String begin, String end){
-        String sql = "select localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where dats between ? and ?";
+        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where dats between ? and ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1,begin);
@@ -40,7 +40,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         }
     }
     private void searchDelaysFilter(){
-        String sql = "select localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where (dats between ? and ?) and typeDelay = ?";
+        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where (dats between ? and ?) and typeDelay = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1,inputFirstDateFilter.getText());
@@ -94,22 +94,22 @@ public class CheckDelayScreen extends javax.swing.JFrame {
 
         tableDelay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Estação", "Tipo do Atraso", "Duração do Atraso"
+                "Estação", "Tipo do Atraso", "Duração do Atraso", "Rodagem"
             }
         ));
         allTableDelay.setViewportView(tableDelay);
@@ -230,7 +230,13 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_inputSecondDateFilterFocusGained
 
     private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
+        int setar=tableDelay.getSelectedRow();
         ShowDelay showDelay = new ShowDelay();
+        showDelay.idDelay = (tableDelay.getModel().getValueAt(setar,0).toString());
+        showDelay.outputStation.setText(tableDelay.getModel().getValueAt(setar,1).toString());
+        showDelay.outputTypeDelay.setText(tableDelay.getModel().getValueAt(setar,2).toString());
+        showDelay.outputBeginDelay.setText(tableDelay.getModel().getValueAt(setar,3).toString());
+        showDelay.outputEndDelay.setText(tableDelay.getModel().getValueAt(setar,4).toString());
         showDelay.setVisible(true);
     }//GEN-LAST:event_buttonShowActionPerformed
 
