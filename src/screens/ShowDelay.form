@@ -252,6 +252,9 @@
           <Image iconType="3" name="/images/LeftArrow.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="previousDelayMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nextDelay">
       <Properties>
@@ -259,6 +262,9 @@
           <Image iconType="3" name="/images/RightArrow.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextDelayMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtShot">
       <Properties>

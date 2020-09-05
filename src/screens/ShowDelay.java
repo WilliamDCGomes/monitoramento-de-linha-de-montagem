@@ -21,19 +21,65 @@ public class ShowDelay extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
     }
     int x=0;
-    public String idDelay;
+    public int idDelay;
     TimeDifference timeDifference = new TimeDifference();
     private void getDelay(){
         String sql = "select reasonDelay, shot, dats from delay where id = ?";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1,idDelay);
+            pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
                 outputReasonDelay.setText(rs.getString(1));
                 outputShot.setText(rs.getString(2));
                 outputDayOfDelay.setText(rs.getString(3));
                 outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getPreviusDelay(){
+        String sql = "select * from delay where id = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1,--idDelay);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                outputStation.setText(rs.getString(6));
+                outputTypeDelay.setText(rs.getString(5));
+                outputShot.setText(rs.getString(2));
+                outputBeginDelay.setText(rs.getString(7));
+                outputEndDelay.setText(rs.getString(8));
+                outputReasonDelay.setText(rs.getString(4));
+                outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
+            }
+            else{
+                idDelay++;
+                JOptionPane.showMessageDialog(null, "NÃO HÁ MAIS ATRASOS PARA SER MOSTRADO");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getNextDelay(){
+        String sql = "select * from delay where id = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setInt(1,++idDelay);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                outputStation.setText(rs.getString(6));
+                outputTypeDelay.setText(rs.getString(5));
+                outputShot.setText(rs.getString(2));
+                outputBeginDelay.setText(rs.getString(7));
+                outputEndDelay.setText(rs.getString(8));
+                outputReasonDelay.setText(rs.getString(4));
+                outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
+            }
+            else{
+                idDelay--;
+                JOptionPane.showMessageDialog(null, "NÃO HÁ MAIS ATRASOS PARA SER MOSTRADO");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
@@ -109,8 +155,18 @@ public class ShowDelay extends javax.swing.JFrame {
         jScrollPane1.setViewportView(outputReasonDelay);
 
         previousDelay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
+        previousDelay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                previousDelayMouseClicked(evt);
+            }
+        });
 
         nextDelay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
+        nextDelay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextDelayMouseClicked(evt);
+            }
+        });
 
         txtShot.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtShot.setText("Rodagem");
@@ -257,6 +313,14 @@ public class ShowDelay extends javax.swing.JFrame {
             getDelay();
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void previousDelayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousDelayMouseClicked
+        getPreviusDelay();
+    }//GEN-LAST:event_previousDelayMouseClicked
+
+    private void nextDelayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextDelayMouseClicked
+        getNextDelay();
+    }//GEN-LAST:event_nextDelayMouseClicked
 
     /**
      * @param args the command line arguments

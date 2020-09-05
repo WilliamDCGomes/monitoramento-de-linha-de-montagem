@@ -232,7 +232,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     private void buttonShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonShowActionPerformed
         int setar=tableDelay.getSelectedRow();
         ShowDelay showDelay = new ShowDelay();
-        showDelay.idDelay = (tableDelay.getModel().getValueAt(setar,0).toString());
+        showDelay.idDelay = Integer.parseInt(tableDelay.getModel().getValueAt(setar,0).toString());
         showDelay.outputStation.setText(tableDelay.getModel().getValueAt(setar,1).toString());
         showDelay.outputTypeDelay.setText(tableDelay.getModel().getValueAt(setar,2).toString());
         showDelay.outputBeginDelay.setText(tableDelay.getModel().getValueAt(setar,3).toString());
