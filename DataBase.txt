@@ -14,7 +14,7 @@ CREATE TABLE `auxdelay` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `delay` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL auto_increment,
   `shot` int(11) DEFAULT NULL,
   `dats` varchar(10) NOT NULL,
   `reasonDelay` varchar(1000) DEFAULT NULL,
