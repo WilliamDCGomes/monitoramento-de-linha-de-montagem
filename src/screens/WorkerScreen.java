@@ -64,9 +64,6 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void finish(){
         String sql = "update stations set working=0 where id=?";
         try {
-            pst=conexao.prepareStatement(sql);
-            pst.setInt(1,Integer.parseInt(outputStation.getText()));
-            pst.executeUpdate();
             pst2=conexao.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
@@ -77,10 +74,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void open(){
         String sql = "update stations set working=1 where id=?";
         try {
-            pst=conexao.prepareStatement(sql);
-            pst.setInt(1,Integer.parseInt(outputStation.getText()));
-            pst.executeUpdate();
-            this.dispose();
+            pst2=conexao.prepareStatement(sql);
+            pst2.setInt(1,Integer.parseInt(outputStation.getText()));
+            pst2.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
@@ -105,15 +101,17 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(confirma==JOptionPane.YES_OPTION){
             String sql = "delete from workfinish where id = ?";
             try {
-                pst=conexao.prepareStatement(sql);
+                pst2=conexao.prepareStatement(sql);
                 getId();
-                pst.setInt(1, id);
-                int apagado = pst.executeUpdate();
+                pst2.setInt(1, id);
+                int apagado = pst2.executeUpdate();
                 if(apagado>0){
                     removeDelay.remove(id);
                     open();
                     groupWorkFinish.clearSelection();
                     groupDelay.clearSelection();
+                    JOptionPane.showMessageDialog(null, "DADOS DELETADOS");
+                    this.dispose();
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -123,17 +121,18 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void addService(){
         String sql = "insert into workfinish(dats,beginning,ending,station,shot) values(?,?,?,?,?)";
         try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1,getDate.informDate());
-            pst.setString(2,getBegin(getShot()));
-            pst.setString(3,getHour.informHour());
-            pst.setString(4,outputStation.getText());
-            pst.setInt(5,getShot());
-            pst.executeUpdate();
+            pst2 = conexao.prepareStatement(sql);
+            pst2.setString(1,getDate.informDate());
+            pst2.setString(2,getBegin(getShot()));
+            pst2.setString(3,getHour.informHour());
+            pst2.setString(4,outputStation.getText());
+            pst2.setInt(5,getShot());
+            pst2.executeUpdate();
             JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
             finish();
             if(stationWorking.hasStation()==false){
                 startShotting.keepProduction(getShot()+1, getHour.informHour());
+                //fazer proxima producao
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -142,12 +141,12 @@ public class WorkerScreen extends javax.swing.JFrame {
     private String getBegin(int shot){
         String sql ="select beginning from presentShotting where dats = ? and shot = ?";
         try {
-            pst2=conexao.prepareStatement(sql);
-            pst2.setString(1, getDate.informDate());
-            pst2.setInt(2, shot);
-            rs2= pst2.executeQuery();
-            if(rs2.next()){
-                return rs2.getString(1);
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1, getDate.informDate());
+            pst.setInt(2, shot);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return rs.getString(1);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -157,11 +156,11 @@ public class WorkerScreen extends javax.swing.JFrame {
     private int getShot(){
         String sql ="select shot from presentShotting where dats = ? order by id desc limit 1";
         try {
-            pst2=conexao.prepareStatement(sql);
-            pst2.setString(1, getDate.informDate());
-            rs2= pst2.executeQuery();
-            if(rs2.next()){
-                return rs2.getInt(1);
+            pst=conexao.prepareStatement(sql);
+            pst.setString(1, getDate.informDate());
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -171,11 +170,11 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void getDelay(){
         String sql ="select reasonDelay, typeDelay from auxDelay order by id desc limit 1";
         try {
-            pst2=conexao.prepareStatement(sql);
-            rs2= pst2.executeQuery();
-            if(rs2.next()){
-                reasonDelay = rs2.getString(1);
-                typeDelay = rs2.getString(2);
+            pst=conexao.prepareStatement(sql);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                reasonDelay = rs.getString(1);
+                typeDelay = rs.getString(2);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -352,6 +351,7 @@ public class WorkerScreen extends javax.swing.JFrame {
             beginTime = beginProdution.getProduction(getShot());
             endTime = getBeginOfDelay.getBegin(getShot());
             setTime();
+            open();
         }
     }//GEN-LAST:event_formWindowActivated
 
