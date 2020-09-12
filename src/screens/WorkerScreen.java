@@ -17,6 +17,7 @@ import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
 import functions.TimeDifference;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,9 +48,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     public String reasonDelay;
     public String typeDelay;
     private int id;
-    int x = 0;
     String beginTime;
     String endTime;
+    int x = 0;
     private void setTime(){
         TimeDifference timeDifference = new TimeDifference();
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
@@ -57,7 +58,15 @@ public class WorkerScreen extends javax.swing.JFrame {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                outputTime.setText(timeDifference.getDifference(getHour.informHour(), endTime));
+                String difference = timeDifference.getDifference(getHour.informHour(), endTime);
+                if(timeDifference.delay=="true"){
+                    outputTime.setForeground(Color.red);
+                    outputTime.setText(difference);
+                }
+                else{
+                    outputTime.setForeground(Color.black);
+                    outputTime.setText(difference);
+                }
             }
         }, delay, interval);
     }
@@ -132,7 +141,20 @@ public class WorkerScreen extends javax.swing.JFrame {
             finish();
             if(stationWorking.hasStation()==false){
                 startShotting.keepProduction(getShot()+1, getHour.informHour());
-                //fazer proxima producao
+                GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+                BeginProdution beginProdution = new BeginProdution();
+                beginTime = getDate.informDate();
+                endTime = getBeginOfDelay.getBegin(getShot());
+                setTime();
+                open();
+                if(inputDelay.isSelected()&&){
+                    getDelay();
+                    InputDelay inputDelay = new InputDelay();
+                    inputDelay.makeInput(reasonDelay,typeDelay);
+                }
+                groupWorkFinish.clearSelection();
+                groupDelay.clearSelection();
+                outputShot.setText(Integer.toString(getShot()));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -154,7 +176,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         return null;
     }
     private int getShot(){
-        String sql ="select shot from presentShotting where dats = ? order by id desc limit 1";
+        String sql ="select max(shot) from presentShotting where dats = ?";
         try {
             pst=conexao.prepareStatement(sql);
             pst.setString(1, getDate.informDate());
@@ -200,6 +222,8 @@ public class WorkerScreen extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JButton();
         txtStation = new javax.swing.JLabel();
         outputStation = new javax.swing.JLabel();
+        outputShot = new javax.swing.JLabel();
+        txtShot = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Linha de Montagem");
@@ -207,6 +231,9 @@ public class WorkerScreen extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -256,6 +283,12 @@ public class WorkerScreen extends javax.swing.JFrame {
         outputStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         outputStation.setText("1");
 
+        outputShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        outputShot.setText("1º");
+
+        txtShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtShot.setText("RODAGEM");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,10 +297,6 @@ public class WorkerScreen extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtStation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outputStation))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(inputDelay)
                             .addComponent(inputWorkFinish))
@@ -275,11 +304,19 @@ public class WorkerScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonReset)
                             .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonLogout)))
+                            .addComponent(buttonLogout)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(outputShot)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtShot))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtTimeToNextWork)
                         .addGap(69, 69, 69)
-                        .addComponent(outputTime)))
+                        .addComponent(outputTime))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtStation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(outputStation)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -302,7 +339,9 @@ public class WorkerScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStation)
-                    .addComponent(outputStation))
+                    .addComponent(outputStation)
+                    .addComponent(outputShot)
+                    .addComponent(txtShot))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -336,24 +375,24 @@ public class WorkerScreen extends javax.swing.JFrame {
         startShotting.startProduction();
         
         addService();
-        if(inputDelay.isSelected()){
-            InputDelay inputDelay = new InputDelay();
-            getDelay();
-            inputDelay.makeInput(reasonDelay,typeDelay);
-        }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
             GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
             BeginProdution beginProdution = new BeginProdution();
-            x++;
             beginTime = beginProdution.getProduction(getShot());
             endTime = getBeginOfDelay.getBegin(getShot());
+            x++;
             setTime();
             open();
+            outputShot.setText(Integer.toString(getShot()));
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        finish();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -398,8 +437,10 @@ public class WorkerScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBox inputDelay;
     private javax.swing.JCheckBox inputWorkFinish;
     private javax.swing.JProgressBar outputBarTime;
+    private javax.swing.JLabel outputShot;
     public static javax.swing.JLabel outputStation;
     private javax.swing.JLabel outputTime;
+    private javax.swing.JLabel txtShot;
     private javax.swing.JLabel txtStation;
     private javax.swing.JLabel txtTimeToNextWork;
     // End of variables declaration//GEN-END:variables
