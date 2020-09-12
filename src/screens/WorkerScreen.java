@@ -142,7 +142,6 @@ public class WorkerScreen extends javax.swing.JFrame {
             if(stationWorking.hasStation()==false){
                 startShotting.keepProduction(getShot()+1, getHour.informHour());
                 GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-                BeginProdution beginProdution = new BeginProdution();
                 beginTime = getDate.informDate();
                 endTime = getBeginOfDelay.getBegin(getShot());
                 setTime();
