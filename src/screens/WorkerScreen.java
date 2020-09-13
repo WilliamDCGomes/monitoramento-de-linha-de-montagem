@@ -12,6 +12,7 @@ import functions.BeginProdution;
 import functions.GetBeginOfDelay;
 import functions.GetDate;
 import functions.GetHour;
+import functions.HourToMinute;
 import functions.InputDelay;
 import functions.RemoveDelay;
 import functions.StartShotting;
@@ -138,19 +139,26 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2.setInt(5,getShot());
             pst2.executeUpdate();
             JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
-            finish();
-            if(stationWorking.hasStation()==false){
-                startShotting.keepProduction(getShot()+1, getHour.informHour());
-                GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-                beginTime = getDate.informDate();
-                endTime = getBeginOfDelay.getBegin(getShot());
-                setTime();
-                open();
-                if(inputDelay.isSelected()&&){
+            GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+            String beginDelay = getBeginOfDelay.getBegin(getShot());
+            String endWork = getHour.informHour();
+            if(inputDelay.isSelected()){
+                TimeDifference timeDifference = new TimeDifference();
+                HourToMinute hourToMinute = new HourToMinute();
+                if(hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork))<0){
                     getDelay();
                     InputDelay inputDelay = new InputDelay();
                     inputDelay.makeInput(reasonDelay,typeDelay);
                 }
+                else{
+                    JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
+                }
+            }
+            finish();
+            if(stationWorking.hasStation()==false){
+                startShotting.keepProduction(getShot()+1, getHour.informHour());
+                setTime();
+                
                 groupWorkFinish.clearSelection();
                 groupDelay.clearSelection();
                 outputShot.setText(Integer.toString(getShot()));
