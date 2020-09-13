@@ -18,6 +18,7 @@ import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
 import functions.TimeDifference;
+import functions.TimeToSet;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,8 +53,10 @@ public class WorkerScreen extends javax.swing.JFrame {
     String beginTime;
     String endTime;
     int x = 0;
-    private void setTime(){
+    public void setTime(){
         TimeDifference timeDifference = new TimeDifference();
+        GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+        endTime = getBeginOfDelay.getBegin(getShot());
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 30000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
@@ -155,14 +158,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 }
             }
             finish();
-            if(stationWorking.hasStation()==false){
-                startShotting.keepProduction(getShot()+1, getHour.informHour());
-                setTime();
-                
-                groupWorkFinish.clearSelection();
-                groupDelay.clearSelection();
-                outputShot.setText(Integer.toString(getShot()));
-            }
+            TimeToSet timeToSet = new TimeToSet();
+            timeToSet.timeSet(getShot());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -386,10 +383,8 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
-            GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
             BeginProdution beginProdution = new BeginProdution();
             beginTime = beginProdution.getProduction(getShot());
-            endTime = getBeginOfDelay.getBegin(getShot());
             x++;
             setTime();
             open();
@@ -439,12 +434,12 @@ public class WorkerScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogout;
     private javax.swing.JButton buttonReset;
-    private javax.swing.ButtonGroup groupDelay;
-    private javax.swing.ButtonGroup groupWorkFinish;
+    public static javax.swing.ButtonGroup groupDelay;
+    public static javax.swing.ButtonGroup groupWorkFinish;
     private javax.swing.JCheckBox inputDelay;
     private javax.swing.JCheckBox inputWorkFinish;
     private javax.swing.JProgressBar outputBarTime;
-    private javax.swing.JLabel outputShot;
+    public static javax.swing.JLabel outputShot;
     public static javax.swing.JLabel outputStation;
     private javax.swing.JLabel outputTime;
     private javax.swing.JLabel txtShot;
