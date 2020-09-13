@@ -84,7 +84,7 @@ public class WorkerScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
     }
-    private void open(){
+    public void open(){
         String sql = "update stations set working=1 where id=?";
         try {
             pst2=conexao.prepareStatement(sql);
@@ -158,7 +158,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 }
             }
             finish();
-            TimeToSet timeToSet = new TimeToSet();
+            TimeToSet timeToSet = new TimeToSet(this);
             timeToSet.timeSet(getShot());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

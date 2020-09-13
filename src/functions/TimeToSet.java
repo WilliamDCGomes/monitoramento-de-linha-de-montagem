@@ -13,11 +13,12 @@ public class TimeToSet {
     ResultSet rs = null;
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();
-    WorkerScreen workerScreen = new WorkerScreen();
+    WorkerScreen workerScreen;
     GetHour getHour = new GetHour();
     GetDate getDate = new GetDate();
-    public TimeToSet(){
+    public TimeToSet(WorkerScreen worker){
         conexao = ModuloConexao.conector();
+        workerScreen = worker;
     }
     public void timeSet(int shot){
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
@@ -25,19 +26,24 @@ public class TimeToSet {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                JOptionPane.showMessageDialog(null, "1");
                 if(getShot()!=shot){
+                    JOptionPane.showMessageDialog(null, "2");
                     workerScreen.setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
+                    workerScreen.open();
                     timer.cancel();
                 }
                 else if(stationWorking.hasStation()==false){
+                    JOptionPane.showMessageDialog(null, "3");
                     startShotting.keepProduction(getShot()+1, getHour.informHour());
                     workerScreen.setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
+                    workerScreen.open();
                     timer.cancel();
                 }
             }
