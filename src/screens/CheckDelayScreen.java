@@ -80,6 +80,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         buttonFilter = new javax.swing.JButton();
         inputDelayReason = new javax.swing.JComboBox<>();
         buttonShow = new javax.swing.JButton();
+        buttonRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atrasos");
@@ -155,6 +156,13 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
 
+        buttonRefresh.setText("ATUALIZAR");
+        buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,6 +178,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                         .addComponent(buttonFilter)
                         .addGap(18, 18, 18)
                         .addComponent(buttonShow)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonRefresh)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +197,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(txtDelay)
                 .addGap(18, 18, 18)
-                .addComponent(allTableDelay, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(allTableDelay, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputFirstDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,7 +207,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonFilter)
-                    .addComponent(buttonShow))
+                    .addComponent(buttonShow)
+                    .addComponent(buttonRefresh))
                 .addGap(29, 29, 29))
         );
 
@@ -240,6 +251,10 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         showDelay.setVisible(true);
     }//GEN-LAST:event_buttonShowActionPerformed
 
+    private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
+        searchDelays(getDate.informDate(), getDate.informDate());
+    }//GEN-LAST:event_buttonRefreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +293,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane allTableDelay;
     private javax.swing.JButton buttonFilter;
+    private javax.swing.JButton buttonRefresh;
     private javax.swing.JButton buttonShow;
     private javax.swing.JComboBox<String> inputDelayReason;
     private javax.swing.JFormattedTextField inputFirstDateFilter;

@@ -26,9 +26,7 @@ public class TimeToSet {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                JOptionPane.showMessageDialog(null, "1");
                 if(getShot()!=shot){
-                    JOptionPane.showMessageDialog(null, "2");
                     workerScreen.setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
@@ -37,7 +35,6 @@ public class TimeToSet {
                     timer.cancel();
                 }
                 else if(stationWorking.hasStation()==false){
-                    JOptionPane.showMessageDialog(null, "3");
                     startShotting.keepProduction(getShot()+1, getHour.informHour());
                     workerScreen.setTime();
                     workerScreen.groupWorkFinish.clearSelection();

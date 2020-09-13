@@ -123,8 +123,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                     open();
                     groupWorkFinish.clearSelection();
                     groupDelay.clearSelection();
-                    JOptionPane.showMessageDialog(null, "DADOS DELETADOS");
-                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "DADOS DELETADOS!");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -148,7 +147,7 @@ public class WorkerScreen extends javax.swing.JFrame {
             if(inputDelay.isSelected()){
                 TimeDifference timeDifference = new TimeDifference();
                 HourToMinute hourToMinute = new HourToMinute();
-                if(hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork))<0){
+                if(hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork), timeDifference)<0){
                     getDelay();
                     InputDelay inputDelay = new InputDelay();
                     inputDelay.makeInput(reasonDelay,typeDelay);
