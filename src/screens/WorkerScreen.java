@@ -8,6 +8,7 @@ package screens;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import conexaobd.ModuloConexao;
+import functions.BarProgress;
 import functions.BeginProdution;
 import functions.GetBeginOfDelay;
 import functions.GetDate;
@@ -55,6 +56,8 @@ public class WorkerScreen extends javax.swing.JFrame {
     int x = 0;
     public void setTime(){
         TimeDifference timeDifference = new TimeDifference();
+        BarProgress barProgress = new BarProgress(this);
+        BeginProdution beginProdution = new BeginProdution();
         GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
         endTime = getBeginOfDelay.getBegin(getShot());
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
@@ -66,10 +69,12 @@ public class WorkerScreen extends javax.swing.JFrame {
                 if(timeDifference.delay=="true"){
                     outputTime.setForeground(Color.red);
                     outputTime.setText(difference);
+                    outputBarTime.setValue(100);
                 }
                 else{
                     outputTime.setForeground(Color.black);
                     outputTime.setText(difference);
+                    barProgress.setBar(beginProdution.getProduction(getShot()), endTime);
                 }
             }
         }, delay, interval);
@@ -246,7 +251,9 @@ public class WorkerScreen extends javax.swing.JFrame {
         outputTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         outputTime.setText("00:00");
 
+        outputBarTime.setBackground(new java.awt.Color(128, 128, 128));
         outputBarTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        outputBarTime.setStringPainted(true);
 
         groupWorkFinish.add(inputWorkFinish);
         inputWorkFinish.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -306,20 +313,20 @@ public class WorkerScreen extends javax.swing.JFrame {
                         .addGap(160, 160, 160)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buttonReset)
-                            .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(buttonLogout)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(outputShot)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtShot))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTimeToNextWork)
-                        .addGap(69, 69, 69)
-                        .addComponent(outputTime))
+                                .addComponent(txtShot))
+                            .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outputStation)))
+                        .addComponent(outputStation))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtTimeToNextWork)
+                        .addGap(69, 69, 69)
+                        .addComponent(outputTime)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -330,8 +337,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                     .addComponent(txtTimeToNextWork)
                     .addComponent(outputTime))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputWorkFinish)
                     .addComponent(buttonReset))
@@ -348,7 +355,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(560, 252));
+        setSize(new java.awt.Dimension(560, 258));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -437,7 +444,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     public static javax.swing.ButtonGroup groupWorkFinish;
     private javax.swing.JCheckBox inputDelay;
     private javax.swing.JCheckBox inputWorkFinish;
-    private javax.swing.JProgressBar outputBarTime;
+    public static javax.swing.JProgressBar outputBarTime;
     public static javax.swing.JLabel outputShot;
     public static javax.swing.JLabel outputStation;
     private javax.swing.JLabel outputTime;
