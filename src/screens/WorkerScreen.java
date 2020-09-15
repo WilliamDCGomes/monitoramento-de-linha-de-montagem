@@ -95,20 +95,20 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2=conexao.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
+            System.out.println("open");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
     }
     private void getId(){
-        String sql ="select id from workfinish where dats = ? and station = ? and shot = ?";
+        String sql ="select max(id) from workfinish where station = ?";
         try {
             pst=conexao.prepareStatement(sql);
-            pst.setString(1, getDate.informDate());
-            pst.setString(2, outputStation.getText());
-            pst.setInt(3, getShot());
+            pst.setString(1, outputStation.getText());
             rs= pst.executeQuery();
             if(rs.next()){
                 id = rs.getInt(1);
+                System.out.println(id);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -119,11 +119,14 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(confirma==JOptionPane.YES_OPTION){
             String sql = "delete from workfinish where id = ?";
             try {
+                System.out.println("removeService");
                 pst2=conexao.prepareStatement(sql);
                 getId();
                 pst2.setInt(1, id);
                 int apagado = pst2.executeUpdate();
+                System.out.println(apagado);
                 if(apagado>0){
+                    System.out.println("apagado");
                     removeDelay.remove(id);
                     open();
                     groupWorkFinish.clearSelection();
@@ -159,6 +162,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
+                    groupDelay.clearSelection();
                 }
             }
             finish();
@@ -304,10 +308,10 @@ public class WorkerScreen extends javax.swing.JFrame {
         outputStation.setText("1");
 
         outputShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        outputShot.setText("1º");
+        outputShot.setText("1");
 
         txtShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtShot.setText("RODAGEM");
+        txtShot.setText("º   RODAGEM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -375,7 +379,14 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDelayActionPerformed
 
     private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
-        removeService();
+        if(inputWorkFinish.isSelected()){
+            System.out.println("vai indo");
+            removeService();
+        }
+        else{
+            groupDelay.clearSelection();
+            System.out.println("so limpando");
+        }
     }//GEN-LAST:event_buttonResetActionPerformed
 
     private void buttonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogoutActionPerformed
@@ -414,7 +425,12 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void buttonResetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonResetKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            removeService();
+            if(inputWorkFinish.isSelected()){
+                removeService();
+            }
+            else{
+                groupDelay.clearSelection();
+            }
         }
     }//GEN-LAST:event_buttonResetKeyPressed
 
