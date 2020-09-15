@@ -130,11 +130,21 @@ public class ShowDelay extends javax.swing.JFrame {
         txtStation.setText("Estação");
 
         outputStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputStation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputStationKeyPressed(evt);
+            }
+        });
 
         txtTypeDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtTypeDelay.setText("Tipo do Atraso");
 
         outputTypeDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputTypeDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputTypeDelayKeyPressed(evt);
+            }
+        });
 
         txtDurationDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay.setText("Duração do Atraso");
@@ -145,6 +155,11 @@ public class ShowDelay extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         outputDurationDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputDurationDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputDurationDelayKeyPressed(evt);
+            }
+        });
 
         txtReasonDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtReasonDelay.setText("Motivo do Atraso");
@@ -172,6 +187,11 @@ public class ShowDelay extends javax.swing.JFrame {
         txtShot.setText("Rodagem");
 
         outputShot.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputShot.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputShotKeyPressed(evt);
+            }
+        });
 
         txtDurationDelay1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay1.setText("Começo do Atraso");
@@ -182,6 +202,11 @@ public class ShowDelay extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         outputBeginDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputBeginDelayKeyPressed(evt);
+            }
+        });
 
         txtDurationDelay2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay2.setText("Finalização do Serviço");
@@ -192,6 +217,11 @@ public class ShowDelay extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         outputEndDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputEndDelayKeyPressed(evt);
+            }
+        });
 
         txtDayOfDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDayOfDelay.setText("Dia do Atraso");
@@ -202,13 +232,18 @@ public class ShowDelay extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         outputDayOfDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputDayOfDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputDayOfDelayKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -247,7 +282,7 @@ public class ShowDelay extends javax.swing.JFrame {
                                     .addComponent(outputDayOfDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 0, Short.MAX_VALUE))))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtDelay)
@@ -321,6 +356,48 @@ public class ShowDelay extends javax.swing.JFrame {
     private void nextDelayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextDelayMouseClicked
         getNextDelay();
     }//GEN-LAST:event_nextDelayMouseClicked
+
+    private void outputStationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputStationKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputTypeDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputStationKeyPressed
+
+    private void outputTypeDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputTypeDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputShot.requestFocus();
+        }
+    }//GEN-LAST:event_outputTypeDelayKeyPressed
+
+    private void outputShotKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputShotKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputBeginDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputShotKeyPressed
+
+    private void outputBeginDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputBeginDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputEndDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputBeginDelayKeyPressed
+
+    private void outputEndDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputEndDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputDurationDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputEndDelayKeyPressed
+
+    private void outputDurationDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputDurationDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputDayOfDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputDurationDelayKeyPressed
+
+    private void outputDayOfDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputDayOfDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            outputReasonDelay.requestFocus();
+        }
+    }//GEN-LAST:event_outputDayOfDelayKeyPressed
 
     /**
      * @param args the command line arguments

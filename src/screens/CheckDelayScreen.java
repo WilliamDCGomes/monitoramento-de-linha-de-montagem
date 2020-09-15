@@ -126,6 +126,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 inputFirstDateFilterFocusGained(evt);
             }
         });
+        inputFirstDateFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputFirstDateFilterKeyPressed(evt);
+            }
+        });
 
         try {
             inputSecondDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -138,6 +143,11 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 inputSecondDateFilterFocusGained(evt);
             }
         });
+        inputSecondDateFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputSecondDateFilterKeyPressed(evt);
+            }
+        });
 
         buttonFilter.setText("FILTRAR");
         buttonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -145,9 +155,19 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 buttonFilterActionPerformed(evt);
             }
         });
+        buttonFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonFilterKeyPressed(evt);
+            }
+        });
 
         inputDelayReason.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONAR", "M1", "M2", "M3", "M4" }));
+        inputDelayReason.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputDelayReasonKeyPressed(evt);
+            }
+        });
 
         buttonShow.setText("MOSTRAR");
         buttonShow.addActionListener(new java.awt.event.ActionListener() {
@@ -155,11 +175,21 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 buttonShowActionPerformed(evt);
             }
         });
+        buttonShow.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonShowKeyPressed(evt);
+            }
+        });
 
         buttonRefresh.setText("ATUALIZAR");
         buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonRefreshActionPerformed(evt);
+            }
+        });
+        buttonRefresh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonRefreshKeyPressed(evt);
             }
         });
 
@@ -254,6 +284,59 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
         searchDelays(getDate.informDate(), getDate.informDate());
     }//GEN-LAST:event_buttonRefreshActionPerformed
+
+    private void inputFirstDateFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputFirstDateFilterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputSecondDateFilter.requestFocus();
+        }
+    }//GEN-LAST:event_inputFirstDateFilterKeyPressed
+
+    private void inputSecondDateFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputSecondDateFilterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputDelayReason.requestFocus();
+        }
+    }//GEN-LAST:event_inputSecondDateFilterKeyPressed
+
+    private void inputDelayReasonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDelayReasonKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+                searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
+            }
+            else{
+                searchDelaysFilter();
+            }
+        }
+    }//GEN-LAST:event_inputDelayReasonKeyPressed
+
+    private void buttonFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonFilterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+                searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
+            }
+            else{
+                searchDelaysFilter();
+            }
+        }
+    }//GEN-LAST:event_buttonFilterKeyPressed
+
+    private void buttonShowKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonShowKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            int setar=tableDelay.getSelectedRow();
+            ShowDelay showDelay = new ShowDelay();
+            showDelay.idDelay = Integer.parseInt(tableDelay.getModel().getValueAt(setar,0).toString());
+            showDelay.outputStation.setText(tableDelay.getModel().getValueAt(setar,1).toString());
+            showDelay.outputTypeDelay.setText(tableDelay.getModel().getValueAt(setar,2).toString());
+            showDelay.outputBeginDelay.setText(tableDelay.getModel().getValueAt(setar,3).toString());
+            showDelay.outputEndDelay.setText(tableDelay.getModel().getValueAt(setar,4).toString());
+            showDelay.setVisible(true);
+        }
+    }//GEN-LAST:event_buttonShowKeyPressed
+
+    private void buttonRefreshKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonRefreshKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            searchDelays(getDate.informDate(), getDate.informDate());
+        }
+    }//GEN-LAST:event_buttonRefreshKeyPressed
 
     /**
      * @param args the command line arguments

@@ -54,6 +54,11 @@ public class DelayScreen extends javax.swing.JFrame {
 
         inputReasonDelay.setColumns(20);
         inputReasonDelay.setRows(5);
+        inputReasonDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputReasonDelayKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(inputReasonDelay);
 
         txtTypeDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -62,23 +67,48 @@ public class DelayScreen extends javax.swing.JFrame {
         buttonGroup1.add(inputType1);
         inputType1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputType1.setText("M1");
+        inputType1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputType1KeyPressed(evt);
+            }
+        });
 
         buttonGroup1.add(inputType2);
         inputType2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputType2.setText("M2");
+        inputType2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputType2KeyPressed(evt);
+            }
+        });
 
         buttonGroup1.add(inputType3);
         inputType3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputType3.setText("M3");
+        inputType3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                inputType3KeyReleased(evt);
+            }
+        });
 
         buttonGroup1.add(inputType4);
         inputType4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         inputType4.setText("M4");
+        inputType4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputType4KeyPressed(evt);
+            }
+        });
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveActionPerformed(evt);
+            }
+        });
+        buttonSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonSaveKeyPressed(evt);
             }
         });
 
@@ -139,7 +169,7 @@ public class DelayScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+    private void beforeAdd(){
         boolean emptyInput=false;
         if(inputReasonDelay.getText().equals("")){
             emptyInput=true;
@@ -168,7 +198,46 @@ public class DelayScreen extends javax.swing.JFrame {
         if(typeDelay!=null){
             addTemporary(reasonDelay, typeDelay);
         }
+    }
+    private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        beforeAdd();
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void inputReasonDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputReasonDelayKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputType1.requestFocus();
+        }
+    }//GEN-LAST:event_inputReasonDelayKeyPressed
+
+    private void inputType1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputType1KeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            beforeAdd();
+        }
+    }//GEN-LAST:event_inputType1KeyPressed
+
+    private void inputType2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputType2KeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            beforeAdd();
+        }
+    }//GEN-LAST:event_inputType2KeyPressed
+
+    private void inputType3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputType3KeyReleased
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            beforeAdd();
+        }
+    }//GEN-LAST:event_inputType3KeyReleased
+
+    private void inputType4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputType4KeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            beforeAdd();
+        }
+    }//GEN-LAST:event_inputType4KeyPressed
+
+    private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            beforeAdd();
+        }
+    }//GEN-LAST:event_buttonSaveKeyPressed
 
     /**
      * @param args the command line arguments

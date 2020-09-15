@@ -100,6 +100,9 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputReasonDelayKeyPressed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -121,6 +124,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="M1"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputType1KeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="inputType2">
       <Properties>
@@ -132,6 +138,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="M2"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputType2KeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="inputType3">
       <Properties>
@@ -143,6 +152,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="M3"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputType3KeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="inputType4">
       <Properties>
@@ -154,6 +166,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="M4"/>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputType4KeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
@@ -161,6 +176,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonSaveKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

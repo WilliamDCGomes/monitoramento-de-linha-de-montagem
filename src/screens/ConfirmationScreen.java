@@ -87,6 +87,11 @@ public class ConfirmationScreen extends javax.swing.JFrame {
         txtInsertAccessPassword.setText("INSIRA A SENHA DE ACESSO");
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputPasswordKeyPressed(evt);
+            }
+        });
 
         buttonEnter.setText("ENTRAR");
         buttonEnter.addActionListener(new java.awt.event.ActionListener() {
@@ -94,11 +99,21 @@ public class ConfirmationScreen extends javax.swing.JFrame {
                 buttonEnterActionPerformed(evt);
             }
         });
+        buttonEnter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonEnterKeyPressed(evt);
+            }
+        });
 
         buttonCancel.setText("CANCELAR");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
+            }
+        });
+        buttonCancel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonCancelKeyPressed(evt);
             }
         });
 
@@ -166,6 +181,56 @@ public class ConfirmationScreen extends javax.swing.JFrame {
             checkIfHasPassword();
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "DIGITE A SENHA DE ACESSO");
+            }
+            else if(hasPassword==false&&(inputPassword.getText().equals("admin")||inputPassword.getText().equals("ADMIN"))){
+                Frame[] frames = getFrames(); 
+                CommandScreen commandScreen = new CommandScreen();
+                for (int i = 0; i < frames.length; i++){ 
+                    frames[i].dispose(); 
+                }
+                commandScreen.setVisible(true);
+            }
+            else if(hasPassword==true){
+                localeStation();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "SENHA DE ACESSO INCORRETA");
+            }
+        }
+    }//GEN-LAST:event_inputPasswordKeyPressed
+
+    private void buttonEnterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonEnterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "DIGITE A SENHA DE ACESSO");
+            }
+            else if(hasPassword==false&&(inputPassword.getText().equals("admin")||inputPassword.getText().equals("ADMIN"))){
+                Frame[] frames = getFrames(); 
+                CommandScreen commandScreen = new CommandScreen();
+                for (int i = 0; i < frames.length; i++){ 
+                    frames[i].dispose(); 
+                }
+                commandScreen.setVisible(true);
+            }
+            else if(hasPassword==true){
+                localeStation();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "SENHA DE ACESSO INCORRETA");
+            }
+        }
+    }//GEN-LAST:event_buttonEnterKeyPressed
+
+    private void buttonCancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonCancelKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            this.dispose();
+        }
+    }//GEN-LAST:event_buttonCancelKeyPressed
 
     /**
      * @param args the command line arguments

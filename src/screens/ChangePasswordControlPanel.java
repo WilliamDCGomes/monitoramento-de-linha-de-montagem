@@ -119,15 +119,35 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         txtConfirmPassword.setText("CONFIRMAR SENHA");
 
         inputOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputOldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputOldPasswordKeyPressed(evt);
+            }
+        });
 
         inputNewPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputNewPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputNewPasswordKeyPressed(evt);
+            }
+        });
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputConfirmPasswordKeyPressed(evt);
+            }
+        });
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveActionPerformed(evt);
+            }
+        });
+        buttonSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonSaveKeyPressed(evt);
             }
         });
 
@@ -204,6 +224,52 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "SENHA ANTIGA INCORRETA");
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void inputOldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputOldPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputNewPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputOldPasswordKeyPressed
+
+    private void inputNewPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNewPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputConfirmPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputNewPasswordKeyPressed
+
+    private void inputConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputConfirmPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputOldPassword.getText().equals("")||inputNewPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+            }
+            else if(hasPassword==false&&(inputOldPassword.getText().equals("admin")||inputOldPassword.getText().equals("ADMIN"))){
+                addPassword();
+            }
+            else if(hasPassword==true){
+                getOldPassword();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "SENHA ANTIGA INCORRETA");
+            }
+        }
+    }//GEN-LAST:event_inputConfirmPasswordKeyPressed
+
+    private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputOldPassword.getText().equals("")||inputNewPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+            }
+            else if(hasPassword==false&&(inputOldPassword.getText().equals("admin")||inputOldPassword.getText().equals("ADMIN"))){
+                addPassword();
+            }
+            else if(hasPassword==true){
+                getOldPassword();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "SENHA ANTIGA INCORRETA");
+            }
+        }
+    }//GEN-LAST:event_buttonSaveKeyPressed
 
     /**
      * @param args the command line arguments

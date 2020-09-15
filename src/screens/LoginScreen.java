@@ -79,11 +79,21 @@ public class LoginScreen extends javax.swing.JFrame {
         txtLogin.setText("LOGIN");
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputLoginKeyPressed(evt);
+            }
+        });
 
         txtPassword.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtPassword.setText("SENHA");
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputPasswordKeyPressed(evt);
+            }
+        });
 
         buttonLogin.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         buttonLogin.setText("LOGAR");
@@ -92,12 +102,22 @@ public class LoginScreen extends javax.swing.JFrame {
                 buttonLoginActionPerformed(evt);
             }
         });
+        buttonLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonLoginKeyPressed(evt);
+            }
+        });
 
         buttonControlPanel.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         buttonControlPanel.setText("PAÍNEL DE CONTROLE");
         buttonControlPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonControlPanelActionPerformed(evt);
+            }
+        });
+        buttonControlPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonControlPanelKeyPressed(evt);
             }
         });
 
@@ -167,6 +187,49 @@ public class LoginScreen extends javax.swing.JFrame {
             logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
+
+    private void inputLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputLoginKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputLoginKeyPressed
+
+    private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            StartShotting startShotting = new StartShotting();
+            startShotting.startProduction();
+
+            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+            }
+            else{
+                Hash hash = new Hash();
+                logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
+            }
+        }
+    }//GEN-LAST:event_inputPasswordKeyPressed
+
+    private void buttonLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonLoginKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            StartShotting startShotting = new StartShotting();
+            startShotting.startProduction();
+
+            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
+            }
+            else{
+                Hash hash = new Hash();
+                logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
+            }
+        }
+    }//GEN-LAST:event_buttonLoginKeyPressed
+
+    private void buttonControlPanelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonControlPanelKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            ConfirmationScreen confirmationScreen = new ConfirmationScreen();
+            confirmationScreen.setVisible(true);
+        }
+    }//GEN-LAST:event_buttonControlPanelKeyPressed
 
     /**
      * @param args the command line arguments

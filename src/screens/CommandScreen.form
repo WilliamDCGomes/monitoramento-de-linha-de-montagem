@@ -43,7 +43,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtDelay" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtExportTable" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtInsertDayPlan" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDayPlan" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtHourHistoric" min="-2" pref="221" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="105" max="32767" attributes="0"/>
@@ -67,7 +67,7 @@
               <Component id="txtControlPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="27" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtInsertDayPlan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDayPlan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCadastreNewStation" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -131,15 +131,15 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtChangePasswordControlPanelMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="txtInsertDayPlan">
+    <Component class="javax.swing.JLabel" name="txtDayPlan">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="INSERIR PLANEJAMENTO DI&#xc1;RIO"/>
+        <Property name="text" type="java.lang.String" value="PLANEJAMENTO DI&#xc1;RIO"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtInsertDayPlanMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtDayPlanMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtDelay">
@@ -181,6 +181,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLogoutActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonLogoutKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

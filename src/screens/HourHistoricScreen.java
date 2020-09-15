@@ -27,278 +27,293 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jFormattedTextField27 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
-        jFormattedTextField15 = new javax.swing.JFormattedTextField();
-        jFormattedTextField16 = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jFormattedTextField17 = new javax.swing.JFormattedTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jFormattedTextField18 = new javax.swing.JFormattedTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jFormattedTextField19 = new javax.swing.JFormattedTextField();
-        jFormattedTextField20 = new javax.swing.JFormattedTextField();
-        jFormattedTextField21 = new javax.swing.JFormattedTextField();
-        jFormattedTextField22 = new javax.swing.JFormattedTextField();
-        jFormattedTextField23 = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField24 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
-        jFormattedTextField6 = new javax.swing.JFormattedTextField();
-        jFormattedTextField7 = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField8 = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField9 = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField10 = new javax.swing.JFormattedTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField11 = new javax.swing.JFormattedTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField12 = new javax.swing.JFormattedTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jFormattedTextField13 = new javax.swing.JFormattedTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jFormattedTextField14 = new javax.swing.JFormattedTextField();
-        jFormattedTextField25 = new javax.swing.JFormattedTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        txtShotHistoric = new javax.swing.JLabel();
+        imageBefore = new javax.swing.JLabel();
+        imageAfter = new javax.swing.JLabel();
+        inputDateFilter = new javax.swing.JFormattedTextField();
+        buttonFilter = new javax.swing.JButton();
+        outputEndThirdShooting = new javax.swing.JFormattedTextField();
+        outputEndSecondShooting = new javax.swing.JFormattedTextField();
+        txtTenthShooting = new javax.swing.JLabel();
+        outputEndFourthShooting = new javax.swing.JFormattedTextField();
+        txtEleventhShooting = new javax.swing.JLabel();
+        outputEndFifthShooting = new javax.swing.JFormattedTextField();
+        txtTwelfthShooting = new javax.swing.JLabel();
+        outputEndSixthShooting = new javax.swing.JFormattedTextField();
+        outputEndSeventhShooting = new javax.swing.JFormattedTextField();
+        outputEndEighthShooting = new javax.swing.JFormattedTextField();
+        outputEndNinthShooting = new javax.swing.JFormattedTextField();
+        outputEndTenthShooting = new javax.swing.JFormattedTextField();
+        outputEndFirstShooting = new javax.swing.JFormattedTextField();
+        outputEndEleventhShooting = new javax.swing.JFormattedTextField();
+        outputBeginningFirstShooting = new javax.swing.JFormattedTextField();
+        outputBeginningSecondShooting = new javax.swing.JFormattedTextField();
+        outputBeginningThirdShooting = new javax.swing.JFormattedTextField();
+        outputBeginningFourthShooting = new javax.swing.JFormattedTextField();
+        outputBeginningFifthShooting = new javax.swing.JFormattedTextField();
+        txtFirstShooting = new javax.swing.JLabel();
+        outputBeginningSeventhShooting = new javax.swing.JFormattedTextField();
+        txtSecondShooting = new javax.swing.JLabel();
+        outputBeginningSixthShooting = new javax.swing.JFormattedTextField();
+        txtThirdShooting = new javax.swing.JLabel();
+        outputBeginningEighthShooting = new javax.swing.JFormattedTextField();
+        txtFourthShooting = new javax.swing.JLabel();
+        outputBeginningNinthShooting = new javax.swing.JFormattedTextField();
+        txtFifthShooting = new javax.swing.JLabel();
+        outputBeginningTenthShooting = new javax.swing.JFormattedTextField();
+        txtSixthShooting = new javax.swing.JLabel();
+        outputBeginningEleventhShooting = new javax.swing.JFormattedTextField();
+        txtSeventhShooting = new javax.swing.JLabel();
+        outputBeginningTwenlthShooting = new javax.swing.JFormattedTextField();
+        outputEndTwenlthShooting = new javax.swing.JFormattedTextField();
+        txtEighthShooting = new javax.swing.JLabel();
+        txtNinthShooting = new javax.swing.JLabel();
+        txtBeginning = new javax.swing.JLabel();
+        txtEnd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Histórico de Rodagens");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("HISTÓRICO DE RODAGENS");
+        txtShotHistoric.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        txtShotHistoric.setText("HISTÓRICO DE RODAGENS");
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
+        imageBefore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
+        imageAfter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
 
         try {
-            jFormattedTextField27.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            inputDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField27.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        inputDateFilter.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        inputDateFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputDateFilterKeyPressed(evt);
+            }
+        });
 
-        jButton1.setText("FILTRAR");
+        buttonFilter.setText("FILTRAR");
+        buttonFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFilterActionPerformed(evt);
+            }
+        });
+        buttonFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonFilterKeyPressed(evt);
+            }
+        });
 
         try {
-            jFormattedTextField15.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField15.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField16.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField16.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel11.setText("10º RODAGEM");
+        txtTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtTenthShooting.setText("10º RODAGEM");
 
         try {
-            jFormattedTextField17.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField17.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel12.setText("11º RODAGEM");
+        txtEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEleventhShooting.setText("11º RODAGEM");
 
         try {
-            jFormattedTextField18.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField18.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel13.setText("12º RODAGEM");
+        txtTwelfthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtTwelfthShooting.setText("12º RODAGEM");
 
         try {
-            jFormattedTextField19.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField19.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField20.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField20.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField21.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField21.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField22.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField22.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField23.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField23.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField24.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField24.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField3.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField4.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField6.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField7.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel2.setText("1º RODAGEM");
+        txtFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFirstShooting.setText("1º RODAGEM");
 
         try {
-            jFormattedTextField8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField8.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel3.setText("2º RODAGEM");
+        txtSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSecondShooting.setText("2º RODAGEM");
 
         try {
-            jFormattedTextField9.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField9.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel4.setText("3º RODAGEM");
+        txtThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtThirdShooting.setText("3º RODAGEM");
 
         try {
-            jFormattedTextField10.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField10.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel5.setText("4º RODAGEM");
+        txtFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFourthShooting.setText("4º RODAGEM");
 
         try {
-            jFormattedTextField11.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField11.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel6.setText("5º RODAGEM");
+        txtFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtFifthShooting.setText("5º RODAGEM");
 
         try {
-            jFormattedTextField12.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField12.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel7.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel7.setText("6º RODAGEM");
+        txtSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSixthShooting.setText("6º RODAGEM");
 
         try {
-            jFormattedTextField13.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField13.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel8.setText("7º RODAGEM");
+        txtSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtSeventhShooting.setText("7º RODAGEM");
 
         try {
-            jFormattedTextField14.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputBeginningTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField14.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputBeginningTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         try {
-            jFormattedTextField25.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            outputEndTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField25.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputEndTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel9.setText("8º RODAGEM");
+        txtEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEighthShooting.setText("8º RODAGEM");
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel10.setText("9º RODAGEM");
+        txtNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtNinthShooting.setText("9º RODAGEM");
 
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel14.setText("INÍCIO");
+        txtBeginning.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtBeginning.setText("INÍCIO");
 
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        jLabel15.setText("FIM");
+        txtEnd.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        txtEnd.setText("FIM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -306,69 +321,69 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(txtShotHistoric)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
+                            .addComponent(txtNinthShooting)
+                            .addComponent(txtTenthShooting)
+                            .addComponent(txtEleventhShooting)
+                            .addComponent(txtTwelfthShooting)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))
+                                    .addComponent(txtSecondShooting)
+                                    .addComponent(txtFirstShooting)
+                                    .addComponent(txtThirdShooting)
+                                    .addComponent(txtFourthShooting)
+                                    .addComponent(txtFifthShooting)
+                                    .addComponent(txtSixthShooting)
+                                    .addComponent(txtSeventhShooting)
+                                    .addComponent(txtEighthShooting))
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextField3)
-                                    .addComponent(jFormattedTextField4)
-                                    .addComponent(jFormattedTextField5)
-                                    .addComponent(jFormattedTextField6)
-                                    .addComponent(jFormattedTextField7)
-                                    .addComponent(jFormattedTextField8)
-                                    .addComponent(jFormattedTextField9)
-                                    .addComponent(jFormattedTextField10)
-                                    .addComponent(jFormattedTextField11)
-                                    .addComponent(jFormattedTextField12)
-                                    .addComponent(jFormattedTextField13)
-                                    .addComponent(jFormattedTextField14))))
+                                    .addComponent(outputBeginningFirstShooting)
+                                    .addComponent(outputBeginningSecondShooting)
+                                    .addComponent(outputBeginningThirdShooting)
+                                    .addComponent(outputBeginningFourthShooting)
+                                    .addComponent(outputBeginningFifthShooting)
+                                    .addComponent(outputBeginningSeventhShooting)
+                                    .addComponent(outputBeginningSixthShooting)
+                                    .addComponent(outputBeginningEighthShooting)
+                                    .addComponent(outputBeginningNinthShooting)
+                                    .addComponent(outputBeginningTenthShooting)
+                                    .addComponent(outputBeginningEleventhShooting)
+                                    .addComponent(outputBeginningTwenlthShooting))))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jFormattedTextField1)
-                            .addComponent(jFormattedTextField16)
-                            .addComponent(jFormattedTextField15)
-                            .addComponent(jFormattedTextField17)
-                            .addComponent(jFormattedTextField18)
-                            .addComponent(jFormattedTextField19)
-                            .addComponent(jFormattedTextField20)
-                            .addComponent(jFormattedTextField21)
-                            .addComponent(jFormattedTextField22)
-                            .addComponent(jFormattedTextField23)
-                            .addComponent(jFormattedTextField24)
-                            .addComponent(jFormattedTextField25)))
+                            .addComponent(outputEndFirstShooting)
+                            .addComponent(outputEndSecondShooting)
+                            .addComponent(outputEndThirdShooting)
+                            .addComponent(outputEndFourthShooting)
+                            .addComponent(outputEndFifthShooting)
+                            .addComponent(outputEndSixthShooting)
+                            .addComponent(outputEndSeventhShooting)
+                            .addComponent(outputEndEighthShooting)
+                            .addComponent(outputEndNinthShooting)
+                            .addComponent(outputEndTenthShooting)
+                            .addComponent(outputEndEleventhShooting)
+                            .addComponent(outputEndTwenlthShooting)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel16)
+                        .addComponent(imageBefore)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jFormattedTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel17)
+                        .addComponent(imageAfter)
                         .addGap(56, 56, 56)
-                        .addComponent(jButton1)
+                        .addComponent(buttonFilter)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(204, 204, 204)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(182, 182, 182)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(73, 73, 73)))
                 .addGap(15, 15, 15))
         );
@@ -376,89 +391,105 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+                .addComponent(txtShotHistoric)
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtBeginning, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEnd, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFirstShooting)
+                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSecondShooting)
+                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtThirdShooting)
+                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFourthShooting)
+                            .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
+                        .addComponent(txtFifthShooting))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jFormattedTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jFormattedTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSixthShooting)
+                    .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jFormattedTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSeventhShooting)
+                    .addComponent(outputBeginningSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jFormattedTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEighthShooting)
+                    .addComponent(outputBeginningEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jFormattedTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNinthShooting)
+                    .addComponent(outputBeginningNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jFormattedTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTenthShooting)
+                    .addComponent(outputBeginningTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEleventhShooting)
+                    .addComponent(outputBeginningEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jFormattedTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTwelfthShooting)
+                    .addComponent(outputBeginningTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel17)
+                    .addComponent(imageBefore)
+                    .addComponent(imageAfter)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
-                        .addComponent(jFormattedTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jButton1)))
+                        .addComponent(buttonFilter)))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(572, 723));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void inputDateFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDateFilterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            
+        }
+    }//GEN-LAST:event_inputDateFilterKeyPressed
+
+    private void buttonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonFilterActionPerformed
+
+    private void buttonFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonFilterKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            
+        }
+    }//GEN-LAST:event_buttonFilterKeyPressed
 
     /**
      * @param args the command line arguments
@@ -496,48 +527,48 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField10;
-    private javax.swing.JFormattedTextField jFormattedTextField11;
-    private javax.swing.JFormattedTextField jFormattedTextField12;
-    private javax.swing.JFormattedTextField jFormattedTextField13;
-    private javax.swing.JFormattedTextField jFormattedTextField14;
-    private javax.swing.JFormattedTextField jFormattedTextField15;
-    private javax.swing.JFormattedTextField jFormattedTextField16;
-    private javax.swing.JFormattedTextField jFormattedTextField17;
-    private javax.swing.JFormattedTextField jFormattedTextField18;
-    private javax.swing.JFormattedTextField jFormattedTextField19;
-    private javax.swing.JFormattedTextField jFormattedTextField20;
-    private javax.swing.JFormattedTextField jFormattedTextField21;
-    private javax.swing.JFormattedTextField jFormattedTextField22;
-    private javax.swing.JFormattedTextField jFormattedTextField23;
-    private javax.swing.JFormattedTextField jFormattedTextField24;
-    private javax.swing.JFormattedTextField jFormattedTextField25;
-    private javax.swing.JFormattedTextField jFormattedTextField27;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JFormattedTextField jFormattedTextField6;
-    private javax.swing.JFormattedTextField jFormattedTextField7;
-    private javax.swing.JFormattedTextField jFormattedTextField8;
-    private javax.swing.JFormattedTextField jFormattedTextField9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton buttonFilter;
+    private javax.swing.JLabel imageAfter;
+    private javax.swing.JLabel imageBefore;
+    private javax.swing.JFormattedTextField inputDateFilter;
+    private javax.swing.JFormattedTextField outputBeginningEighthShooting;
+    private javax.swing.JFormattedTextField outputBeginningEleventhShooting;
+    private javax.swing.JFormattedTextField outputBeginningFifthShooting;
+    private javax.swing.JFormattedTextField outputBeginningFirstShooting;
+    private javax.swing.JFormattedTextField outputBeginningFourthShooting;
+    private javax.swing.JFormattedTextField outputBeginningNinthShooting;
+    private javax.swing.JFormattedTextField outputBeginningSecondShooting;
+    private javax.swing.JFormattedTextField outputBeginningSeventhShooting;
+    private javax.swing.JFormattedTextField outputBeginningSixthShooting;
+    private javax.swing.JFormattedTextField outputBeginningTenthShooting;
+    private javax.swing.JFormattedTextField outputBeginningThirdShooting;
+    private javax.swing.JFormattedTextField outputBeginningTwenlthShooting;
+    private javax.swing.JFormattedTextField outputEndEighthShooting;
+    private javax.swing.JFormattedTextField outputEndEleventhShooting;
+    private javax.swing.JFormattedTextField outputEndFifthShooting;
+    private javax.swing.JFormattedTextField outputEndFirstShooting;
+    private javax.swing.JFormattedTextField outputEndFourthShooting;
+    private javax.swing.JFormattedTextField outputEndNinthShooting;
+    private javax.swing.JFormattedTextField outputEndSecondShooting;
+    private javax.swing.JFormattedTextField outputEndSeventhShooting;
+    private javax.swing.JFormattedTextField outputEndSixthShooting;
+    private javax.swing.JFormattedTextField outputEndTenthShooting;
+    private javax.swing.JFormattedTextField outputEndThirdShooting;
+    private javax.swing.JFormattedTextField outputEndTwenlthShooting;
+    private javax.swing.JLabel txtBeginning;
+    private javax.swing.JLabel txtEighthShooting;
+    private javax.swing.JLabel txtEleventhShooting;
+    private javax.swing.JLabel txtEnd;
+    private javax.swing.JLabel txtFifthShooting;
+    private javax.swing.JLabel txtFirstShooting;
+    private javax.swing.JLabel txtFourthShooting;
+    private javax.swing.JLabel txtNinthShooting;
+    private javax.swing.JLabel txtSecondShooting;
+    private javax.swing.JLabel txtSeventhShooting;
+    private javax.swing.JLabel txtShotHistoric;
+    private javax.swing.JLabel txtSixthShooting;
+    private javax.swing.JLabel txtTenthShooting;
+    private javax.swing.JLabel txtThirdShooting;
+    private javax.swing.JLabel txtTwelfthShooting;
     // End of variables declaration//GEN-END:variables
 }

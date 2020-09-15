@@ -34,7 +34,7 @@ public class CommandScreen extends javax.swing.JFrame {
         txtControlPanel = new javax.swing.JLabel();
         txtEditStation = new javax.swing.JLabel();
         txtChangePasswordControlPanel = new javax.swing.JLabel();
-        txtInsertDayPlan = new javax.swing.JLabel();
+        txtDayPlan = new javax.swing.JLabel();
         txtDelay = new javax.swing.JLabel();
         txtExportTable = new javax.swing.JLabel();
         txtHourHistoric = new javax.swing.JLabel();
@@ -71,11 +71,11 @@ public class CommandScreen extends javax.swing.JFrame {
             }
         });
 
-        txtInsertDayPlan.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        txtInsertDayPlan.setText("INSERIR PLANEJAMENTO DIÁRIO");
-        txtInsertDayPlan.addMouseListener(new java.awt.event.MouseAdapter() {
+        txtDayPlan.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtDayPlan.setText("PLANEJAMENTO DIÁRIO");
+        txtDayPlan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtInsertDayPlanMouseClicked(evt);
+                txtDayPlanMouseClicked(evt);
             }
         });
 
@@ -105,6 +105,11 @@ public class CommandScreen extends javax.swing.JFrame {
                 buttonLogoutActionPerformed(evt);
             }
         });
+        buttonLogout.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonLogoutKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +129,7 @@ public class CommandScreen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDelay)
                             .addComponent(txtExportTable)
-                            .addComponent(txtInsertDayPlan)
+                            .addComponent(txtDayPlan)
                             .addComponent(txtHourHistoric, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +146,7 @@ public class CommandScreen extends javax.swing.JFrame {
                 .addComponent(txtControlPanel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtInsertDayPlan)
+                    .addComponent(txtDayPlan)
                     .addComponent(txtCadastreNewStation))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -174,10 +179,10 @@ public class CommandScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
-    private void txtInsertDayPlanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtInsertDayPlanMouseClicked
-        DailyPlanningScreen dailyPlanningScreen = new DailyPlanningScreen();
-        dailyPlanningScreen.setVisible(true);
-    }//GEN-LAST:event_txtInsertDayPlanMouseClicked
+    private void txtDayPlanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDayPlanMouseClicked
+        NewAndCheckPlanning newAndCheckPlanning = new NewAndCheckPlanning();
+        newAndCheckPlanning.setVisible(true);
+    }//GEN-LAST:event_txtDayPlanMouseClicked
 
     private void txtDelayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDelayMouseClicked
         CheckDelayScreen checkDelayScreen = new CheckDelayScreen();
@@ -203,6 +208,20 @@ public class CommandScreen extends javax.swing.JFrame {
         ChangePasswordControlPanel changePasswordControlPanel = new ChangePasswordControlPanel();
         changePasswordControlPanel.setVisible(true);
     }//GEN-LAST:event_txtChangePasswordControlPanelMouseClicked
+
+    private void buttonLogoutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonLogoutKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            int confirma = JOptionPane.showConfirmDialog(null, "DESEJA FAZER LOGOUT?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+            if(confirma==JOptionPane.YES_OPTION){
+                LoginScreen loginScreen = new LoginScreen();
+                Frame[] frames = getFrames(); 
+                for (int i = 0; i < frames.length; i++){ 
+                    frames[i].dispose(); 
+                }
+                loginScreen.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_buttonLogoutKeyPressed
 
     /**
      * @param args the command line arguments
@@ -244,10 +263,10 @@ public class CommandScreen extends javax.swing.JFrame {
     private javax.swing.JLabel txtCadastreNewStation;
     private javax.swing.JLabel txtChangePasswordControlPanel;
     private javax.swing.JLabel txtControlPanel;
+    private javax.swing.JLabel txtDayPlan;
     private javax.swing.JLabel txtDelay;
     private javax.swing.JLabel txtEditStation;
     private javax.swing.JLabel txtExportTable;
     private javax.swing.JLabel txtHourHistoric;
-    private javax.swing.JLabel txtInsertDayPlan;
     // End of variables declaration//GEN-END:variables
 }

@@ -131,15 +131,35 @@ public class EditStation extends javax.swing.JFrame {
         txtPassword.setText("NOVA SENHA");
 
         inputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputNumberOfStation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputNumberOfStationKeyPressed(evt);
+            }
+        });
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputLoginKeyPressed(evt);
+            }
+        });
 
         txtConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtConfirmPassword.setText("CONFIRMAR SENHA");
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputPasswordKeyPressed(evt);
+            }
+        });
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputConfirmPasswordKeyPressed(evt);
+            }
+        });
 
         txtNewStation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtNewStation.setText("EDITAR ESTAÇÃO");
@@ -150,6 +170,11 @@ public class EditStation extends javax.swing.JFrame {
                 buttonSaveActionPerformed(evt);
             }
         });
+        buttonSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonSaveKeyPressed(evt);
+            }
+        });
 
         buttonLocale.setText("LOCALIZAR");
         buttonLocale.addActionListener(new java.awt.event.ActionListener() {
@@ -157,16 +182,31 @@ public class EditStation extends javax.swing.JFrame {
                 buttonLocaleActionPerformed(evt);
             }
         });
+        buttonLocale.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonLocaleKeyPressed(evt);
+            }
+        });
 
         txtOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtOldPassword.setText("ANTIGA SENHA");
 
         inputOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputOldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputOldPasswordKeyPressed(evt);
+            }
+        });
 
         buttonDelete.setText("APAGAR");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
+            }
+        });
+        buttonDelete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonDeleteKeyPressed(evt);
             }
         });
 
@@ -275,6 +315,91 @@ public class EditStation extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void inputNumberOfStationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputNumberOfStationKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputNumberOfStation.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "INFORME O NÚMERO DA ESTAÇÃO");
+            }
+            else{
+                localeStation();
+            }
+            inputLogin.requestFocus();
+        }
+    }//GEN-LAST:event_inputNumberOfStationKeyPressed
+
+    private void buttonLocaleKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonLocaleKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputNumberOfStation.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "INFORME O NÚMERO DA ESTAÇÃO");
+            }
+            else{
+                localeStation();
+            }
+        }
+    }//GEN-LAST:event_buttonLocaleKeyPressed
+
+    private void inputLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputLoginKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputOldPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputLoginKeyPressed
+
+    private void inputOldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputOldPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputOldPasswordKeyPressed
+
+    private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputConfirmPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputPasswordKeyPressed
+
+    private void inputConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputConfirmPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputNumberOfStation.getText().equals("")||inputLogin.getText().equals("")||inputOldPassword.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR PREENCHA TODOS OS CAMPOS");
+            }
+            else{
+                checkStation();
+                if(stationValid == true){
+                    if((inputPassword.getText().equals(inputConfirmPassword.getText()))){
+                        updateStation();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "CAMPOS DA NOVA SENHA NÃO CONFEREM");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_inputConfirmPasswordKeyPressed
+
+    private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputNumberOfStation.getText().equals("")||inputLogin.getText().equals("")||inputOldPassword.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR PREENCHA TODOS OS CAMPOS");
+            }
+            else{
+                checkStation();
+                if(stationValid == true){
+                    if((inputPassword.getText().equals(inputConfirmPassword.getText()))){
+                        updateStation();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "CAMPOS DA NOVA SENHA NÃO CONFEREM");
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_buttonSaveKeyPressed
+
+    private void buttonDeleteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonDeleteKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            remove();
+        }
+    }//GEN-LAST:event_buttonDeleteKeyPressed
 
     /**
      * @param args the command line arguments

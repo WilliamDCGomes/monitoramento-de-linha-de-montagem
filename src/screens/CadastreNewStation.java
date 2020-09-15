@@ -113,20 +113,50 @@ public class CadastreNewStation extends javax.swing.JFrame {
 
         outputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputNumberOfStation.setText("1");
+        outputNumberOfStation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputNumberOfStationActionPerformed(evt);
+            }
+        });
+        outputNumberOfStation.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputNumberOfStationKeyPressed(evt);
+            }
+        });
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputLoginKeyPressed(evt);
+            }
+        });
 
         txtConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtConfirmPassword.setText("CONFIRMAR SENHA");
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputPasswordKeyPressed(evt);
+            }
+        });
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputConfirmPasswordKeyPressed(evt);
+            }
+        });
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveActionPerformed(evt);
+            }
+        });
+        buttonSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonSaveKeyPressed(evt);
             }
         });
 
@@ -211,6 +241,66 @@ public class CadastreNewStation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
+
+    private void outputNumberOfStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputNumberOfStationActionPerformed
+        
+    }//GEN-LAST:event_outputNumberOfStationActionPerformed
+
+    private void outputNumberOfStationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputNumberOfStationKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputLogin.requestFocus();
+        }
+    }//GEN-LAST:event_outputNumberOfStationKeyPressed
+
+    private void inputLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputLoginKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputLoginKeyPressed
+
+    private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputConfirmPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputPasswordKeyPressed
+
+    private void inputConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputConfirmPasswordKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS");
+            }
+            else if(inputPassword.getText().equals(inputConfirmPassword.getText())){
+                if(hasStation()){
+                    JOptionPane.showMessageDialog(null, "ESSA ESTAÇÃO JÁ ESTÁ CADASTRADA NO BANCO DE DADOS");
+                }
+                else{
+                    add();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");
+            }
+        }
+    }//GEN-LAST:event_inputConfirmPasswordKeyPressed
+
+    private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")||inputConfirmPassword.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS");
+            }
+            else if(inputPassword.getText().equals(inputConfirmPassword.getText())){
+                if(hasStation()){
+                    JOptionPane.showMessageDialog(null, "ESSA ESTAÇÃO JÁ ESTÁ CADASTRADA NO BANCO DE DADOS");
+                }
+                else{
+                    add();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "AS SENHAS NÃO CONFEREM");
+            }
+        }
+    }//GEN-LAST:event_buttonSaveKeyPressed
 
     /**
      * @param args the command line arguments

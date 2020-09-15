@@ -279,11 +279,21 @@ public class WorkerScreen extends javax.swing.JFrame {
                 buttonResetActionPerformed(evt);
             }
         });
+        buttonReset.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonResetKeyPressed(evt);
+            }
+        });
 
         buttonLogout.setText("LOGOUT");
         buttonLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLogoutActionPerformed(evt);
+            }
+        });
+        buttonLogout.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonLogoutKeyPressed(evt);
             }
         });
 
@@ -401,6 +411,26 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         finish();
     }//GEN-LAST:event_formWindowClosing
+
+    private void buttonResetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonResetKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            removeService();
+        }
+    }//GEN-LAST:event_buttonResetKeyPressed
+
+    private void buttonLogoutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonLogoutKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA FAZER LOGOUT?\nCASO FAÇA SEM FINALIZAR O SERVIÇO, OS DADOS SERÃO PERDIDOS!","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+            if(confirma==JOptionPane.YES_OPTION){
+                LoginScreen loginScreen = new LoginScreen();
+                Frame[] frames = getFrames(); 
+                for (int i = 0; i < frames.length; i++){ 
+                    frames[i].dispose(); 
+                }
+                loginScreen.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_buttonLogoutKeyPressed
 
     /**
      * @param args the command line arguments

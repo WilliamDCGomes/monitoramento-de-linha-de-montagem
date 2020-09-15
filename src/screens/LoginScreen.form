@@ -103,6 +103,9 @@
           <Font name="Dialog" size="20" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputLoginKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtPassword">
       <Properties>
@@ -118,6 +121,9 @@
           <Font name="Dialog" size="20" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="inputPasswordKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonLogin">
       <Properties>
@@ -128,6 +134,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLoginActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonLoginKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonControlPanel">
@@ -139,6 +146,7 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonControlPanelActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonControlPanelKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>
