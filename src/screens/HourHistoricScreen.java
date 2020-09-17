@@ -5,19 +5,141 @@
  */
 package screens;
 
+import functions.GetDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import conexaobd.ModuloConexao;
+import javax.swing.JOptionPane;
 /**
  *
  * @author willi
  */
 public class HourHistoricScreen extends javax.swing.JFrame {
-
+    Connection conexao = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
     /**
      * Creates new form HourHistoricScreen
      */
     public HourHistoricScreen() {
         initComponents();
+        conexao = ModuloConexao.conector();
     }
-
+    int x=0;
+    int selects=0;
+    String[] begins = new String [12];
+    String[] ends = new String [12];
+    private void getBegin(){
+        selects=0;
+        String sqlnome = "select min(beginning), shot from presentshotting where dats = ? group by shot";
+        try {
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,"14/09/2020"/*inputDateFilter.getText()*/);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                begins[selects] = rs.getString(1);
+                selects++;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getEnd(){
+        selects=0;
+        String sqlnome = "select max(ending), shot from workfinish where dats = ? group by shot";
+        try {
+            pst = conexao.prepareStatement(sqlnome);
+            pst.setString(1,"14/09/2020"/*inputDateFilter.getText()*/);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                ends[selects] = rs.getString(1);
+                selects++;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void printBegins(){
+        for(int i=0;i<selects;i++){
+            if(i==0){
+                outputBeginningFirstShooting.setText(begins[0]);
+            }
+            else if(i==1){
+                outputBeginningSecondShooting.setText(begins[1]);
+            }
+            else if(i==2){
+                outputBeginningThirdShooting.setText(begins[2]);
+            }
+            else if(i==3){
+                outputBeginningFourthShooting.setText(begins[3]);
+            }
+            else if(i==4){
+                outputBeginningFifthShooting.setText(begins[4]);
+            }
+            else if(i==5){
+                outputBeginningSixthShooting.setText(begins[5]);
+            }
+            else if(i==6){
+                outputBeginningSeventhShooting.setText(begins[6]);
+            }
+            else if(i==7){
+                outputBeginningEighthShooting.setText(begins[7]);
+            }
+            else if(i==8){
+                outputBeginningNinthShooting.setText(begins[8]);
+            }
+            else if(i==9){
+                outputBeginningTenthShooting.setText(begins[9]);
+            }
+            else if(i==10){
+                outputBeginningEleventhShooting.setText(begins[10]);
+            }
+            else if(i==11){
+                outputBeginningTwenlthShooting.setText(begins[11]);
+            }
+        }
+    }
+    private void printEnds(){
+        for(int i=0;i<selects;i++){
+            if(i==0){
+                outputEndFirstShooting.setText(ends[0]);
+            }
+            else if(i==1){
+                outputEndSecondShooting.setText(ends[1]);
+            }
+            else if(i==2){
+                outputEndThirdShooting.setText(ends[2]);
+            }
+            else if(i==3){
+                outputEndFourthShooting.setText(ends[3]);
+            }
+            else if(i==4){
+                outputEndFifthShooting.setText(ends[4]);
+            }
+            else if(i==5){
+                outputEndSixthShooting.setText(ends[5]);
+            }
+            else if(i==6){
+                outputEndSeventhShooting.setText(ends[6]);
+            }
+            else if(i==7){
+                outputEndEighthShooting.setText(ends[7]);
+            }
+            else if(i==8){
+                outputEndNinthShooting.setText(ends[8]);
+            }
+            else if(i==9){
+                outputEndTenthShooting.setText(ends[9]);
+            }
+            else if(i==10){
+                outputEndEleventhShooting.setText(ends[10]);
+            }
+            else if(i==11){
+                outputEndTwenlthShooting.setText(ends[11]);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +195,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Histórico de Rodagens");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtShotHistoric.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtShotHistoric.setText("HISTÓRICO DE RODAGENS");
@@ -418,11 +545,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                             .addComponent(txtFourthShooting)
                             .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtFifthShooting))
+                        .addGap(41, 41, 41))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFifthShooting)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSixthShooting)
@@ -468,7 +595,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(buttonFilter)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(572, 723));
@@ -490,6 +617,18 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_buttonFilterKeyPressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            GetDate getDate = new GetDate();
+            inputDateFilter.setText(getDate.informDate());
+            getBegin();
+            printBegins();
+            getEnd();
+            printEnds();
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
