@@ -10,8 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
+import functions.AfterDate;
+import functions.BeforeDate;
 import functions.GetYesterdayDate;
 import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 /**
@@ -379,7 +384,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtShotHistoric)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -389,10 +394,10 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                                 .addComponent(txtFirstShooting)
                                 .addComponent(txtThirdShooting)
                                 .addComponent(txtFourthShooting)
-                                .addComponent(txtFifthShooting)
-                                .addComponent(txtSixthShooting)
                                 .addComponent(txtSeventhShooting)
-                                .addComponent(txtEighthShooting))
+                                .addComponent(txtEighthShooting)
+                                .addComponent(txtSixthShooting)
+                                .addComponent(txtFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNinthShooting)
                             .addComponent(txtTenthShooting)
                             .addComponent(txtEleventhShooting)
@@ -404,13 +409,13 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                             .addComponent(outputBeginningThirdShooting)
                             .addComponent(outputBeginningFourthShooting)
                             .addComponent(outputBeginningFifthShooting)
-                            .addComponent(outputBeginningSixthShooting)
                             .addComponent(outputBeginningSeventhShooting)
                             .addComponent(outputBeginningEighthShooting)
                             .addComponent(outputBeginningNinthShooting)
                             .addComponent(outputBeginningTenthShooting)
                             .addComponent(outputBeginningEleventhShooting)
-                            .addComponent(outputBeginningTwenlthShooting))
+                            .addComponent(outputBeginningTwenlthShooting)
+                            .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,13 +423,13 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                             .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndSixthShooting)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageBefore)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -459,21 +464,22 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                             .addComponent(outputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSecondShooting)
-                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSecondShooting))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtThirdShooting)
-                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtThirdShooting)
+                                .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFourthShooting)
                             .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))
+                        .addGap(38, 38, 38))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFifthShooting)
                         .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -531,7 +537,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         outputBeginningThirdShooting.getAccessibleContext().setAccessibleDescription("");
         outputBeginningFourthShooting.getAccessibleContext().setAccessibleName("");
 
-        setSize(new java.awt.Dimension(572, 723));
+        setSize(new java.awt.Dimension(572, 651));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -579,8 +585,21 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void imageBeforeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageBeforeMouseClicked
-        GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
-        inputDateFilter.setText(getYesterdayDate.informDate(inputDateFilter.getText()));
+        if(inputDateFilter.getText().equals("  /  /    ")){
+            JOptionPane.showMessageDialog(null, "POR FAVOR, INSIRA UMA DATA!");
+        }
+        else if(inputDateFilter.getText().length()<10){
+            JOptionPane.showMessageDialog(null, "POR FAVOR, INSIRA UMA DATA CORRETA!");
+        }
+        else{
+            BeforeDate beforeDate = new BeforeDate();
+            try {
+                inputDateFilter.setText(beforeDate.informDate(inputDateFilter.getText()));
+                filter();
+            } catch (ParseException ex) {
+                Logger.getLogger(HourHistoricScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_imageBeforeMouseClicked
 
     /**
