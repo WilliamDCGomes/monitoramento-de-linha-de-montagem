@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
+import functions.GetYesterdayDate;
+import java.text.ParseException;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 /**
  *
@@ -30,12 +33,53 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     int selects=0;
     String[] begins = new String [12];
     String[] ends = new String [12];
+    private void filter(){
+        clearShots();
+        getBegin();
+        printBegins();
+        getEnd();
+        printEnds();
+    }
+    public void clearShots(){
+        int aux = begins.length;
+        for(int i=0;i<aux;i++){
+            begins[i] = "";
+        }
+        aux = ends.length;
+        for(int i=0;i<aux;i++){
+            ends[i] = "";
+        }
+        outputBeginningFirstShooting.setText("");
+        outputBeginningSecondShooting.setText("");
+        outputBeginningThirdShooting.setText("");
+        outputBeginningFourthShooting.setText("");
+        outputBeginningFifthShooting.setText("");
+        outputBeginningSixthShooting.setText("");
+        outputBeginningSeventhShooting.setText("");
+        outputBeginningEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndFirstShooting.setText("");
+        outputEndSecondShooting.setText("");
+        outputEndThirdShooting.setText("");
+        outputEndFourthShooting.setText("");
+        outputEndFifthShooting.setText("");
+        outputEndSixthShooting.setText("");
+        outputEndSeventhShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndNinthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+        outputEndEighthShooting.setText("");
+    }
     private void getBegin(){
         selects=0;
         String sqlnome = "select min(beginning), shot from presentshotting where dats = ? group by shot";
         try {
             pst = conexao.prepareStatement(sqlnome);
-            pst.setString(1,"14/09/2020"/*inputDateFilter.getText()*/);
+            pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {
                 begins[selects] = rs.getString(1);
@@ -50,7 +94,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         String sqlnome = "select max(ending), shot from workfinish where dats = ? group by shot";
         try {
             pst = conexao.prepareStatement(sqlnome);
-            pst.setString(1,"14/09/2020"/*inputDateFilter.getText()*/);
+            pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {
                 ends[selects] = rs.getString(1);
@@ -87,16 +131,16 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 outputBeginningEighthShooting.setText(begins[7]);
             }
             else if(i==8){
-                outputBeginningNinthShooting.setText(begins[8]);
+                outputEndEighthShooting.setText(begins[8]);
             }
             else if(i==9){
-                outputBeginningTenthShooting.setText(begins[9]);
+                outputEndEighthShooting.setText(begins[9]);
             }
             else if(i==10){
-                outputBeginningEleventhShooting.setText(begins[10]);
+                outputEndEighthShooting.setText(begins[10]);
             }
             else if(i==11){
-                outputBeginningTwenlthShooting.setText(begins[11]);
+                outputEndEighthShooting.setText(begins[11]);
             }
         }
     }
@@ -130,13 +174,13 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 outputEndNinthShooting.setText(ends[8]);
             }
             else if(i==9){
-                outputEndTenthShooting.setText(ends[9]);
+                outputEndEighthShooting.setText(ends[9]);
             }
             else if(i==10){
-                outputEndEleventhShooting.setText(ends[10]);
+                outputEndEighthShooting.setText(ends[10]);
             }
             else if(i==11){
-                outputEndTwenlthShooting.setText(ends[11]);
+                outputEndEighthShooting.setText(ends[11]);
             }
         }
     }
@@ -154,44 +198,44 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         imageAfter = new javax.swing.JLabel();
         inputDateFilter = new javax.swing.JFormattedTextField();
         buttonFilter = new javax.swing.JButton();
-        outputEndThirdShooting = new javax.swing.JFormattedTextField();
-        outputEndSecondShooting = new javax.swing.JFormattedTextField();
         txtTenthShooting = new javax.swing.JLabel();
-        outputEndFourthShooting = new javax.swing.JFormattedTextField();
         txtEleventhShooting = new javax.swing.JLabel();
-        outputEndFifthShooting = new javax.swing.JFormattedTextField();
         txtTwelfthShooting = new javax.swing.JLabel();
-        outputEndSixthShooting = new javax.swing.JFormattedTextField();
-        outputEndSeventhShooting = new javax.swing.JFormattedTextField();
-        outputEndEighthShooting = new javax.swing.JFormattedTextField();
-        outputEndNinthShooting = new javax.swing.JFormattedTextField();
-        outputEndTenthShooting = new javax.swing.JFormattedTextField();
-        outputEndFirstShooting = new javax.swing.JFormattedTextField();
-        outputEndEleventhShooting = new javax.swing.JFormattedTextField();
-        outputBeginningFirstShooting = new javax.swing.JFormattedTextField();
-        outputBeginningSecondShooting = new javax.swing.JFormattedTextField();
-        outputBeginningThirdShooting = new javax.swing.JFormattedTextField();
-        outputBeginningFourthShooting = new javax.swing.JFormattedTextField();
-        outputBeginningFifthShooting = new javax.swing.JFormattedTextField();
         txtFirstShooting = new javax.swing.JLabel();
-        outputBeginningSeventhShooting = new javax.swing.JFormattedTextField();
         txtSecondShooting = new javax.swing.JLabel();
-        outputBeginningSixthShooting = new javax.swing.JFormattedTextField();
         txtThirdShooting = new javax.swing.JLabel();
-        outputBeginningEighthShooting = new javax.swing.JFormattedTextField();
         txtFourthShooting = new javax.swing.JLabel();
-        outputBeginningNinthShooting = new javax.swing.JFormattedTextField();
         txtFifthShooting = new javax.swing.JLabel();
-        outputBeginningTenthShooting = new javax.swing.JFormattedTextField();
         txtSixthShooting = new javax.swing.JLabel();
-        outputBeginningEleventhShooting = new javax.swing.JFormattedTextField();
         txtSeventhShooting = new javax.swing.JLabel();
-        outputBeginningTwenlthShooting = new javax.swing.JFormattedTextField();
-        outputEndTwenlthShooting = new javax.swing.JFormattedTextField();
         txtEighthShooting = new javax.swing.JLabel();
         txtNinthShooting = new javax.swing.JLabel();
         txtBeginning = new javax.swing.JLabel();
         txtEnd = new javax.swing.JLabel();
+        outputBeginningFirstShooting = new javax.swing.JTextField();
+        outputEndFirstShooting = new javax.swing.JTextField();
+        outputBeginningSecondShooting = new javax.swing.JTextField();
+        outputEndSecondShooting = new javax.swing.JTextField();
+        outputBeginningThirdShooting = new javax.swing.JTextField();
+        outputEndThirdShooting = new javax.swing.JTextField();
+        outputBeginningFourthShooting = new javax.swing.JTextField();
+        outputEndFourthShooting = new javax.swing.JTextField();
+        outputBeginningFifthShooting = new javax.swing.JTextField();
+        outputEndFifthShooting = new javax.swing.JTextField();
+        outputBeginningSixthShooting = new javax.swing.JTextField();
+        outputEndSixthShooting = new javax.swing.JTextField();
+        outputBeginningSeventhShooting = new javax.swing.JTextField();
+        outputEndSeventhShooting = new javax.swing.JTextField();
+        outputBeginningEighthShooting = new javax.swing.JTextField();
+        outputEndEighthShooting = new javax.swing.JTextField();
+        outputBeginningNinthShooting = new javax.swing.JTextField();
+        outputEndNinthShooting = new javax.swing.JTextField();
+        outputBeginningTenthShooting = new javax.swing.JTextField();
+        outputEndTenthShooting = new javax.swing.JTextField();
+        outputBeginningEleventhShooting = new javax.swing.JTextField();
+        outputEndEleventhShooting = new javax.swing.JTextField();
+        outputBeginningTwenlthShooting = new javax.swing.JTextField();
+        outputEndTwenlthShooting = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Histórico de Rodagens");
@@ -205,6 +249,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         txtShotHistoric.setText("HISTÓRICO DE RODAGENS");
 
         imageBefore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
+        imageBefore.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imageBeforeMouseClicked(evt);
+            }
+        });
 
         imageAfter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
 
@@ -232,203 +281,35 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             }
         });
 
-        try {
-            outputEndThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtTenthShooting.setText("10º RODAGEM");
-
-        try {
-            outputEndFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         txtEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtEleventhShooting.setText("11º RODAGEM");
 
-        try {
-            outputEndFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtTwelfthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtTwelfthShooting.setText("12º RODAGEM");
-
-        try {
-            outputEndSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputBeginningFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputBeginningSecondShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputBeginningThirdShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputBeginningFourthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputBeginningFifthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         txtFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFirstShooting.setText("1º RODAGEM");
 
-        try {
-            outputBeginningSeventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtSecondShooting.setText("2º RODAGEM");
-
-        try {
-            outputBeginningSixthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         txtThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtThirdShooting.setText("3º RODAGEM");
 
-        try {
-            outputBeginningEighthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFourthShooting.setText("4º RODAGEM");
-
-        try {
-            outputBeginningNinthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         txtFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtFifthShooting.setText("5º RODAGEM");
 
-        try {
-            outputBeginningTenthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtSixthShooting.setText("6º RODAGEM");
 
-        try {
-            outputBeginningEleventhShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
         txtSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtSeventhShooting.setText("7º RODAGEM");
-
-        try {
-            outputBeginningTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputBeginningTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-
-        try {
-            outputEndTwenlthShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputEndTwenlthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
 
         txtEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtEighthShooting.setText("8º RODAGEM");
@@ -441,6 +322,54 @@ public class HourHistoricScreen extends javax.swing.JFrame {
 
         txtEnd.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtEnd.setText("FIM");
+
+        outputBeginningFirstShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndFirstShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningSecondShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndSecondShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningThirdShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndThirdShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningFourthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndFourthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningFifthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndFifthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningSixthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndSixthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningSeventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndSeventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningEighthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndEighthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningNinthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndNinthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningTenthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndTenthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningEleventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndEleventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputBeginningTwenlthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        outputEndTwenlthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -455,48 +384,47 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtSecondShooting)
+                                .addComponent(txtFirstShooting)
+                                .addComponent(txtThirdShooting)
+                                .addComponent(txtFourthShooting)
+                                .addComponent(txtFifthShooting)
+                                .addComponent(txtSixthShooting)
+                                .addComponent(txtSeventhShooting)
+                                .addComponent(txtEighthShooting))
                             .addComponent(txtNinthShooting)
                             .addComponent(txtTenthShooting)
                             .addComponent(txtEleventhShooting)
-                            .addComponent(txtTwelfthShooting)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtSecondShooting)
-                                    .addComponent(txtFirstShooting)
-                                    .addComponent(txtThirdShooting)
-                                    .addComponent(txtFourthShooting)
-                                    .addComponent(txtFifthShooting)
-                                    .addComponent(txtSixthShooting)
-                                    .addComponent(txtSeventhShooting)
-                                    .addComponent(txtEighthShooting))
-                                .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(outputBeginningFirstShooting)
-                                    .addComponent(outputBeginningSecondShooting)
-                                    .addComponent(outputBeginningThirdShooting)
-                                    .addComponent(outputBeginningFourthShooting)
-                                    .addComponent(outputBeginningFifthShooting)
-                                    .addComponent(outputBeginningSeventhShooting)
-                                    .addComponent(outputBeginningSixthShooting)
-                                    .addComponent(outputBeginningEighthShooting)
-                                    .addComponent(outputBeginningNinthShooting)
-                                    .addComponent(outputBeginningTenthShooting)
-                                    .addComponent(outputBeginningEleventhShooting)
-                                    .addComponent(outputBeginningTwenlthShooting))))
+                            .addComponent(txtTwelfthShooting))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputBeginningFirstShooting)
+                            .addComponent(outputBeginningSecondShooting)
+                            .addComponent(outputBeginningThirdShooting)
+                            .addComponent(outputBeginningFourthShooting)
+                            .addComponent(outputBeginningFifthShooting)
+                            .addComponent(outputBeginningSixthShooting)
+                            .addComponent(outputBeginningSeventhShooting)
+                            .addComponent(outputBeginningEighthShooting)
+                            .addComponent(outputBeginningNinthShooting)
+                            .addComponent(outputBeginningTenthShooting)
+                            .addComponent(outputBeginningEleventhShooting)
+                            .addComponent(outputBeginningTwenlthShooting))
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(outputEndFirstShooting)
-                            .addComponent(outputEndSecondShooting)
-                            .addComponent(outputEndThirdShooting)
-                            .addComponent(outputEndFourthShooting)
-                            .addComponent(outputEndFifthShooting)
-                            .addComponent(outputEndSixthShooting)
-                            .addComponent(outputEndSeventhShooting)
-                            .addComponent(outputEndEighthShooting)
-                            .addComponent(outputEndNinthShooting)
-                            .addComponent(outputEndTenthShooting)
-                            .addComponent(outputEndEleventhShooting)
-                            .addComponent(outputEndTwenlthShooting)))
+                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageBefore)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -528,63 +456,63 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFirstShooting)
-                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(outputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtSecondShooting)
-                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtThirdShooting)
-                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFourthShooting)
-                            .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtFifthShooting)))
+                        .addComponent(txtFifthShooting)
+                        .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSixthShooting)
-                    .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSeventhShooting)
-                    .addComponent(outputBeginningSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEighthShooting)
-                    .addComponent(outputBeginningEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNinthShooting)
-                    .addComponent(outputBeginningNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTenthShooting)
-                    .addComponent(outputBeginningTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEleventhShooting)
-                    .addComponent(outputBeginningEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTwelfthShooting)
-                    .addComponent(outputBeginningTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(outputBeginningTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imageBefore)
@@ -595,8 +523,13 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(buttonFilter)))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(81, 81, 81))
         );
+
+        outputBeginningSecondShooting.getAccessibleContext().setAccessibleDescription("");
+        outputEndSecondShooting.getAccessibleContext().setAccessibleDescription("");
+        outputBeginningThirdShooting.getAccessibleContext().setAccessibleDescription("");
+        outputBeginningFourthShooting.getAccessibleContext().setAccessibleName("");
 
         setSize(new java.awt.Dimension(572, 723));
         setLocationRelativeTo(null);
@@ -604,17 +537,32 @@ public class HourHistoricScreen extends javax.swing.JFrame {
 
     private void inputDateFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDateFilterKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            if(inputDateFilter.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, INSIRA UMA DATA!");
+            }
+            else{
+                filter();
+            }
         }
     }//GEN-LAST:event_inputDateFilterKeyPressed
 
     private void buttonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFilterActionPerformed
-        // TODO add your handling code here:
+        if(inputDateFilter.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "POR FAVOR, INSIRA UMA DATA!");
+        }
+        else{
+            filter();
+        }
     }//GEN-LAST:event_buttonFilterActionPerformed
 
     private void buttonFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonFilterKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            if(inputDateFilter.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, INSIRA UMA DATA!");
+            }
+            else{
+                filter();
+            }
         }
     }//GEN-LAST:event_buttonFilterKeyPressed
 
@@ -629,6 +577,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             printEnds();
         }
     }//GEN-LAST:event_formWindowActivated
+
+    private void imageBeforeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imageBeforeMouseClicked
+        GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
+        inputDateFilter.setText(getYesterdayDate.informDate(inputDateFilter.getText()));
+    }//GEN-LAST:event_imageBeforeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -670,30 +623,30 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     private javax.swing.JLabel imageAfter;
     private javax.swing.JLabel imageBefore;
     private javax.swing.JFormattedTextField inputDateFilter;
-    private javax.swing.JFormattedTextField outputBeginningEighthShooting;
-    private javax.swing.JFormattedTextField outputBeginningEleventhShooting;
-    private javax.swing.JFormattedTextField outputBeginningFifthShooting;
-    private javax.swing.JFormattedTextField outputBeginningFirstShooting;
-    private javax.swing.JFormattedTextField outputBeginningFourthShooting;
-    private javax.swing.JFormattedTextField outputBeginningNinthShooting;
-    private javax.swing.JFormattedTextField outputBeginningSecondShooting;
-    private javax.swing.JFormattedTextField outputBeginningSeventhShooting;
-    private javax.swing.JFormattedTextField outputBeginningSixthShooting;
-    private javax.swing.JFormattedTextField outputBeginningTenthShooting;
-    private javax.swing.JFormattedTextField outputBeginningThirdShooting;
-    private javax.swing.JFormattedTextField outputBeginningTwenlthShooting;
-    private javax.swing.JFormattedTextField outputEndEighthShooting;
-    private javax.swing.JFormattedTextField outputEndEleventhShooting;
-    private javax.swing.JFormattedTextField outputEndFifthShooting;
-    private javax.swing.JFormattedTextField outputEndFirstShooting;
-    private javax.swing.JFormattedTextField outputEndFourthShooting;
-    private javax.swing.JFormattedTextField outputEndNinthShooting;
-    private javax.swing.JFormattedTextField outputEndSecondShooting;
-    private javax.swing.JFormattedTextField outputEndSeventhShooting;
-    private javax.swing.JFormattedTextField outputEndSixthShooting;
-    private javax.swing.JFormattedTextField outputEndTenthShooting;
-    private javax.swing.JFormattedTextField outputEndThirdShooting;
-    private javax.swing.JFormattedTextField outputEndTwenlthShooting;
+    private javax.swing.JTextField outputBeginningEighthShooting;
+    private javax.swing.JTextField outputBeginningEleventhShooting;
+    private javax.swing.JTextField outputBeginningFifthShooting;
+    private javax.swing.JTextField outputBeginningFirstShooting;
+    private javax.swing.JTextField outputBeginningFourthShooting;
+    private javax.swing.JTextField outputBeginningNinthShooting;
+    private javax.swing.JTextField outputBeginningSecondShooting;
+    private javax.swing.JTextField outputBeginningSeventhShooting;
+    private javax.swing.JTextField outputBeginningSixthShooting;
+    private javax.swing.JTextField outputBeginningTenthShooting;
+    private javax.swing.JTextField outputBeginningThirdShooting;
+    private javax.swing.JTextField outputBeginningTwenlthShooting;
+    private javax.swing.JTextField outputEndEighthShooting;
+    private javax.swing.JTextField outputEndEleventhShooting;
+    private javax.swing.JTextField outputEndFifthShooting;
+    private javax.swing.JTextField outputEndFirstShooting;
+    private javax.swing.JTextField outputEndFourthShooting;
+    private javax.swing.JTextField outputEndNinthShooting;
+    private javax.swing.JTextField outputEndSecondShooting;
+    private javax.swing.JTextField outputEndSeventhShooting;
+    private javax.swing.JTextField outputEndSixthShooting;
+    private javax.swing.JTextField outputEndTenthShooting;
+    private javax.swing.JTextField outputEndThirdShooting;
+    private javax.swing.JTextField outputEndTwenlthShooting;
     private javax.swing.JLabel txtBeginning;
     private javax.swing.JLabel txtEighthShooting;
     private javax.swing.JLabel txtEleventhShooting;
