@@ -9,6 +9,7 @@ import functions.CheckInputDailyPlanning;
 import javax.swing.JOptionPane;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
+import functions.GetHour;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -449,7 +450,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         txtEleventhShooting = new javax.swing.JLabel();
         txtTwelfthShooting = new javax.swing.JLabel();
         buttonSave = new javax.swing.JButton();
-        buttonImport = new javax.swing.JButton();
+        buttonCancele = new javax.swing.JButton();
         txtBeginning = new javax.swing.JLabel();
         txtEnd = new javax.swing.JLabel();
         inputEndFirstShooting = new javax.swing.JFormattedTextField();
@@ -531,10 +532,15 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
 
-        buttonImport.setText("IMPORTAR");
-        buttonImport.addKeyListener(new java.awt.event.KeyAdapter() {
+        buttonCancele.setText("CANCELAR");
+        buttonCancele.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCanceleActionPerformed(evt);
+            }
+        });
+        buttonCancele.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                buttonImportKeyPressed(evt);
+                buttonCanceleKeyPressed(evt);
             }
         });
 
@@ -849,7 +855,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(buttonSave)
                                 .addGap(45, 45, 45)
-                                .addComponent(buttonImport))))
+                                .addComponent(buttonCancele))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtSecondShooting)
@@ -975,7 +981,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonSave)
-                    .addComponent(buttonImport))
+                    .addComponent(buttonCancele))
                 .addGap(99, 99, 99))
         );
 
@@ -984,7 +990,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-        if(buttonImport.isVisible()){
+        if(buttonCancele.isVisible()){
             beforeAdd();
         }
         else{
@@ -1132,7 +1138,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void inputEndTwenlthShootingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEndTwenlthShootingKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            if(buttonImport.isVisible()){
+            if(buttonCancele.isVisible()){
                 beforeAdd();
             }
             else{
@@ -1143,7 +1149,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            if(buttonImport.isVisible()){
+            if(buttonCancele.isVisible()){
                 beforeAdd();
             }
             else{
@@ -1152,11 +1158,15 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonSaveKeyPressed
 
-    private void buttonImportKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonImportKeyPressed
+    private void buttonCanceleKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonCanceleKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            this.dispose();
         }
-    }//GEN-LAST:event_buttonImportKeyPressed
+    }//GEN-LAST:event_buttonCanceleKeyPressed
+
+    private void buttonCanceleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCanceleActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_buttonCanceleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1194,7 +1204,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton buttonImport;
+    public static javax.swing.JButton buttonCancele;
     private javax.swing.JButton buttonSave;
     public static javax.swing.JFormattedTextField inputBeginningEighthShooting;
     public static javax.swing.JFormattedTextField inputBeginningEleventhShooting;

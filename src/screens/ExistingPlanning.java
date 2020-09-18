@@ -143,7 +143,7 @@ public class ExistingPlanning extends javax.swing.JFrame {
     }
     private void sendShots(){
         DailyPlanningScreen dailyPlanningScreen = new DailyPlanningScreen();
-        dailyPlanningScreen.buttonImport.setVisible(false);
+        dailyPlanningScreen.buttonCancele.setVisible(false);
         for(int i=0;i<selects;i++){
             if(i==0){
                 dailyPlanningScreen.inputBeginningFirstShooting.setText(outputBeginningFirstShooting.getText());
@@ -334,6 +334,11 @@ public class ExistingPlanning extends javax.swing.JFrame {
         txtSecondShooting.setText("2º RODAGEM");
 
         outputBeginningSeventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        outputBeginningSeventhShooting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputBeginningSeventhShootingActionPerformed(evt);
+            }
+        });
 
         txtThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtThirdShooting.setText("3º RODAGEM");
@@ -411,46 +416,9 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 .addComponent(txtShotHistoric)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(txtBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                        .addGap(182, 182, 182)
-                        .addComponent(txtEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                        .addGap(73, 73, 73))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSecondShooting)
-                            .addComponent(txtFirstShooting)
-                            .addComponent(txtThirdShooting)
-                            .addComponent(txtFourthShooting)
-                            .addComponent(txtFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSixthShooting)
-                            .addComponent(txtSeventhShooting)
-                            .addComponent(txtEighthShooting)
-                            .addComponent(txtNinthShooting))
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputBeginningFirstShooting)
-                            .addComponent(outputBeginningSecondShooting)
-                            .addComponent(outputBeginningThirdShooting)
-                            .addComponent(outputBeginningFourthShooting)
-                            .addComponent(outputBeginningFifthShooting)
-                            .addComponent(outputBeginningSixthShooting))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSixthShooting)
-                            .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(imageBefore)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,23 +430,58 @@ public class ExistingPlanning extends javax.swing.JFrame {
                         .addComponent(buttonEdit)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEleventhShooting)
-                            .addComponent(txtTenthShooting)
-                            .addComponent(txtTwelfthShooting))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputBeginningTwenlthShooting)
-                            .addComponent(outputBeginningSeventhShooting)
-                            .addComponent(outputBeginningEighthShooting)
-                            .addComponent(outputBeginningNinthShooting)
-                            .addComponent(outputBeginningTenthShooting)
-                            .addComponent(outputBeginningEleventhShooting))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndEleventhShooting)
-                            .addComponent(outputEndTwenlthShooting))))
-                .addGap(15, 15, 15))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(204, 204, 204)
+                                .addComponent(txtBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                                .addGap(182, 182, 182)
+                                .addComponent(txtEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                                .addGap(73, 73, 73))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtSecondShooting)
+                                        .addComponent(txtFirstShooting)
+                                        .addComponent(txtThirdShooting)
+                                        .addComponent(txtFourthShooting)
+                                        .addComponent(txtFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtSixthShooting)
+                                        .addComponent(txtSeventhShooting)
+                                        .addComponent(txtEighthShooting)
+                                        .addComponent(txtNinthShooting))
+                                    .addComponent(txtTenthShooting)
+                                    .addComponent(txtEleventhShooting)
+                                    .addComponent(txtTwelfthShooting))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(outputBeginningFirstShooting)
+                                    .addComponent(outputBeginningSecondShooting)
+                                    .addComponent(outputBeginningThirdShooting)
+                                    .addComponent(outputBeginningFourthShooting)
+                                    .addComponent(outputBeginningFifthShooting)
+                                    .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(outputBeginningSeventhShooting)
+                                    .addComponent(outputBeginningEighthShooting)
+                                    .addComponent(outputBeginningNinthShooting)
+                                    .addComponent(outputBeginningTenthShooting)
+                                    .addComponent(outputBeginningEleventhShooting)
+                                    .addComponent(outputBeginningTwenlthShooting))
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(outputEndFirstShooting)
+                                    .addComponent(outputEndSecondShooting)
+                                    .addComponent(outputEndThirdShooting)
+                                    .addComponent(outputEndFourthShooting)
+                                    .addComponent(outputEndFifthShooting)
+                                    .addComponent(outputEndSixthShooting)
+                                    .addComponent(outputEndSeventhShooting)
+                                    .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(outputEndTenthShooting)
+                                    .addComponent(outputEndEleventhShooting)
+                                    .addComponent(outputEndTwenlthShooting))))))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,7 +567,7 @@ public class ExistingPlanning extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonFilter)
                             .addComponent(buttonEdit))))
-                .addGap(69, 69, 69))
+                .addGap(57, 57, 57))
         );
 
         setSize(new java.awt.Dimension(617, 680));
@@ -668,6 +671,10 @@ public class ExistingPlanning extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonEditKeyPressed
+
+    private void outputBeginningSeventhShootingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputBeginningSeventhShootingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_outputBeginningSeventhShootingActionPerformed
 
     /**
      * @param args the command line arguments

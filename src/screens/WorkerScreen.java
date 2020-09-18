@@ -95,7 +95,6 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2=conexao.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
-            System.out.println("open");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
@@ -108,7 +107,6 @@ public class WorkerScreen extends javax.swing.JFrame {
             rs= pst.executeQuery();
             if(rs.next()){
                 id = rs.getInt(1);
-                System.out.println(id);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -119,14 +117,11 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(confirma==JOptionPane.YES_OPTION){
             String sql = "delete from workfinish where id = ?";
             try {
-                System.out.println("removeService");
                 pst2=conexao.prepareStatement(sql);
                 getId();
                 pst2.setInt(1, id);
                 int apagado = pst2.executeUpdate();
-                System.out.println(apagado);
                 if(apagado>0){
-                    System.out.println("apagado");
                     removeDelay.remove(id);
                     open();
                     groupWorkFinish.clearSelection();
@@ -236,6 +231,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         outputStation = new javax.swing.JLabel();
         outputShot = new javax.swing.JLabel();
         txtShot = new javax.swing.JLabel();
+        buttonRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Linha de Montagem");
@@ -313,6 +309,13 @@ public class WorkerScreen extends javax.swing.JFrame {
         txtShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtShot.setText("º   RODAGEM");
 
+        buttonRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -322,17 +325,19 @@ public class WorkerScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputDelay)
-                            .addComponent(inputWorkFinish))
+                            .addComponent(inputWorkFinish)
+                            .addComponent(inputDelay))
                         .addGap(160, 160, 160)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonReset)
-                            .addComponent(buttonLogout)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(outputShot)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtShot))
-                            .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtShot)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonReset)
+                            .addComponent(buttonLogout)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,7 +346,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                         .addComponent(txtTimeToNextWork)
                         .addGap(69, 69, 69)
                         .addComponent(outputTime)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,13 +365,19 @@ public class WorkerScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputDelay)
                     .addComponent(buttonLogout))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStation)
-                    .addComponent(outputStation)
-                    .addComponent(outputShot)
-                    .addComponent(txtShot))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtStation)
+                            .addComponent(outputStation)
+                            .addComponent(outputShot)
+                            .addComponent(txtShot))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonRefresh)
+                        .addContainerGap())))
         );
 
         setSize(new java.awt.Dimension(560, 258));
@@ -380,12 +391,10 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
         if(inputWorkFinish.isSelected()){
-            System.out.println("vai indo");
             removeService();
         }
         else{
             groupDelay.clearSelection();
-            System.out.println("so limpando");
         }
     }//GEN-LAST:event_buttonResetActionPerformed
 
@@ -404,7 +413,6 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void inputWorkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWorkFinishActionPerformed
         StartShotting startShotting = new StartShotting();
         startShotting.startProduction();
-        
         addService();
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 
@@ -448,6 +456,21 @@ public class WorkerScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonLogoutKeyPressed
 
+    private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
+        String shotActual = outputShot.getText();
+        setTime();
+        outputShot.setText(Integer.toString(getShot()));
+        if(outputShot.getText().equals(shotActual)){
+            
+        }
+        else{
+            groupWorkFinish.clearSelection();
+            groupDelay.clearSelection();
+            outputShot.setText(Integer.toString(getShot()));
+            open();
+        }
+    }//GEN-LAST:event_buttonRefreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -485,6 +508,7 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonLogout;
+    private javax.swing.JButton buttonRefresh;
     private javax.swing.JButton buttonReset;
     public static javax.swing.ButtonGroup groupDelay;
     public static javax.swing.ButtonGroup groupWorkFinish;

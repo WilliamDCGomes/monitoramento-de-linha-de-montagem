@@ -4,3 +4,4 @@ Impedir de inserir um novo planejamento quando já existir um
 Parar as rodagens quando não houver mais planejamento
 Permitir que um atraso seja excluido
 Trocar o input de login na tela inicial
+Se fechar a tela de execução, voltar como estava antes

@@ -39,7 +39,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="buttonSave" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="buttonImport" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonCancele" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -194,7 +194,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonImport" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonCancele" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
@@ -315,12 +315,13 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonSaveKeyPressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonImport">
+    <Component class="javax.swing.JButton" name="buttonCancele">
       <Properties>
-        <Property name="text" type="java.lang.String" value="IMPORTAR"/>
+        <Property name="text" type="java.lang.String" value="CANCELAR"/>
       </Properties>
       <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonImportKeyPressed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCanceleActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buttonCanceleKeyPressed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
