@@ -1,2 +1,6 @@
 Fazer o delay subir de 1 em 1
-Arrumar o reset da tela de serviço
+Impedir que salve o serviço sem o Delay dps do horario
+Impedir de inserir um novo planejamento quando já existir um
+Parar as rodagens quando não houver mais planejamento
+Permitir que um atraso seja excluido
+Trocar o input de login na tela inicial
