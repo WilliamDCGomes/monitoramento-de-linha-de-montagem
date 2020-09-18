@@ -26,7 +26,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     GetDate getDate = new GetDate();
     GetYesterdayDate getYesterdayDate= new GetYesterdayDate();
     private void searchDelays(String begin, String end){
-        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where dats between ? and ?";
+        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço', dats as 'Data' from delay where dats between ? and ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1,begin);
@@ -40,7 +40,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         }
     }
     private void searchDelaysFilter(){
-        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço' from delay where (dats between ? and ?) and typeDelay = ?";
+        String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço', dats as 'Data' from delay where (dats between ? and ?) and typeDelay = ?";
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1,inputFirstDateFilter.getText());

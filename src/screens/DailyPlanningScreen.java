@@ -41,8 +41,30 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             pst.executeUpdate();
             manyShotting--;
             if(manyShotting==0){
+                ExistingPlanning existingPlanning = new ExistingPlanning();
                 JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO INSERIDO COM SUCESSO");
                 this.dispose();
+                existingPlanning.setVisible(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    private void update(int numberShotting, String start, String end){
+        String sql = "update planning set beginning=?,ending=? where dats=? and shooting=?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1,start);
+            pst.setString(2,end);
+            pst.setString(3,getDate.informDate());
+            pst.setInt(4,numberShotting);
+            pst.executeUpdate();
+            manyShotting--;
+            if(manyShotting==0){
+                ExistingPlanning existingPlanning = new ExistingPlanning();
+                JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO ATUALIZADO COM SUCESSO");
+                this.dispose();
+                existingPlanning.setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -221,6 +243,184 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             add(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
             add(11, inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText());
             add(12, inputBeginningTwenlthShooting.getText(), inputEndTwenlthShooting.getText());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+        }
+    }
+    private void beforeUpdate(){
+        CheckInputDailyPlanning checkInputDailyPlanning = new CheckInputDailyPlanning();
+        if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndFirstShooting.getText().equals("  :  ")){
+            JOptionPane.showMessageDialog(null, "INSIRA AO MENOS UMA RODAGEM!");
+        }
+        else if(inputBeginningSecondShooting.getText().equals("  :  ")||inputEndSecondShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())){
+                manyShotting = 1;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningThirdShooting.getText().equals("  :  ")||inputEndThirdShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())){
+                manyShotting = 2;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningFourthShooting.getText().equals("  :  ")||inputEndFourthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())){
+                manyShotting = 3;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningFifthShooting.getText().equals("  :  ")||inputEndFifthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())){
+                manyShotting = 4;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningSixthShooting.getText().equals("  :  ")||inputEndSixthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())){
+                manyShotting = 5;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningSeventhShooting.getText().equals("  :  ")||inputEndSeventhShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())){
+                manyShotting = 6;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningEighthShooting.getText().equals("  :  ")||inputEndEighthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())){
+                manyShotting = 7;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningNinthShooting.getText().equals("  :  ")||inputEndNinthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())){
+                manyShotting = 8;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                update(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningTenthShooting.getText().equals("  :  ")||inputEndTenthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())){
+                manyShotting = 9;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                update(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                update(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningEleventhShooting.getText().equals("  :  ")||inputEndEleventhShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())){
+                manyShotting = 10;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                update(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                update(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+                update(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(inputBeginningTwenlthShooting.getText().equals("  :  ")||inputEndTwenlthShooting.getText().equals("  :  ")){
+            if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText())){
+                manyShotting = 11;
+                update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+                update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+                update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+                update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+                update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+                update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+                update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+                update(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+                update(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+                update(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+                update(11, inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText());
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
+            }
+        }
+        else if(checkInputDailyPlanning.checkValidation(inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText())&&checkInputDailyPlanning.checkValidation(inputBeginningTwenlthShooting.getText(), inputEndTwenlthShooting.getText())){
+            manyShotting = 12;
+            update(1, inputBeginningFirstShooting.getText(), inputEndFirstShooting.getText());
+            update(2, inputBeginningSecondShooting.getText(), inputEndSecondShooting.getText());
+            update(3, inputBeginningThirdShooting.getText(), inputEndThirdShooting.getText());
+            update(4, inputBeginningFourthShooting.getText(), inputEndFourthShooting.getText());
+            update(5, inputBeginningFifthShooting.getText(), inputEndFifthShooting.getText());
+            update(6, inputBeginningSixthShooting.getText(), inputEndSixthShooting.getText());
+            update(7, inputBeginningSeventhShooting.getText(), inputEndSeventhShooting.getText());
+            update(8, inputBeginningEighthShooting.getText(), inputEndEighthShooting.getText());
+            update(9, inputBeginningNinthShooting.getText(), inputEndNinthShooting.getText());
+            update(10, inputBeginningTenthShooting.getText(), inputEndTenthShooting.getText());
+            update(11, inputBeginningEleventhShooting.getText(), inputEndEleventhShooting.getText());
+            update(12, inputBeginningTwenlthShooting.getText(), inputEndTwenlthShooting.getText());
         }
         else{
             JOptionPane.showMessageDialog(null, "DADO INCORRETO! O COMEÇO NÃO PODE SER DEPOIS DO FIM");
@@ -784,7 +984,12 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
-        beforeAdd();
+        if(buttonImport.isVisible()){
+            beforeAdd();
+        }
+        else{
+            beforeUpdate();
+        }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void inputBeginningFirstShootingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputBeginningFirstShootingKeyPressed
@@ -927,13 +1132,23 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void inputEndTwenlthShootingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputEndTwenlthShootingKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            beforeAdd();
+            if(buttonImport.isVisible()){
+                beforeAdd();
+            }
+            else{
+                beforeUpdate();
+            }
         }
     }//GEN-LAST:event_inputEndTwenlthShootingKeyPressed
 
     private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            beforeAdd();
+            if(buttonImport.isVisible()){
+                beforeAdd();
+            }
+            else{
+                beforeUpdate();
+            }
         }
     }//GEN-LAST:event_buttonSaveKeyPressed
 
@@ -979,32 +1194,32 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonImport;
+    public static javax.swing.JButton buttonImport;
     private javax.swing.JButton buttonSave;
-    private javax.swing.JFormattedTextField inputBeginningEighthShooting;
-    private javax.swing.JFormattedTextField inputBeginningEleventhShooting;
-    private javax.swing.JFormattedTextField inputBeginningFifthShooting;
-    private javax.swing.JFormattedTextField inputBeginningFirstShooting;
-    private javax.swing.JFormattedTextField inputBeginningFourthShooting;
-    private javax.swing.JFormattedTextField inputBeginningNinthShooting;
-    private javax.swing.JFormattedTextField inputBeginningSecondShooting;
-    private javax.swing.JFormattedTextField inputBeginningSeventhShooting;
-    private javax.swing.JFormattedTextField inputBeginningSixthShooting;
-    private javax.swing.JFormattedTextField inputBeginningTenthShooting;
-    private javax.swing.JFormattedTextField inputBeginningThirdShooting;
-    private javax.swing.JFormattedTextField inputBeginningTwenlthShooting;
-    private javax.swing.JFormattedTextField inputEndEighthShooting;
-    private javax.swing.JFormattedTextField inputEndEleventhShooting;
-    private javax.swing.JFormattedTextField inputEndFifthShooting;
-    private javax.swing.JFormattedTextField inputEndFirstShooting;
-    private javax.swing.JFormattedTextField inputEndFourthShooting;
-    private javax.swing.JFormattedTextField inputEndNinthShooting;
-    private javax.swing.JFormattedTextField inputEndSecondShooting;
-    private javax.swing.JFormattedTextField inputEndSeventhShooting;
-    private javax.swing.JFormattedTextField inputEndSixthShooting;
-    private javax.swing.JFormattedTextField inputEndTenthShooting;
-    private javax.swing.JFormattedTextField inputEndThirdShooting;
-    private javax.swing.JFormattedTextField inputEndTwenlthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningEighthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningEleventhShooting;
+    public static javax.swing.JFormattedTextField inputBeginningFifthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningFirstShooting;
+    public static javax.swing.JFormattedTextField inputBeginningFourthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningNinthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningSecondShooting;
+    public static javax.swing.JFormattedTextField inputBeginningSeventhShooting;
+    public static javax.swing.JFormattedTextField inputBeginningSixthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningTenthShooting;
+    public static javax.swing.JFormattedTextField inputBeginningThirdShooting;
+    public static javax.swing.JFormattedTextField inputBeginningTwenlthShooting;
+    public static javax.swing.JFormattedTextField inputEndEighthShooting;
+    public static javax.swing.JFormattedTextField inputEndEleventhShooting;
+    public static javax.swing.JFormattedTextField inputEndFifthShooting;
+    public static javax.swing.JFormattedTextField inputEndFirstShooting;
+    public static javax.swing.JFormattedTextField inputEndFourthShooting;
+    public static javax.swing.JFormattedTextField inputEndNinthShooting;
+    public static javax.swing.JFormattedTextField inputEndSecondShooting;
+    public static javax.swing.JFormattedTextField inputEndSeventhShooting;
+    public static javax.swing.JFormattedTextField inputEndSixthShooting;
+    public static javax.swing.JFormattedTextField inputEndTenthShooting;
+    public static javax.swing.JFormattedTextField inputEndThirdShooting;
+    public static javax.swing.JFormattedTextField inputEndTwenlthShooting;
     private javax.swing.JLabel txtBeginning;
     private javax.swing.JLabel txtEighthShooting;
     private javax.swing.JLabel txtEleventhShooting;

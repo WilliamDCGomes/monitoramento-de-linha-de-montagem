@@ -111,12 +111,16 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
 
     private void buttonCheckPlanningKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonCheckPlanningKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            ExistingPlanning existingPlanning = new ExistingPlanning();
+            this.dispose();
+            existingPlanning.setVisible(true);
         }
     }//GEN-LAST:event_buttonCheckPlanningKeyPressed
 
     private void buttonCheckPlanningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckPlanningActionPerformed
-        // TODO add your handling code here:
+        ExistingPlanning existingPlanning = new ExistingPlanning();
+        this.dispose();
+        existingPlanning.setVisible(true);
     }//GEN-LAST:event_buttonCheckPlanningActionPerformed
 
     /**
