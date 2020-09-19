@@ -37,12 +37,6 @@ public class HourDefault {
         else if(shotting==12){
             return "21:00/22:00";
         }
-        else if(shotting==13){
-            return "22:00/23:00";
-        }
-        else if(shotting==14){
-            return "23:00/23:59";
-        }
         else{
             return null;
         }

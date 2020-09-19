@@ -5,10 +5,15 @@
  */
 package screens;
 
+import functions.ExportDataCSV;
+import functions.GetDate;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -94,8 +99,12 @@ public class CommandScreen extends javax.swing.JFrame {
         });
 
         txtExportTable.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        txtExportTable.setForeground(new java.awt.Color(255, 0, 0));
         txtExportTable.setText("EXPORTAR TABELA COMPARATIVA");
+        txtExportTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtExportTableMouseClicked(evt);
+            }
+        });
 
         txtHourHistoric.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtHourHistoric.setText("HISTÓRICO DE HORÁRIOS");
@@ -228,6 +237,11 @@ public class CommandScreen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonLogoutKeyPressed
+
+    private void txtExportTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtExportTableMouseClicked
+        Export export = new Export();
+        export.setVisible(true);
+    }//GEN-LAST:event_txtExportTableMouseClicked
 
     /**
      * @param args the command line arguments
