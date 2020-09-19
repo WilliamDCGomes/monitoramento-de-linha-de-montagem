@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
 import functions.GetHour;
+import functions.StartShotting;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -991,7 +992,13 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         if(buttonCancele.isVisible()){
-            beforeAdd();
+            StartShotting startShotting = new StartShotting();
+            if(startShotting.hasAProgramming(getDate.informDate())){
+                JOptionPane.showMessageDialog(null, "JÁ FOI INSERIDO UM PLANEJAMENTO PARA O DIA DE HOJE!");
+            }
+            else{
+                beforeAdd();
+            }
         }
         else{
             beforeUpdate();
@@ -1150,7 +1157,13 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
             if(buttonCancele.isVisible()){
-                beforeAdd();
+                StartShotting startShotting = new StartShotting();
+                if(startShotting.hasAProgramming(getDate.informDate())){
+                    JOptionPane.showMessageDialog(null, "JÁ FOI INSERIDO UM PLANEJAMENTO PARA O DIA DE HOJE!");
+                }
+                else{
+                    beforeAdd();
+                }
             }
             else{
                 beforeUpdate();

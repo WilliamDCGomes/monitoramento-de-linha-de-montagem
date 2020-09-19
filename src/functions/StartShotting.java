@@ -68,7 +68,7 @@ public class StartShotting {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    private boolean hasAProgramming(String date){
+    public boolean hasAProgramming(String date){
         String sql ="select * from planning where dats = ?";
         try {
             pst=conexao.prepareStatement(sql);
