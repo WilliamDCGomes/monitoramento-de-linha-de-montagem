@@ -25,8 +25,26 @@ public class HourDefault {
         else if(shotting==8){
             return "16:00/17:00";
         }
+        else if(shotting==9){
+            return "18:00/19:00";
+        }
+        else if(shotting==10){
+            return "19:00/20:00";
+        }
+        else if(shotting==11){
+            return "20:00/21:00";
+        }
+        else if(shotting==12){
+            return "21:00/22:00";
+        }
+        else if(shotting==13){
+            return "22:00/23:00";
+        }
+        else if(shotting==14){
+            return "23:00/23:59";
+        }
         else{
-            return "17:00/18:00";
+            return null;
         }
     }
 }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
+import java.awt.Color;
 import screens.WorkerScreen;
 
 public class TimeToSet {
@@ -26,6 +27,12 @@ public class TimeToSet {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                if(workerScreen.informMoreShots==true){
+                    workerScreen.outputBarTime.setValue(0);
+                    workerScreen.outputTime.setForeground(Color.green);
+                    workerScreen.outputTime.setText("00:00");
+                    timer.cancel();
+                }
                 if(getShot()!=shot){
                     workerScreen.setTime();
                     workerScreen.groupWorkFinish.clearSelection();
