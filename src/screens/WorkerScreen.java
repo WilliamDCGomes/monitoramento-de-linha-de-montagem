@@ -59,13 +59,13 @@ public class WorkerScreen extends javax.swing.JFrame {
         BarProgress barProgress = new BarProgress(this);
         BeginProdution beginProdution = new BeginProdution();
         GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-        endTime = getBeginOfDelay.getBegin(getShot());
+        String endTime2 = getBeginOfDelay.getBegin(getShot());
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 30000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                String difference = timeDifference.getDifference(getHour.informHour(), endTime);
+                String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
                 if(timeDifference.delay=="true"){
                     outputTime.setForeground(Color.red);
                     outputTime.setText(difference);
@@ -74,7 +74,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 else{
                     outputTime.setForeground(Color.black);
                     outputTime.setText(difference);
-                    barProgress.setBar(beginProdution.getProduction(getShot()), endTime);
+                    barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
                 }
             }
         }, delay, interval);
@@ -386,6 +386,7 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void inputDelayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDelayActionPerformed
         DelayScreen delayScreen = new DelayScreen();
+        delayScreen.workerScreen = this;
         delayScreen.setVisible(true);
     }//GEN-LAST:event_inputDelayActionPerformed
 
@@ -411,9 +412,19 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
     private void inputWorkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWorkFinishActionPerformed
-        StartShotting startShotting = new StartShotting();
-        startShotting.startProduction();
-        addService();
+        TimeDifference timeDifference = new TimeDifference();
+        GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+        String endTime2 = getBeginOfDelay.getBegin(getShot());        
+        timeDifference.getDifference(getHour.informHour(), endTime2);
+        if(timeDifference.delay=="true"&&inputDelay.isSelected()==false){
+            JOptionPane.showMessageDialog(null, "ADICIONE O MOTIVO DO ATRASO ANTES DE SALVAR!");
+            groupWorkFinish.clearSelection();
+        }
+        else{
+            StartShotting startShotting = new StartShotting();
+            startShotting.startProduction();
+            addService();
+        }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

@@ -18,6 +18,8 @@ public class DelayScreen extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    public WorkerScreen workerScreen;
+    
     /**
      * Creates new form DelayScreen
      */
@@ -26,6 +28,7 @@ public class DelayScreen extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
     }
     public String station;
+    boolean addAuxDelay=false;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,6 +51,11 @@ public class DelayScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atraso");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         txtReasonDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtReasonDelay.setText("MOTIVO DO ATRASO");
@@ -165,6 +173,7 @@ public class DelayScreen extends javax.swing.JFrame {
             pst.setString(1,reasonDelay);
             pst.setString(2,typeDelay);
             pst.executeUpdate();
+            addAuxDelay=true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -238,6 +247,12 @@ public class DelayScreen extends javax.swing.JFrame {
             beforeAdd();
         }
     }//GEN-LAST:event_buttonSaveKeyPressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(addAuxDelay==false){
+            workerScreen.groupDelay.clearSelection();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
