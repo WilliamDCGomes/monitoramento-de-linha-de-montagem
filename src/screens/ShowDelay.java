@@ -46,18 +46,19 @@ public class ShowDelay extends javax.swing.JFrame {
         }
     }
     private void getPreviusDelay(){
-        String sql = "select * from delay where id = ?";
+        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MAX(id) FROM delay WHERE id < ?)";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1,--idDelay);
+            pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
-                outputStation.setText(rs.getString(6));
-                outputTypeDelay.setText(rs.getString(5));
-                outputShot.setText(rs.getString(2));
-                outputBeginDelay.setText(rs.getString(7));
-                outputEndDelay.setText(rs.getString(8));
-                outputReasonDelay.setText(rs.getString(4));
+                idDelay= rs.getInt(1);
+                outputStation.setText(rs.getString(2));
+                outputTypeDelay.setText(rs.getString(3));
+                outputShot.setText(rs.getString(4));
+                outputBeginDelay.setText(rs.getString(5));
+                outputEndDelay.setText(rs.getString(6));
+                outputReasonDelay.setText(rs.getString(7));
                 outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
             }
             else{
@@ -69,18 +70,19 @@ public class ShowDelay extends javax.swing.JFrame {
         }
     }
     private void getNextDelay(){
-        String sql = "select * from delay where id = ?";
+        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MIN(id) FROM delay WHERE id > ?)";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setInt(1,++idDelay);
+            pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
-                outputStation.setText(rs.getString(6));
-                outputTypeDelay.setText(rs.getString(5));
-                outputShot.setText(rs.getString(2));
-                outputBeginDelay.setText(rs.getString(7));
-                outputEndDelay.setText(rs.getString(8));
-                outputReasonDelay.setText(rs.getString(4));
+                idDelay= rs.getInt(1);
+                outputStation.setText(rs.getString(2));
+                outputTypeDelay.setText(rs.getString(3));
+                outputShot.setText(rs.getString(4));
+                outputBeginDelay.setText(rs.getString(5));
+                outputEndDelay.setText(rs.getString(6));
+                outputReasonDelay.setText(rs.getString(7));
                 outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
             }
             else{
