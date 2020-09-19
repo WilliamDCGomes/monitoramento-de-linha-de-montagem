@@ -9,7 +9,6 @@ import functions.CheckInputDailyPlanning;
 import javax.swing.JOptionPane;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
-import functions.GetHour;
 import functions.StartShotting;
 import java.awt.Image;
 import java.awt.Toolkit;

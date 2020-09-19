@@ -5,15 +5,10 @@
  */
 package screens;
 
-import functions.ExportDataCSV;
-import functions.GetDate;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

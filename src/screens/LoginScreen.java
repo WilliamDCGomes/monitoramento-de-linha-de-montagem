@@ -2,8 +2,6 @@ package screens;
 
 import commands.Hash;
 import conexaobd.ModuloConexao;
-import functions.GetDate;
-import functions.GetYesterdayDate;
 import functions.StartShotting;
 import java.awt.Image;
 import java.awt.Toolkit;
