@@ -51,6 +51,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
+    TimeToSet timeToSet = new TimeToSet(this);
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();
     GetDate getDate = new GetDate();
@@ -69,12 +70,12 @@ public class WorkerScreen extends javax.swing.JFrame {
         BarProgress barProgress = new BarProgress(this);
         BeginProdution beginProdution = new BeginProdution();
         GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-        String endTime2 = getBeginOfDelay.getBegin(getShot());
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 30000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                String endTime2 = getBeginOfDelay.getBegin(getShot());
                 if(informMoreShots==true){
                     outputBarTime.setValue(0);
                     outputTime.setForeground(Color.green);
@@ -92,6 +93,10 @@ public class WorkerScreen extends javax.swing.JFrame {
                         outputTime.setForeground(Color.black);
                         outputTime.setText(difference);
                         barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
+                    }
+                    if(getShot()!=timeToSet.shotting){
+                        groupWorkFinish.clearSelection();
+                        groupDelay.clearSelection();
                     }
                 }
             }
@@ -190,7 +195,6 @@ public class WorkerScreen extends javax.swing.JFrame {
             }
             finish();
             if(hasOtherPlanning()){
-                TimeToSet timeToSet = new TimeToSet(this);
                 timeToSet.timeSet(getShot());
             }
             else{

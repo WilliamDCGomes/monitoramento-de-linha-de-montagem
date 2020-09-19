@@ -17,11 +17,13 @@ public class TimeToSet {
     WorkerScreen workerScreen;
     GetHour getHour = new GetHour();
     GetDate getDate = new GetDate();
+    public int shotting;
     public TimeToSet(WorkerScreen worker){
         conexao = ModuloConexao.conector();
         workerScreen = worker;
     }
     public void timeSet(int shot){
+        shotting = shot;
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 60000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
@@ -34,7 +36,7 @@ public class TimeToSet {
                     timer.cancel();
                 }
                 if(getShot()!=shot){
-                    workerScreen.setTime();
+                    setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
@@ -43,7 +45,7 @@ public class TimeToSet {
                 }
                 else if(stationWorking.hasStation()==false){
                     startShotting.keepProduction(getShot()+1, getHour.informHour());
-                    workerScreen.setTime();
+                    setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
@@ -66,5 +68,23 @@ public class TimeToSet {
             JOptionPane.showMessageDialog(null, e);
         }
         return -1;
+    }
+    private void setTime(){
+        TimeDifference timeDifference = new TimeDifference();
+        BeginProdution beginProdution = new BeginProdution();
+        BarProgress barProgress = new BarProgress(workerScreen);
+        GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+        String endTime2 = getBeginOfDelay.getBegin(getShot());
+        String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
+        if(timeDifference.delay=="true"){
+            workerScreen.outputTime.setForeground(Color.red);
+            workerScreen.outputTime.setText(difference);
+            workerScreen.outputBarTime.setValue(100);
+        }
+        else{
+            workerScreen.outputTime.setForeground(Color.black);
+            workerScreen.outputTime.setText(difference);
+            barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
+        }
     }
 }
