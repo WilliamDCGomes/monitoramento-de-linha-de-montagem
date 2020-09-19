@@ -29,6 +29,10 @@ public class TimeToSet {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                if(workerScreen.x==1){
+                    workerScreen.x=2;
+                    timer.cancel();
+                }
                 if(workerScreen.informMoreShots==true){
                     workerScreen.outputBarTime.setValue(0);
                     workerScreen.outputTime.setForeground(Color.green);

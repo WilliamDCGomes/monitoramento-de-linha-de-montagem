@@ -62,7 +62,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private int id;
     String beginTime;
     String endTime;
-    int x = 0;
+    public int x = 0;
     public boolean informMoreShots=false;
     String beginNoMoreShots;
     public void setTime(){
@@ -554,16 +554,18 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(x==0){
             BeginProdution beginProdution = new BeginProdution();
             beginTime = beginProdution.getProduction(getShot());
-            x++;
+            timeToSet.timeSet(getShot());
             setTime();
             open();
             outputShot.setText(Integer.toString(getShot()));
+            x++;
         }
         if(hasProduction()){
             inputWorkFinish.setSelected(true);
             if(hasDelay()){
                 inputDelay.setSelected(true);
             }
+            finish();
         }
     }//GEN-LAST:event_formWindowActivated
 
