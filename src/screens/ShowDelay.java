@@ -85,6 +85,30 @@ public class ShowDelay extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
     }
+    private void remove(){
+        int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA APAGAR ESSE ATRASO?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+        if(confirma==JOptionPane.YES_OPTION){
+            String sql = "delete from delay where shot=? and dats=? and localeOfDelay=? and beginningDelay=? and endingDelay=?";
+            try {
+                pst=conexao.prepareStatement(sql);
+                pst.setInt(1, Integer.parseInt(outputShot.getText()));
+                pst.setString(2, outputDayOfDelay.getText());
+                pst.setInt(3, Integer.parseInt(outputStation.getText()));
+                pst.setString(4, outputBeginDelay.getText());
+                pst.setString(5, outputEndDelay.getText());
+                int apagado = pst.executeUpdate();
+                if(apagado>0){
+                    JOptionPane.showMessageDialog(null,"ATRASO APAGADA COM SUCESSO");
+                    this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "ATRASO NÃO LOCALIZADO NO BANCO DE DADOS");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +138,7 @@ public class ShowDelay extends javax.swing.JFrame {
         outputEndDelay = new javax.swing.JFormattedTextField();
         txtDayOfDelay = new javax.swing.JLabel();
         outputDayOfDelay = new javax.swing.JFormattedTextField();
+        buttonDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atraso");
@@ -238,6 +263,18 @@ public class ShowDelay extends javax.swing.JFrame {
             }
         });
 
+        buttonDelete.setText("APAGAR");
+        buttonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDeleteActionPerformed(evt);
+            }
+        });
+        buttonDelete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonDeleteKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,7 +294,9 @@ public class ShowDelay extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(previousDelay)
                         .addGap(29, 29, 29)
-                        .addComponent(nextDelay))
+                        .addComponent(nextDelay)
+                        .addGap(27, 27, 27)
+                        .addComponent(buttonDelete))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,7 +322,7 @@ public class ShowDelay extends javax.swing.JFrame {
                                     .addGap(0, 0, Short.MAX_VALUE))))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtDelay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -332,9 +371,12 @@ public class ShowDelay extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(previousDelay)
-                    .addComponent(nextDelay))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(previousDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nextDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(buttonDelete)))
                 .addGap(12, 12, 12))
         );
 
@@ -399,6 +441,16 @@ public class ShowDelay extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_outputDayOfDelayKeyPressed
 
+    private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
+        remove();
+    }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonDeleteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonDeleteKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            remove();
+        }
+    }//GEN-LAST:event_buttonDeleteKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -435,6 +487,7 @@ public class ShowDelay extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDelete;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nextDelay;
     public static javax.swing.JFormattedTextField outputBeginDelay;

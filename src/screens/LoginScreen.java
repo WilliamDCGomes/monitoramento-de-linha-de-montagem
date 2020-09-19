@@ -23,6 +23,7 @@ public class LoginScreen extends javax.swing.JFrame {
     Connection conexao = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    int x =0;
     /**
      * Creates new form LoginScreen
      */
@@ -52,6 +53,18 @@ public class LoginScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    private void getUsers(){
+        String sql ="select login from stations";
+        try {
+            pst = conexao.prepareStatement(sql);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                inputLogin.addItem(rs.getString(1));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,27 +76,25 @@ public class LoginScreen extends javax.swing.JFrame {
 
         txtDoLogin = new javax.swing.JLabel();
         txtLogin = new javax.swing.JLabel();
-        inputLogin = new javax.swing.JTextField();
         txtPassword = new javax.swing.JLabel();
         inputPassword = new javax.swing.JPasswordField();
         buttonLogin = new javax.swing.JButton();
         buttonControlPanel = new javax.swing.JButton();
+        inputLogin = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         txtDoLogin.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         txtDoLogin.setText("FAÇA LOGIN");
 
         txtLogin.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtLogin.setText("LOGIN");
-
-        inputLogin.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                inputLoginKeyPressed(evt);
-            }
-        });
 
         txtPassword.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtPassword.setText("SENHA");
@@ -121,6 +132,14 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
+        inputLogin.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
+        inputLogin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar" }));
+        inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                inputLoginKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,9 +152,9 @@ public class LoginScreen extends javax.swing.JFrame {
                             .addComponent(txtLogin)
                             .addComponent(txtPassword))
                         .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputLogin)
-                            .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(inputLogin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonLogin)
                         .addGap(35, 35, 35)
@@ -149,13 +168,13 @@ public class LoginScreen extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addComponent(txtDoLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin)
                     .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword)
                     .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -179,32 +198,26 @@ public class LoginScreen extends javax.swing.JFrame {
         StartShotting startShotting = new StartShotting();
         startShotting.startProduction();
         
-        if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+        if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
             JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
         }
         else{
             Hash hash = new Hash();
-            logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
+            logar(inputLogin.getSelectedItem().toString(), hash.DoHash(inputPassword.getText()));
         }
     }//GEN-LAST:event_buttonLoginActionPerformed
-
-    private void inputLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputLoginKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
-            inputPassword.requestFocus();
-        }
-    }//GEN-LAST:event_inputLoginKeyPressed
 
     private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
             StartShotting startShotting = new StartShotting();
             startShotting.startProduction();
 
-            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+            if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
             }
             else{
                 Hash hash = new Hash();
-                logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
+                logar(inputLogin.getSelectedItem().toString(), hash.DoHash(inputPassword.getText()));
             }
         }
     }//GEN-LAST:event_inputPasswordKeyPressed
@@ -214,12 +227,12 @@ public class LoginScreen extends javax.swing.JFrame {
             StartShotting startShotting = new StartShotting();
             startShotting.startProduction();
 
-            if(inputLogin.getText().equals("")||inputPassword.getText().equals("")){
+            if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
             }
             else{
                 Hash hash = new Hash();
-                logar(inputLogin.getText(), hash.DoHash(inputPassword.getText()));
+                logar(inputLogin.getSelectedItem().toString(), hash.DoHash(inputPassword.getText()));
             }
         }
     }//GEN-LAST:event_buttonLoginKeyPressed
@@ -230,6 +243,19 @@ public class LoginScreen extends javax.swing.JFrame {
             confirmationScreen.setVisible(true);
         }
     }//GEN-LAST:event_buttonControlPanelKeyPressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            getUsers();
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void inputLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputLoginKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            inputPassword.requestFocus();
+        }
+    }//GEN-LAST:event_inputLoginKeyPressed
 
     /**
      * @param args the command line arguments
@@ -269,7 +295,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonControlPanel;
     private javax.swing.JButton buttonLogin;
-    private javax.swing.JTextField inputLogin;
+    private javax.swing.JComboBox<String> inputLogin;
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JLabel txtDoLogin;
     private javax.swing.JLabel txtLogin;

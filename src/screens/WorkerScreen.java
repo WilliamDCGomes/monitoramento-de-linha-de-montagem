@@ -209,6 +209,38 @@ public class WorkerScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    private boolean hasProduction(){
+        String sql ="select id from workfinish where shot=? and station=? and dats=?";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(outputShot.getText()));
+            pst.setString(2, outputStation.getText());
+            pst.setString(3, getDate.informDate());
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return false;
+    }
+    private boolean hasDelay(){
+        String sql ="select id from delay where shot=? and localeOfDelay=? and dats=?";
+        try {
+            pst=conexao.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(outputShot.getText()));
+            pst.setInt(2, Integer.parseInt(outputStation.getText()));
+            pst.setString(3, getDate.informDate());
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return false;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -435,6 +467,12 @@ public class WorkerScreen extends javax.swing.JFrame {
             setTime();
             open();
             outputShot.setText(Integer.toString(getShot()));
+        }
+        if(hasProduction()){
+            inputWorkFinish.setSelected(true);
+            if(hasDelay()){
+                inputDelay.setSelected(true);
+            }
         }
     }//GEN-LAST:event_formWindowActivated
 
