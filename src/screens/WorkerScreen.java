@@ -23,6 +23,9 @@ import functions.StationWorking;
 import functions.TimeDifference;
 import functions.TimeToSet;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +47,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     public WorkerScreen() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();

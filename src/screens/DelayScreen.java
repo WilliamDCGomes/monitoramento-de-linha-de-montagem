@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 /**
  *
  * @author Alunos
@@ -26,6 +29,9 @@ public class DelayScreen extends javax.swing.JFrame {
     public DelayScreen() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     public String station;
     boolean addAuxDelay=false;

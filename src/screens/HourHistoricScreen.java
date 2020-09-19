@@ -12,6 +12,9 @@ import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
 import functions.AfterDate;
 import functions.BeforeDate;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +33,9 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     public HourHistoricScreen() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     int x=0;
     int selects=0;

@@ -6,6 +6,9 @@
 package screens;
 
 import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +22,9 @@ public class CommandScreen extends javax.swing.JFrame {
      */
     public CommandScreen() {
         initComponents();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
 
     /**

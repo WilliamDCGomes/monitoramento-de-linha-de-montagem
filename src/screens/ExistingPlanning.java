@@ -14,6 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexaobd.ModuloConexao;
 import functions.GetDate;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +34,9 @@ public class ExistingPlanning extends javax.swing.JFrame {
     public ExistingPlanning() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     int x =0;
     int selects;

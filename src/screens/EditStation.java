@@ -1,6 +1,9 @@
 package screens;
 import commands.Hash;
 import conexaobd.ModuloConexao;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +23,9 @@ public class EditStation extends javax.swing.JFrame {
     public EditStation() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     boolean stationValid = false;
     private void remove(){

@@ -5,6 +5,9 @@ import conexaobd.ModuloConexao;
 import functions.GetDate;
 import functions.GetYesterdayDate;
 import functions.StartShotting;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +33,9 @@ public class LoginScreen extends javax.swing.JFrame {
     public LoginScreen() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     public void logar(String login, String password){
         String sql ="select id from stations where login = ? and passwors = MD5(MD5(MD5(?)))";

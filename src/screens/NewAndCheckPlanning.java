@@ -5,6 +5,10 @@
  */
 package screens;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+
 /**
  *
  * @author Alunos
@@ -16,6 +20,9 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
      */
     public NewAndCheckPlanning() {
         initComponents();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
 
     /**

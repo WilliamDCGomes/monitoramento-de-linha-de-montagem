@@ -11,6 +11,9 @@ import conexaobd.ModuloConexao;
 import functions.GetDate;
 import functions.GetHour;
 import functions.StartShotting;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +32,9 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     public DailyPlanningScreen() {
         initComponents();
         conexao = ModuloConexao.conector();
+        URL adress = getClass().getResource("/images/icone.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     GetDate getDate = new GetDate();
     int manyShotting;
