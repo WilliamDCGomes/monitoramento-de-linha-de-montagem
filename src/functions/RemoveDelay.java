@@ -1,20 +1,21 @@
 package functions;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 public class RemoveDelay {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     public RemoveDelay(){
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
     }
     public void remove(int id){
         String sql = "delete from delay where id = ?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setInt(1, id);
             int apagado = pst.executeUpdate();
             if(apagado>0){

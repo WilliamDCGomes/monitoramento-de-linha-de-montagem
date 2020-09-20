@@ -1,5 +1,5 @@
 package screens;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.TimeDifference;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author Alunos
  */
 public class ShowDelay extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -21,7 +21,8 @@ public class ShowDelay extends javax.swing.JFrame {
      */
     public ShowDelay() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -32,7 +33,7 @@ public class ShowDelay extends javax.swing.JFrame {
     private void getDelay(){
         String sql = "select reasonDelay, shot, dats from delay where id = ?";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
@@ -48,7 +49,7 @@ public class ShowDelay extends javax.swing.JFrame {
     private void getPreviusDelay(){
         String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MAX(id) FROM delay WHERE id < ?)";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
@@ -72,7 +73,7 @@ public class ShowDelay extends javax.swing.JFrame {
     private void getNextDelay(){
         String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MIN(id) FROM delay WHERE id > ?)";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setInt(1,idDelay);
             rs=pst.executeQuery();
             if(rs.next()){
@@ -98,7 +99,7 @@ public class ShowDelay extends javax.swing.JFrame {
         if(confirma==JOptionPane.YES_OPTION){
             String sql = "delete from delay where shot=? and dats=? and localeOfDelay=? and beginningDelay=? and endingDelay=?";
             try {
-                pst=conexao.prepareStatement(sql);
+                pst=connection.prepareStatement(sql);
                 pst.setInt(1, Integer.parseInt(outputShot.getText()));
                 pst.setString(2, outputDayOfDelay.getText());
                 pst.setInt(3, Integer.parseInt(outputStation.getText()));
@@ -290,14 +291,6 @@ public class ShowDelay extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(outputStation, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(136, 136, 136)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTypeDelay)
-                            .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(txtReasonDelay)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(previousDelay)
@@ -328,7 +321,15 @@ public class ShowDelay extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(outputDayOfDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(0, 0, Short.MAX_VALUE))))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(outputStation, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtStation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(136, 136, 136)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTypeDelay)
+                            .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

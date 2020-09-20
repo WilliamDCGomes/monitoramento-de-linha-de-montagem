@@ -9,7 +9,7 @@ import functions.GetDate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.AfterDate;
 import functions.BeforeDate;
 import java.awt.Image;
@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  * @author willi
  */
 public class HourHistoricScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -32,7 +32,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
      */
     public HourHistoricScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -84,7 +85,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         selects=0;
         String sqlnome = "select min(beginning) from presentshotting where dats = ? group by shot";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -99,7 +100,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         selects=0;
         String sqlnome = "select max(ending) from workfinish where dats = ? group by shot";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {

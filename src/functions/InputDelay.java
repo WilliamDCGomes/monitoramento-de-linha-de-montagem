@@ -1,17 +1,18 @@
 package functions;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 public class InputDelay {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     PreparedStatement pst2 = null;
     ResultSet rs2 = null;
     public InputDelay(){
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
     }
     GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
     private int shot;
@@ -21,7 +22,7 @@ public class InputDelay {
     public void makeInput(String reasonDelay,String typeDelay){
         String sql = "insert into delay(id,shot,dats,reasonDelay,typeDelay,localeOfDelay,beginningDelay,endingDelay)values(?,?,?,?,?,?,?,?)";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setInt(1,getId());
             pst.setInt(2,shot);
             pst.setString(3,dats);
@@ -38,7 +39,7 @@ public class InputDelay {
     private int getId(){
         String sql = "select id,shot,dats,station,ending from workfinish order by id desc limit 1";
         try {
-            pst2=conexao.prepareStatement(sql);
+            pst2=connection.prepareStatement(sql);
             rs2= pst2.executeQuery();
             if(rs2.next()){
                 shot=rs2.getInt(2);

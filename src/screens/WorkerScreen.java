@@ -7,7 +7,7 @@ package screens;
 
 import java.awt.Frame;
 import javax.swing.JOptionPane;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.BarProgress;
 import functions.BeginProdution;
 import functions.GetBeginOfDelay;
@@ -36,7 +36,7 @@ import java.util.TimerTask;
  * @author Alunos
  */
 public class WorkerScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     PreparedStatement pst2 = null;
@@ -46,7 +46,8 @@ public class WorkerScreen extends javax.swing.JFrame {
      */
     public WorkerScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -105,7 +106,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void finish(){
         String sql = "update stations set working=0 where id=?";
         try {
-            pst2=conexao.prepareStatement(sql);
+            pst2=connection.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
         } catch (Exception e) {
@@ -115,7 +116,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     public void open(){
         String sql = "update stations set working=1 where id=?";
         try {
-            pst2=conexao.prepareStatement(sql);
+            pst2=connection.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
         } catch (Exception e) {
@@ -125,7 +126,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void getId(){
         String sql ="select max(id) from workfinish where station = ?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1, outputStation.getText());
             rs= pst.executeQuery();
             if(rs.next()){
@@ -140,7 +141,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(confirma==JOptionPane.YES_OPTION){
             String sql = "delete from workfinish where id = ?";
             try {
-                pst2=conexao.prepareStatement(sql);
+                pst2=connection.prepareStatement(sql);
                 getId();
                 pst2.setInt(1, id);
                 int apagado = pst2.executeUpdate();
@@ -159,7 +160,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void addService(){
         String sql = "insert into workfinish(dats,beginning,ending,station,shot) values(?,?,?,?,?)";
         try {
-            pst2 = conexao.prepareStatement(sql);
+            pst2 = connection.prepareStatement(sql);
             pst2.setString(1,getDate.informDate());
             if(informMoreShots==false){
                 pst2.setString(2,getBegin(getShot()));
@@ -224,7 +225,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(startShotting.hasAProgramming(getDate.informDate())){
             String sql ="select id from planning where dats = ? and shooting = ?";
             try {
-                pst=conexao.prepareStatement(sql);
+                pst=connection.prepareStatement(sql);
                 pst.setString(1, getDate.informDate());
                 pst.setInt(2, shots);
                 rs= pst.executeQuery();
@@ -239,7 +240,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         else if(startShotting.hasAProgramming(getYesterdayDate.informDate())){
             String sql ="select id from planning where dats = ? and shooting = ?";
             try {
-                pst=conexao.prepareStatement(sql);
+                pst=connection.prepareStatement(sql);
                 pst.setString(1, getYesterdayDate.informDate());
                 pst.setInt(2, shots);
                 rs= pst.executeQuery();
@@ -261,7 +262,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private String getBegin(int shot){
         String sql ="select beginning from presentShotting where dats = ? and shot = ?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1, getDate.informDate());
             pst.setInt(2, shot);
             rs= pst.executeQuery();
@@ -276,7 +277,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private int getShot(){
         String sql ="select max(shot) from presentShotting where dats = ?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1, getDate.informDate());
             rs= pst.executeQuery();
             if(rs.next()){
@@ -290,7 +291,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private void getDelay(){
         String sql ="select reasonDelay, typeDelay from auxDelay order by id desc limit 1";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             rs= pst.executeQuery();
             if(rs.next()){
                 reasonDelay = rs.getString(1);
@@ -303,7 +304,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private boolean hasProduction(){
         String sql ="select id from workfinish where shot=? and station=? and dats=?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(outputShot.getText()));
             pst.setString(2, outputStation.getText());
             pst.setString(3, getDate.informDate());
@@ -319,7 +320,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     private boolean hasDelay(){
         String sql ="select id from delay where shot=? and localeOfDelay=? and dats=?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setInt(1, Integer.parseInt(outputShot.getText()));
             pst.setInt(2, Integer.parseInt(outputStation.getText()));
             pst.setString(3, getDate.informDate());

@@ -1,5 +1,5 @@
 package screens;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.GetDate;
 import functions.GetYesterdayDate;
 import java.awt.Image;
@@ -15,7 +15,7 @@ import net.proteanit.sql.DbUtils;
  * @author willi
  */
 public class CheckDelayScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -23,7 +23,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
      */
     public CheckDelayScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -34,7 +35,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     private void searchDelays(String begin, String end){
         String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço', dats as 'Data' from delay where dats between ? and ?";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,begin);
             pst.setString(2,end);
             inputFirstDateFilter.setText(getDate.informDate());
@@ -48,7 +49,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     private void searchDelaysFilter(){
         String sql = "select id, localeOfDelay as 'Estação', typeDelay as 'Tipo do Atraso', beginningDelay as 'Começo do Atraso', endingDelay as 'Finalização do Serviço', dats as 'Data' from delay where (dats between ? and ?) and typeDelay = ?";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,inputFirstDateFilter.getText());
             pst.setString(2,inputSecondDateFilter.getText());
             if(inputDelayReason.getSelectedItem().equals("M1")){

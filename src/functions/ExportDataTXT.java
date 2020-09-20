@@ -2,7 +2,7 @@ package functions;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 import screens.Export;
 
 public class ExportDataTXT {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     ArrayList<String> planning = new ArrayList<String>();
@@ -21,7 +21,8 @@ public class ExportDataTXT {
     Export export;
     String date;
     public ExportDataTXT(String dateInformed, Export exportData){
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         date = dateInformed;
         export = exportData;
     }
@@ -93,7 +94,7 @@ public class ExportDataTXT {
     private void getPlannning(){
         String sqlnome = "select dats, shooting, beginning, ending from planning where dats = ?";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,date);
             rs = pst.executeQuery();
             planning.add("Data         Rodagem   Inicio   Fim");
@@ -112,7 +113,7 @@ public class ExportDataTXT {
     private void getProduction(){
         String sqlnome = "select dats, shot, min(beginning), max(ending) from workfinish where dats = ? group by shot";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,date);
             rs = pst.executeQuery();
             production.add("           Data         Rodagem   Inicio   Fim\n");

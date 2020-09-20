@@ -4,12 +4,12 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.awt.Color;
 import screens.WorkerScreen;
 
 public class TimeToSet {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     StationWorking stationWorking = new StationWorking();
@@ -19,7 +19,8 @@ public class TimeToSet {
     GetDate getDate = new GetDate();
     public int shotting;
     public TimeToSet(WorkerScreen worker){
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         workerScreen = worker;
     }
     public void timeSet(int shot){
@@ -62,7 +63,7 @@ public class TimeToSet {
     private int getShot(){
         String sql ="select max(shot) from presentShotting where dats = ?";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1, getDate.informDate());
             rs= pst.executeQuery();
             if(rs.next()){

@@ -2,7 +2,7 @@ package screens;
 
 import java.awt.Frame;
 import commands.Hash;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author Alunos
  */
 public class ConfirmationScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -20,14 +20,15 @@ public class ConfirmationScreen extends javax.swing.JFrame {
      */
     public ConfirmationScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
     }
     boolean hasPassword;
     int x = 0;
     public void checkIfHasPassword(){
         String sql ="select * from access_control_panel";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             rs= pst.executeQuery();
             if(rs.next()){
                 hasPassword=true;
@@ -43,7 +44,7 @@ public class ConfirmationScreen extends javax.swing.JFrame {
         String sqlnome = "select * from access_control_panel where passwors = MD5(MD5(MD5(?)))";
         try {
             Hash hash = new Hash();
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,hash.DoHash(inputPassword.getText()));
             rs = pst.executeQuery();
             if (rs.next()) {

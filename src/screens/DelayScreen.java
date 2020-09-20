@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -18,7 +18,7 @@ import java.net.URL;
  * @author Alunos
  */
 public class DelayScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     public WorkerScreen workerScreen;
@@ -28,7 +28,8 @@ public class DelayScreen extends javax.swing.JFrame {
      */
     public DelayScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -175,7 +176,7 @@ public class DelayScreen extends javax.swing.JFrame {
     private void addTemporary(String reasonDelay, String typeDelay){
         String sql = "insert into auxDelay(reasonDelay,typeDelay) values(?,?)";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,reasonDelay);
             pst.setString(2,typeDelay);
             pst.executeUpdate();

@@ -1,7 +1,7 @@
 package screens;
 
 import commands.Hash;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.StartShotting;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  * @author Alunos
  */
 public class LoginScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     int x =0;
@@ -30,7 +30,8 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -38,7 +39,7 @@ public class LoginScreen extends javax.swing.JFrame {
     public void logar(String login, String password){
         String sql ="select id from stations where login = ? and passwors = MD5(MD5(MD5(?)))";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1, login);
             pst.setString(2, password);
             rs= pst.executeQuery();
@@ -46,7 +47,7 @@ public class LoginScreen extends javax.swing.JFrame {
                 int id = rs.getInt(1);
                 WorkerScreen workerScreen = new WorkerScreen();
                 this.dispose();
-                conexao.close();
+                connection.close();
                 workerScreen.setVisible(true);
                 workerScreen.outputStation.setText(Integer.toString(id));
             }
@@ -60,7 +61,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private void getUsers(){
         String sql ="select login from stations";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             rs=pst.executeQuery();
             while(rs.next()){
                 inputLogin.addItem(rs.getString(1));

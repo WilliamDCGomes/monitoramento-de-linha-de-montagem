@@ -7,7 +7,7 @@ package screens;
 
 import functions.CheckInputDailyPlanning;
 import javax.swing.JOptionPane;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.GetDate;
 import functions.StartShotting;
 import java.awt.Image;
@@ -22,7 +22,7 @@ import java.sql.ResultSet;
  * @author willi
  */
 public class DailyPlanningScreen extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -30,7 +30,8 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
      */
     public DailyPlanningScreen() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -40,7 +41,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     private void add(int numberShotting, String start, String end){
         String sql = "insert into planning(dats,shooting,beginning,ending)values(?,?,?,?)";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,getDate.informDate());
             pst.setInt(2,numberShotting);
             pst.setString(3,start);
@@ -60,7 +61,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     private void update(int numberShotting, String start, String end){
         String sql = "update planning set beginning=?,ending=? where dats=? and shooting=?";
         try {
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,start);
             pst.setString(2,end);
             pst.setString(3,getDate.informDate());

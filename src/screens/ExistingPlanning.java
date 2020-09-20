@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import functions.GetDate;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * @author Alunos
  */
 public class ExistingPlanning extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -33,7 +33,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
      */
     public ExistingPlanning() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -83,7 +84,7 @@ public class ExistingPlanning extends javax.swing.JFrame {
         selects=0;
         String sqlnome = "select beginning, ending from planning where dats = ?";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {

@@ -6,7 +6,7 @@
 package screens;
 
 import commands.Hash;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author willi
  */
 public class CadastreNewStation extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     PreparedStatement pst2 = null;
@@ -30,7 +30,8 @@ public class CadastreNewStation extends javax.swing.JFrame {
      */
     public CadastreNewStation() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -40,7 +41,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
         String sql = "insert into stations(id,login,passwors)values(?,?,MD5(MD5(MD5(?))))";
         try {
             Hash hash = new Hash();
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setInt(1,Integer.parseInt(outputNumberOfStation.getText()));
             pst.setString(2,inputLogin.getText());
             pst.setString(3,hash.DoHash(inputPassword.getText()));
@@ -54,7 +55,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
     private boolean hasStation(){
         String sqlnome = "select * from stations where id = ?";
         try {
-            pst2 = conexao.prepareStatement(sqlnome);
+            pst2 = connection.prepareStatement(sqlnome);
             pst2.setString(1,outputNumberOfStation.getText());
             rs2 = pst2.executeQuery();
             if (rs2.next()) {
@@ -68,7 +69,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
     private void localeID(){
         String sqlnome = "select id from stations order by id desc limit 1";
         try {
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             rs = pst.executeQuery();
             if (rs.next()) {
                 outputNumberOfStation.setText(Integer.toString(Integer.parseInt(rs.getString(1))+1));

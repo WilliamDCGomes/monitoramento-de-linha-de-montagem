@@ -1,6 +1,6 @@
 package screens;
 import commands.Hash;
-import conexaobd.ModuloConexao;
+import connectionbd.ConnectionModule;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author willi
  */
 public class ChangePasswordControlPanel extends javax.swing.JFrame {
-    Connection conexao = null;
+    Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     /**
@@ -21,7 +21,8 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
      */
     public ChangePasswordControlPanel() {
         initComponents();
-        conexao = ModuloConexao.conector();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
@@ -31,7 +32,7 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
     public void checkIfHasPassword(){
         String sql ="select * from access_control_panel";
         try {
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             rs= pst.executeQuery();
             if(rs.next()){
                 hasPassword=true;
@@ -47,7 +48,7 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         String sqlnome = "select passwors from access_control_panel where passwors = MD5(MD5(MD5(?)))";
         try {
             Hash hash = new Hash();
-            pst = conexao.prepareStatement(sqlnome);
+            pst = connection.prepareStatement(sqlnome);
             pst.setString(1,hash.DoHash(inputOldPassword.getText()));
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -64,7 +65,7 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         String sql = "insert into access_control_panel(id,passwors)values(1,MD5(MD5(MD5(?))))";
         try {
             Hash hash = new Hash();
-            pst = conexao.prepareStatement(sql);
+            pst = connection.prepareStatement(sql);
             pst.setString(1,hash.DoHash(inputNewPassword.getText()));
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"SENHA ATUALIZADA COM SUCESSO");
@@ -77,7 +78,7 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
         String sql = "update access_control_panel set passwors=MD5(MD5(MD5(?))) where id=1";
         try {
             Hash hash = new Hash();
-            pst=conexao.prepareStatement(sql);
+            pst=connection.prepareStatement(sql);
             pst.setString(1,hash.DoHash(inputNewPassword.getText()));
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"SENHA ATUALIZADA COM SUCESSO");
