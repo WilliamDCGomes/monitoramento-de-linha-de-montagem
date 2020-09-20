@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import screens.Export;
 
 public class ExportDataTXT {
@@ -25,8 +26,23 @@ public class ExportDataTXT {
         export = exportData;
     }
     public void export() throws IOException{
-        File file = new File("C:/Users/Alunos/Desktop/Tabela de Comparação.txt");
-        
+        String userDir = System.getProperty("user.home");
+        JFileChooser fc = new JFileChooser(userDir +"/Desktop");
+        fc.showSaveDialog(export.fileChooser);
+        File file =  new File(fc.getSelectedFile() + ".txt");
+        if(file.exists()){
+            Object[] options = { "Sim", "Não" };
+            int opt = JOptionPane.showOptionDialog(null,"ESTE ARQUIVO JÁ EXISTE. DESEJA SOBREESCREVER ELE?", "ATENÇÃO!!!",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
+            if (opt == JOptionPane.YES_OPTION) {   
+                insert(file);
+            }     
+        }
+        else{
+            insert(file);
+        }
+    }
+    private void insert(File file){
         try{
             file.createNewFile();
             getPlannning();

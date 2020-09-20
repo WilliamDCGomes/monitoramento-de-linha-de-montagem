@@ -30,6 +30,7 @@ public class Export extends javax.swing.JFrame {
         URL adress = getClass().getResource("/images/icone.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
+        fileChooser.setVisible(false);
     }
     int x=0;
     /**
@@ -43,6 +44,7 @@ public class Export extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         inputDateFilter = new javax.swing.JFormattedTextField();
+        fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -56,6 +58,7 @@ public class Export extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         try {
             inputDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -68,9 +71,21 @@ public class Export extends javax.swing.JFrame {
                 inputDateFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(inputDateFilter);
+        inputDateFilter.setBounds(153, 78, 114, 28);
+
+        fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
+        fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Alunos\\Desktop"));
+        fileChooser.setDialogTitle("");
+        fileChooser.setFileFilter(null);
+        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
+        getContentPane().add(fileChooser);
+        fileChooser.setBounds(0, 10, 730, 326);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel1.setText("INFORME O DIA QUE DESEJA EXPORTAR");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(26, 34, 398, 26);
 
         jButton1.setText("EXPORTAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,55 +98,22 @@ public class Export extends javax.swing.JFrame {
                 jButton1KeyPressed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(161, 164, 93, 32);
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jRadioButton1.setText("Excel");
+        getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(102, 124, 71, 28);
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jRadioButton2.setText("Bloco de Notas");
+        getContentPane().add(jRadioButton2);
+        jRadioButton2.setBounds(203, 124, 140, 28);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jRadioButton1)
-                        .addGap(30, 30, 30)
-                        .addComponent(jRadioButton2)))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        setSize(new java.awt.Dimension(461, 252));
+        setSize(new java.awt.Dimension(461, 242));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -232,6 +214,7 @@ public class Export extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    public static javax.swing.JFileChooser fileChooser;
     private javax.swing.JFormattedTextField inputDateFilter;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
