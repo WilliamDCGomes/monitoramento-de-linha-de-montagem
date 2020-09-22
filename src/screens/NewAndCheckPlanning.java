@@ -20,7 +20,7 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
      */
     public NewAndCheckPlanning() {
         initComponents();
-        URL adress = getClass().getResource("/images/icone.png");
+        URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }

@@ -22,7 +22,7 @@ public class CommandScreen extends javax.swing.JFrame {
      */
     public CommandScreen() {
         initComponents();
-        URL adress = getClass().getResource("/images/icone.png");
+        URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }

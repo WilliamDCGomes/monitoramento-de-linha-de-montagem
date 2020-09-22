@@ -30,7 +30,7 @@ public class DelayScreen extends javax.swing.JFrame {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
         connection = connect.getConnectionMySQL();
-        URL adress = getClass().getResource("/images/icone.png");
+        URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
