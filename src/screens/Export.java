@@ -27,7 +27,7 @@ public class Export extends javax.swing.JFrame {
      */
     public Export() {
         initComponents();
-        URL adress = getClass().getResource("/images/icone.png");
+        URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
         fileChooser.setVisible(false);
