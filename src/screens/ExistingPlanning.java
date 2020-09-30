@@ -151,56 +151,6 @@ public class ExistingPlanning extends javax.swing.JFrame {
     private void sendShots(){
         DailyPlanningScreen dailyPlanningScreen = new DailyPlanningScreen();
         dailyPlanningScreen.buttonCancele.setVisible(false);
-        for(int i=0;i<selects;i++){
-            if(i==0){
-                dailyPlanningScreen.inputBeginningFirstShooting.setText(outputBeginningFirstShooting.getText());
-                dailyPlanningScreen.inputEndFirstShooting.setText(outputEndFirstShooting.getText());
-            }
-            else if(i==1){
-                dailyPlanningScreen.inputBeginningSecondShooting.setText(outputBeginningSecondShooting.getText());
-                dailyPlanningScreen.inputEndSecondShooting.setText(outputEndSecondShooting.getText());
-            }
-            else if(i==2){
-                dailyPlanningScreen.inputBeginningThirdShooting.setText(outputBeginningThirdShooting.getText());
-                dailyPlanningScreen.inputEndThirdShooting.setText(outputEndThirdShooting.getText());
-            }
-            else if(i==3){
-                dailyPlanningScreen.inputBeginningFourthShooting.setText(outputBeginningFourthShooting.getText());
-                dailyPlanningScreen.inputEndFourthShooting.setText(outputEndFourthShooting.getText());
-            }
-            else if(i==4){
-                dailyPlanningScreen.inputBeginningFifthShooting.setText(outputBeginningFifthShooting.getText());
-                dailyPlanningScreen.inputEndFifthShooting.setText(outputEndFifthShooting.getText());
-            }
-            else if(i==5){
-                dailyPlanningScreen.inputBeginningSixthShooting.setText(outputBeginningSixthShooting.getText());
-                dailyPlanningScreen.inputEndSixthShooting.setText(outputEndSixthShooting.getText());
-            }
-            else if(i==6){
-                dailyPlanningScreen.inputBeginningSeventhShooting.setText(outputBeginningSeventhShooting.getText());
-                dailyPlanningScreen.inputEndSeventhShooting.setText(outputEndSeventhShooting.getText());
-            }
-            else if(i==7){
-                dailyPlanningScreen.inputBeginningEighthShooting.setText(outputBeginningEighthShooting.getText());
-                dailyPlanningScreen.inputEndEighthShooting.setText(outputEndEighthShooting.getText());
-            }
-            else if(i==8){
-                dailyPlanningScreen.inputBeginningNinthShooting.setText(outputBeginningNinthShooting.getText());
-                dailyPlanningScreen.inputEndNinthShooting.setText(outputEndNinthShooting.getText());
-            }
-            else if(i==9){
-                dailyPlanningScreen.inputBeginningTenthShooting.setText(outputBeginningTenthShooting.getText());
-                dailyPlanningScreen.inputEndTenthShooting.setText(outputEndTenthShooting.getText());
-            }
-            else if(i==10){
-                dailyPlanningScreen.inputBeginningEleventhShooting.setText(outputBeginningEleventhShooting.getText());
-                dailyPlanningScreen.inputEndEleventhShooting.setText(outputEndEleventhShooting.getText());
-            }
-            else if(i==11){
-                dailyPlanningScreen.inputBeginningTwenlthShooting.setText(outputBeginningTwenlthShooting.getText());
-                dailyPlanningScreen.inputEndTwenlthShooting.setText(outputEndTwenlthShooting.getText());
-            }
-        }
         this.dispose();
         dailyPlanningScreen.setVisible(true);
     }
