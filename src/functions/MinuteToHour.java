@@ -1,4 +1,4 @@
-package screens;
+package functions;
 public class MinuteToHour {
     public String getHour(int time){
         int h = 0;

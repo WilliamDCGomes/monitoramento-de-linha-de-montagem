@@ -5,6 +5,7 @@
  */
 package screens;
 
+import functions.MinuteToHour;
 import functions.CheckInputDailyPlanning;
 import javax.swing.JOptionPane;
 import connectionbd.ConnectionModule;
