@@ -7,11 +7,11 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ConnectionModule {
-    private String host = "192.168.1.106";
+    private String host = "192.168.1.103";
     private String port = "3306";
     private String db = "linha_de_montagem";
-    private String user = "root";
-    private String password = "47122223";
+    private String user = "glassbyte";
+    private String password = "fmmpwwpmmf";
     private Connection connection = null;
     
     public ConnectionModule(){
@@ -19,7 +19,7 @@ public class ConnectionModule {
     }
     
     private void doConection(){
-        String url = "jdbc:mysql://address=(host=" + host + ")(port=" + port + ")(user=" + user + ")(password=" + password + ")/" + db + " ? useTimezone=true & serverTimezone=UTC & useSSL=false";
+        String url = "jdbc:mysql://address=(host=" + host + ")(port=" + port + ")(user=" + user + ")(password=" + password + ")/" + db + " ? useTimezone=true & serverTimezone=UTC & AllowPublicKeyRetrieval=True";
         try {
             connection = DriverManager.getConnection(url);
         } catch (SQLException ex) {
