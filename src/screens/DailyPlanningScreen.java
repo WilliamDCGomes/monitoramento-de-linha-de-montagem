@@ -129,7 +129,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                         }
                     }
                     else{
-                        nextDay("00:50");
+                        nextDay(inputShootingDuration.getText());
                     }
                 }
                 JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO INSERIDO COM SUCESSO");
@@ -219,7 +219,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSave);
-        buttonSave.setBounds(30, 260, 80, 23);
+        buttonSave.setBounds(30, 260, 80, 32);
 
         buttonCancele.setText("CANCELAR");
         buttonCancele.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +233,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonCancele);
-        buttonCancele.setBounds(150, 260, 120, 23);
+        buttonCancele.setBounds(150, 260, 120, 32);
 
         txtBeginning.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBeginning.setText("INÍCIO");
@@ -250,30 +250,38 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        inputEndLastShooting.setText("16:00");
         inputEndLastShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndLastShooting.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputEndLastShootingFocusGained(evt);
+            }
+        });
         inputEndLastShooting.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEndLastShootingKeyPressed(evt);
             }
         });
         getContentPane().add(inputEndLastShooting);
-        inputEndLastShooting.setBounds(400, 110, 72, 26);
+        inputEndLastShooting.setBounds(400, 110, 72, 24);
 
         try {
             inputBeginningFirstShooting.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        inputBeginningFirstShooting.setText("08:00");
         inputBeginningFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningFirstShooting.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputBeginningFirstShootingFocusGained(evt);
+            }
+        });
         inputBeginningFirstShooting.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputBeginningFirstShootingKeyPressed(evt);
             }
         });
         getContentPane().add(inputBeginningFirstShooting);
-        inputBeginningFirstShooting.setBounds(280, 110, 73, 26);
+        inputBeginningFirstShooting.setBounds(280, 110, 73, 24);
 
         try {
             inputBeginningLanchTime.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -282,28 +290,37 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
         inputBeginningLanchTime.setText("12:00");
         inputBeginningLanchTime.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputBeginningLanchTime.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputBeginningLanchTimeFocusGained(evt);
+            }
+        });
         inputBeginningLanchTime.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputBeginningLanchTimeKeyPressed(evt);
             }
         });
         getContentPane().add(inputBeginningLanchTime);
-        inputBeginningLanchTime.setBounds(280, 145, 73, 26);
+        inputBeginningLanchTime.setBounds(280, 145, 73, 24);
 
         try {
             inputShootingDuration.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        inputShootingDuration.setText("00:50");
         inputShootingDuration.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputShootingDuration.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputShootingDurationFocusGained(evt);
+            }
+        });
         inputShootingDuration.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputShootingDurationKeyPressed(evt);
             }
         });
         getContentPane().add(inputShootingDuration);
-        inputShootingDuration.setBounds(280, 180, 73, 26);
+        inputShootingDuration.setBounds(280, 180, 73, 24);
 
         try {
             inputEndLanchTime.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -312,13 +329,18 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
         inputEndLanchTime.setText("13:00");
         inputEndLanchTime.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputEndLanchTime.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputEndLanchTimeFocusGained(evt);
+            }
+        });
         inputEndLanchTime.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputEndLanchTimeKeyPressed(evt);
             }
         });
         getContentPane().add(inputEndLanchTime);
-        inputEndLanchTime.setBounds(400, 145, 72, 26);
+        inputEndLanchTime.setBounds(400, 145, 72, 24);
 
         txtStopLine.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtStopLine.setText("HORÁRIO EM QUE A LINHA PARA");
@@ -332,13 +354,18 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
         inputStopLine.setText("15:45");
         inputStopLine.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        inputStopLine.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputStopLineFocusGained(evt);
+            }
+        });
         inputStopLine.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputStopLineKeyPressed(evt);
             }
         });
         getContentPane().add(inputStopLine);
-        inputStopLine.setBounds(280, 215, 73, 26);
+        inputStopLine.setBounds(280, 215, 73, 24);
 
         setSize(new java.awt.Dimension(522, 330));
         setLocationRelativeTo(null);
@@ -433,6 +460,30 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputStopLineKeyPressed
 
+    private void inputBeginningFirstShootingFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputBeginningFirstShootingFocusGained
+        inputBeginningFirstShooting.selectAll();
+    }//GEN-LAST:event_inputBeginningFirstShootingFocusGained
+
+    private void inputEndLastShootingFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEndLastShootingFocusGained
+        inputEndLastShooting.selectAll();
+    }//GEN-LAST:event_inputEndLastShootingFocusGained
+
+    private void inputBeginningLanchTimeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputBeginningLanchTimeFocusGained
+        inputBeginningLanchTime.selectAll();
+    }//GEN-LAST:event_inputBeginningLanchTimeFocusGained
+
+    private void inputEndLanchTimeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputEndLanchTimeFocusGained
+        inputEndLanchTime.selectAll();
+    }//GEN-LAST:event_inputEndLanchTimeFocusGained
+
+    private void inputShootingDurationFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputShootingDurationFocusGained
+        inputShootingDuration.selectAll();
+    }//GEN-LAST:event_inputShootingDurationFocusGained
+
+    private void inputStopLineFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputStopLineFocusGained
+        inputStopLine.selectAll();
+    }//GEN-LAST:event_inputStopLineFocusGained
+
     /**
      * @param args the command line arguments
      */
@@ -476,7 +527,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     public static javax.swing.JFormattedTextField inputEndLanchTime;
     public static javax.swing.JFormattedTextField inputEndLastShooting;
     public static javax.swing.JFormattedTextField inputShootingDuration;
-    private javax.swing.JFormattedTextField inputStopLine;
+    public static javax.swing.JFormattedTextField inputStopLine;
     private javax.swing.JLabel txtBeginning;
     private javax.swing.JLabel txtEnd;
     private javax.swing.JLabel txtLanch;
