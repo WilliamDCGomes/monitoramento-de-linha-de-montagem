@@ -118,17 +118,19 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 TimeDifference timeDifferences = new TimeDifference();
                 if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()), timeDifferences)>0){
                     int time = hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputStopLine.getText()), timeDifferences);
-                    begin = minuteToHour.getHour(end);
-                    String duration = minuteToHour.getHour(time);
-                    end = auxShot.time(minuteToHour.getHour(end), duration);
-                    add(aux, begin, minuteToHour.getHour(end));
-                    int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()), timeDifferences);
-                    if(lessTime!=0){
-                        nextDay(minuteToHour.getHour(lessTime));
+                    if(timeDifference.delay.equals("false")){
+                        begin = minuteToHour.getHour(end);
+                        String duration = minuteToHour.getHour(time);
+                        end = auxShot.time(minuteToHour.getHour(end), duration);
+                        add(aux, begin, minuteToHour.getHour(end));
+                        int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()), timeDifferences);
+                        if(lessTime!=0){
+                            nextDay(minuteToHour.getHour(lessTime));
+                        }
                     }
-                }
-                else if(true){
-                    
+                    else{
+                        nextDay("00:50");
+                    }
                 }
                 JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO INSERIDO COM SUCESSO");
                 this.dispose();
