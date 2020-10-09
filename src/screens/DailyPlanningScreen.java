@@ -7,6 +7,7 @@ import connectionbd.ConnectionModule;
 import functions.AuxShot;
 import functions.ComparableHour;
 import functions.GetDate;
+import functions.GetYesterdayDate;
 import functions.HourToMinute;
 import functions.HourToMinuteFromWhile;
 import functions.MoreThan24Hour;
@@ -31,6 +32,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     PreparedStatement pst2 = null;
     ResultSet rs2 = null;
     boolean error = false;
+    boolean hasYesterday = false;
     /**
      * Creates new form DailyPlanningScreen
      */
@@ -62,10 +64,10 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         ArrayList<Integer> list = new ArrayList<Integer>();
         String sql = "select id from planning";
         try {
-            pst = connection.prepareStatement(sql);
-            rs=pst.executeQuery();
-            while(rs.next()){
-                list.add(rs.getInt(1));
+            pst2 = connection.prepareStatement(sql);
+            rs2=pst2.executeQuery();
+            while(rs2.next()){
+                list.add(rs2.getInt(1));
             }
             return list;
         } catch (Exception e) {
@@ -92,6 +94,21 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    private String hasYesterdayTime(){
+        GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
+        String sql = "select duration from nextDay where dats=?";
+        try {
+            pst2 = connection.prepareStatement(sql);
+            pst2.setString(1,getYesterdayDate.informDate());
+            rs2=pst2.executeQuery();
+            if(rs2.next()){
+                return rs2.getString(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return null;
     }
     private void beforeAdd(){
         CheckInputDailyPlanning checkInputDailyPlanning = new CheckInputDailyPlanning();
@@ -120,6 +137,14 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                     String lanchDurantion = timeDifference.getDifference(inputBeginningLanchTime.getText(), inputEndLanchTime.getText());
                     String decrement = minuteToHour.getHour(auxShot.time(lanchDurantion, inputShootingDuration.getText()));
                     end = auxShot.time(begin, decrement);
+                }
+                if(hasYesterday==true){
+                    hasYesterday=false;
+                    end = auxShot.time(hasYesterdayTime(), begin);
+                    add(aux, begin, minuteToHour.getHour(end));
+                    aux++;
+                    begin = minuteToHour.getHour(end);
+                    end = auxShot.time(begin, inputShootingDuration.getText());
                 }
                 add(aux, begin, minuteToHour.getHour(end));
                 aux++;
@@ -153,7 +178,15 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
     }
     private void nextDay(String duration){
-        System.out.println(duration);
+        String sql = "insert into nextDay(dats,duration)values(?,?)";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,getDate.informDate());
+            pst.setString(2,duration);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     private void beforeUpdate(){
         ArrayList<Integer> list = getIds();
@@ -183,6 +216,15 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                     String lanchDurantion = timeDifference.getDifference(inputBeginningLanchTime.getText(), inputEndLanchTime.getText());
                     String decrement = minuteToHour.getHour(auxShot.time(lanchDurantion, inputShootingDuration.getText()));
                     end = auxShot.time(begin, decrement);
+                }
+                if(hasYesterday==true){
+                    hasYesterday=false;
+                    end = auxShot.time(hasYesterdayTime(), begin);
+                    update(aux, begin, minuteToHour.getHour(end), list.get(0));
+                    list.remove(0);
+                    aux++;
+                    begin = minuteToHour.getHour(end);
+                    end = auxShot.time(begin, inputShootingDuration.getText());
                 }
                 update(aux, begin, minuteToHour.getHour(end), list.get(0));
                 list.remove(0);
@@ -218,6 +260,12 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
     }
     private void trySave(){
+        if(hasYesterdayTime()!=null){
+            int confirma = JOptionPane.showConfirmDialog(null, "RECICLAGEM DE HORAS! RESTOU " + hasYesterdayTime() + " DO DIA ANTERIOR, DESEJA INCLUIR NA PRODUÇÃO DE HOJE?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
+            if(confirma==JOptionPane.YES_OPTION){
+                hasYesterday=true;
+            }
+        }
         ComparableHour comparableHour = new ComparableHour();
         MoreThan24Hour moreThan24Hour = new MoreThan24Hour();
         if(buttonCancele.isVisible()){

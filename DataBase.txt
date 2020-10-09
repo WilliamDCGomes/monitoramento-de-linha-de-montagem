@@ -63,3 +63,10 @@ CREATE TABLE `workfinish` (
   `shot` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+create table nextDay(
+    id int not null auto_increment,
+    dats varchar(10) NOT NULL,
+    duration varchar(8) not null,
+    PRIMARY KEY (`id`)
+);
