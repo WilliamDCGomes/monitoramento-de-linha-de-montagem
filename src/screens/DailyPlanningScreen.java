@@ -14,6 +14,7 @@ import functions.ComparableHour;
 import functions.GetDate;
 import functions.HourToMinute;
 import functions.HourToMinuteFromWhile;
+import functions.MoreThan24Hour;
 import functions.StartShotting;
 import functions.TimeDifference;
 import java.awt.Image;
@@ -95,22 +96,23 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             int aux = 1;
             int end = auxShot.time(begin, inputShootingDuration.getText());
             int saveEnd = 0;
-            while(hourToMinuteComparable.getMinute(inputEndLastShooting.getText())>end){
+            while(hourToMinuteComparable.getMinute(inputStopLine.getText())>end){
                 saveEnd = end;
-                add(aux, begin, minuteToHour.getHour(end));
-                aux++;
-                begin = minuteToHour.getHour(end);
-                end = auxShot.time(begin, inputShootingDuration.getText());
                 if(comparableHour.compare(begin, inputBeginningLanchTime.getText(), 1)&&comparableHour.compare(inputEndLanchTime.getText(), begin, 2)){
                     String lanchDurantion = timeDifference.getDifference(inputBeginningLanchTime.getText(), inputEndLanchTime.getText());
                     begin = minuteToHour.getHour(auxShot.time(begin, lanchDurantion));
                     end = auxShot.time(begin, inputShootingDuration.getText());
+                    System.out.println("ah");
                 }
                 else if(comparableHour.compare(minuteToHour.getHour(end), inputBeginningLanchTime.getText(), 2)&&comparableHour.compare(inputEndLanchTime.getText(), minuteToHour.getHour(end), 2)){
                     String lanchDurantion = timeDifference.getDifference(inputBeginningLanchTime.getText(), inputEndLanchTime.getText());
                     String decrement = minuteToHour.getHour(auxShot.time(lanchDurantion, inputShootingDuration.getText()));
                     end = auxShot.time(begin, decrement);
                 }
+                add(aux, begin, minuteToHour.getHour(end));
+                aux++;
+                begin = minuteToHour.getHour(end);
+                end = auxShot.time(begin, inputShootingDuration.getText());
             }
             end = saveEnd;
             if(error==false){
@@ -372,13 +374,33 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
+        ComparableHour comparableHour = new ComparableHour();
+        MoreThan24Hour moreThan24Hour = new MoreThan24Hour();
         if(buttonCancele.isVisible()){
             StartShotting startShotting = new StartShotting();
             if(startShotting.hasAProgramming(getDate.informDate())){
                 JOptionPane.showMessageDialog(null, "JÁ FOI INSERIDO UM PLANEJAMENTO PARA O DIA DE HOJE!");
             }
-            else{
+            else if(moreThan24Hour.check(inputBeginningFirstShooting.getText())||moreThan24Hour.check(inputEndLastShooting.getText())||moreThan24Hour.check(inputBeginningLanchTime.getText())||moreThan24Hour.check(inputEndLanchTime.getText())||moreThan24Hour.check(inputShootingDuration.getText())||moreThan24Hour.check(inputStopLine.getText())){
+                JOptionPane.showMessageDialog(null, "ENTRADA DE DADOS INCORRETA!");
+            }
+            else if(inputBeginningFirstShooting.getText().equals(inputEndLastShooting.getText())||inputBeginningLanchTime.getText().equals(inputEndLanchTime.getText())){
+                JOptionPane.showMessageDialog(null, "A RODAGEM E O ALMOÇO NÃO PODE TER O MESMO COMEÇO E O MESMO FIM!");
+            }
+            else if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndLastShooting.getText().equals("  :  ")||inputBeginningLanchTime.getText().equals("  :  ")||inputEndLanchTime.getText().equals("  :  ")||inputShootingDuration.getText().equals("  :  ")||inputStopLine.getText().equals("  :  ")){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS!");
+            }
+            else if(comparableHour.compare(inputEndLastShooting.getText(), inputStopLine.getText(), 1)==false){
+                JOptionPane.showMessageDialog(null, "O HORÁRIO DO FIM DO PLANEJAMENTO TEM QUE SER SUPERIOR AO HORÁRIO QUE A LINHA PARA!");
+            }
+            else if(inputShootingDuration.getText().equals("00:00")){
+                JOptionPane.showMessageDialog(null, "A DURAÇÃO DE CADA RODAGEM NÃO PODE SER DE 0 MINUTOS!");
+            }
+            else if (comparableHour.compare(inputEndLastShooting.getText(), inputBeginningFirstShooting.getText(), 2)&&comparableHour.compare(inputEndLanchTime.getText(), inputBeginningLanchTime.getText(), 2)){
                 beforeAdd();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "O FIM NÃO PODE SER ANTES DO COMEÇO!");
             }
         }
         else{
@@ -418,13 +440,33 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void buttonSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonSaveKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
+            ComparableHour comparableHour = new ComparableHour();
+            MoreThan24Hour moreThan24Hour = new MoreThan24Hour();
             if(buttonCancele.isVisible()){
                 StartShotting startShotting = new StartShotting();
                 if(startShotting.hasAProgramming(getDate.informDate())){
                     JOptionPane.showMessageDialog(null, "JÁ FOI INSERIDO UM PLANEJAMENTO PARA O DIA DE HOJE!");
                 }
-                else{
+                else if(moreThan24Hour.check(inputBeginningFirstShooting.getText())||moreThan24Hour.check(inputEndLastShooting.getText())||moreThan24Hour.check(inputBeginningLanchTime.getText())||moreThan24Hour.check(inputEndLanchTime.getText())||moreThan24Hour.check(inputShootingDuration.getText())||moreThan24Hour.check(inputStopLine.getText())){
+                    JOptionPane.showMessageDialog(null, "ENTRADA DE DADOS INCORRETA!");
+                }
+                else if(inputBeginningFirstShooting.getText().equals(inputEndLastShooting.getText())||inputBeginningLanchTime.getText().equals(inputEndLanchTime.getText())){
+                    JOptionPane.showMessageDialog(null, "A RODAGEM E O ALMOÇO NÃO PODE TER O MESMO COMEÇO E O MESMO FIM!");
+                }
+                else if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndLastShooting.getText().equals("  :  ")||inputBeginningLanchTime.getText().equals("  :  ")||inputEndLanchTime.getText().equals("  :  ")||inputShootingDuration.getText().equals("  :  ")||inputStopLine.getText().equals("  :  ")){
+                    JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS!");
+                }
+                else if(comparableHour.compare(inputEndLastShooting.getText(), inputStopLine.getText(), 1)==false){
+                    JOptionPane.showMessageDialog(null, "O HORÁRIO DO FIM DO PLANEJAMENTO TEM QUE SER SUPERIOR AO HORÁRIO QUE A LINHA PARA!");
+                }
+                else if(inputShootingDuration.getText().equals("00:00")){
+                    JOptionPane.showMessageDialog(null, "A DURAÇÃO DE CADA RODAGEM NÃO PODE SER DE 0 MINUTOS!");
+                }
+                else if (comparableHour.compare(inputEndLastShooting.getText(), inputBeginningFirstShooting.getText(), 2)&&comparableHour.compare(inputEndLanchTime.getText(), inputBeginningLanchTime.getText(), 2)){
                     beforeAdd();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "O FIM NÃO PODE SER ANTES DO COMEÇO!");
                 }
             }
             else{
@@ -445,13 +487,33 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
 
     private void inputStopLineKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputStopLineKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
+            ComparableHour comparableHour = new ComparableHour();
+            MoreThan24Hour moreThan24Hour = new MoreThan24Hour();
             if(buttonCancele.isVisible()){
                 StartShotting startShotting = new StartShotting();
                 if(startShotting.hasAProgramming(getDate.informDate())){
                     JOptionPane.showMessageDialog(null, "JÁ FOI INSERIDO UM PLANEJAMENTO PARA O DIA DE HOJE!");
                 }
-                else{
+                else if(moreThan24Hour.check(inputBeginningFirstShooting.getText())||moreThan24Hour.check(inputEndLastShooting.getText())||moreThan24Hour.check(inputBeginningLanchTime.getText())||moreThan24Hour.check(inputEndLanchTime.getText())||moreThan24Hour.check(inputShootingDuration.getText())||moreThan24Hour.check(inputStopLine.getText())){
+                    JOptionPane.showMessageDialog(null, "ENTRADA DE DADOS INCORRETA!");
+                }
+                else if(inputBeginningFirstShooting.getText().equals(inputEndLastShooting.getText())||inputBeginningLanchTime.getText().equals(inputEndLanchTime.getText())){
+                    JOptionPane.showMessageDialog(null, "A RODAGEM E O ALMOÇO NÃO PODE TER O MESMO COMEÇO E O MESMO FIM!");
+                }
+                else if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndLastShooting.getText().equals("  :  ")||inputBeginningLanchTime.getText().equals("  :  ")||inputEndLanchTime.getText().equals("  :  ")||inputShootingDuration.getText().equals("  :  ")||inputStopLine.getText().equals("  :  ")){
+                    JOptionPane.showMessageDialog(null, "POR FAVOR, PREENCHA TODOS OS CAMPOS!");
+                }
+                else if(comparableHour.compare(inputEndLastShooting.getText(), inputStopLine.getText(), 1)==false){
+                    JOptionPane.showMessageDialog(null, "O HORÁRIO DO FIM DO PLANEJAMENTO TEM QUE SER SUPERIOR AO HORÁRIO QUE A LINHA PARA!");
+                }
+                else if(inputShootingDuration.getText().equals("00:00")){
+                    JOptionPane.showMessageDialog(null, "A DURAÇÃO DE CADA RODAGEM NÃO PODE SER DE 0 MINUTOS!");
+                }
+                else if (comparableHour.compare(inputEndLastShooting.getText(), inputBeginningFirstShooting.getText(), 2)&&comparableHour.compare(inputEndLanchTime.getText(), inputBeginningLanchTime.getText(), 2)){
                     beforeAdd();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "O FIM NÃO PODE SER ANTES DO COMEÇO!");
                 }
             }
             else{
