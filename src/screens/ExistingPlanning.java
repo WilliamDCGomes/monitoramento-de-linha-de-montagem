@@ -136,19 +136,7 @@ public class ExistingPlanning extends javax.swing.JFrame {
 
         tablePlanning.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Rodagem", "Começo", "Fim"
@@ -347,7 +335,6 @@ public class ExistingPlanning extends javax.swing.JFrame {
     private javax.swing.JLabel imageAfter;
     private javax.swing.JLabel imageBefore;
     private javax.swing.JFormattedTextField inputDateFilter;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane tableExistingPlan;
     private javax.swing.JTable tablePlanning;
     private javax.swing.JLabel txtShotHistoric;

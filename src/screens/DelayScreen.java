@@ -213,9 +213,7 @@ public class DelayScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSaveActionPerformed
 
     private void inputReasonDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputReasonDelayKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
-            inputType1.requestFocus();
-        }
+        
     }//GEN-LAST:event_inputReasonDelayKeyPressed
 
     private void inputType1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputType1KeyPressed

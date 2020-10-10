@@ -199,6 +199,11 @@ public class ShowDelay extends javax.swing.JFrame {
         outputReasonDelay.setColumns(20);
         outputReasonDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputReasonDelay.setRows(5);
+        outputReasonDelay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                outputReasonDelayKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(outputReasonDelay);
 
         previousDelay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
@@ -329,7 +334,7 @@ public class ShowDelay extends javax.swing.JFrame {
                             .addComponent(txtTypeDelay)
                             .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtDelay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -337,9 +342,9 @@ public class ShowDelay extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(23, 23, 23)
                 .addComponent(txtDelay)
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -457,6 +462,10 @@ public class ShowDelay extends javax.swing.JFrame {
             remove();
         }
     }//GEN-LAST:event_buttonDeleteKeyPressed
+
+    private void outputReasonDelayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_outputReasonDelayKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_outputReasonDelayKeyPressed
 
     /**
      * @param args the command line arguments
