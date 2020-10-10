@@ -11,9 +11,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author willi
@@ -24,8 +26,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     ResultSet rs = null;
     int x=0;
     int selects=0;
-    String[] begins = new String [12];
-    String[] ends = new String [12];
+    ArrayList<String> begins = new ArrayList<String>();
+    ArrayList<String> ends = new ArrayList<String>();
     
     public HourHistoricScreen() {
         initComponents();
@@ -36,43 +38,27 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         this.setIconImage(icon);
     }
     private void filter(){
-        clearShots();
         getBegin();
-        printBegins();
         getEnd();
-        printEnds();
+        insertInTable();
     }
-    public void clearShots(){
-        for(int i=0;i<12;i++){
-            begins[i] = "";
+    private void insertInTable(){
+        DefaultTableModel table = (DefaultTableModel) tablePlanning.getModel();
+        int aux = 0;
+        while(true){
+            if(aux<begins.size()&&aux<ends.size()){
+                String[] data = {Integer.toString(aux+1), begins.get(aux), ends.get(aux)};
+                table.addRow(data);
+            }
+            else if(aux<begins.size()){
+                String[] data = {Integer.toString(aux+1), begins.get(aux)};
+                table.addRow(data);
+            }
+            else{
+                break;
+            }
+            aux++;
         }
-        for(int i=0;i<12;i++){
-            ends[i] = "";
-        }
-        outputBeginningFirstShooting.setText("");
-        outputBeginningSecondShooting.setText("");
-        outputBeginningThirdShooting.setText("");
-        outputBeginningFourthShooting.setText("");
-        outputBeginningFifthShooting.setText("");
-        outputBeginningSixthShooting.setText("");
-        outputBeginningSeventhShooting.setText("");
-        outputBeginningEighthShooting.setText("");
-        outputBeginningNinthShooting.setText("");
-        outputBeginningTenthShooting.setText("");
-        outputBeginningEleventhShooting.setText("");
-        outputBeginningTwenlthShooting.setText("");
-        outputEndFirstShooting.setText("");
-        outputEndSecondShooting.setText("");
-        outputEndThirdShooting.setText("");
-        outputEndFourthShooting.setText("");
-        outputEndFifthShooting.setText("");
-        outputEndSixthShooting.setText("");
-        outputEndSeventhShooting.setText("");
-        outputEndEighthShooting.setText("");
-        outputEndNinthShooting.setText("");
-        outputEndTenthShooting.setText("");
-        outputEndEleventhShooting.setText("");
-        outputEndTwenlthShooting.setText("");
     }
     private void getBegin(){
         selects=0;
@@ -82,7 +68,7 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {
-                begins[selects] = rs.getString(1);
+                begins.add(rs.getString(1));
                 selects++;
             }
         } catch (Exception e) {
@@ -97,91 +83,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             pst.setString(1,inputDateFilter.getText());
             rs = pst.executeQuery();
             while (rs.next()) {
-                ends[selects] = rs.getString(1);
+                ends.add(rs.getString(1));
                 selects++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
-        }
-    }
-    private void printBegins(){
-        for(int i=0;i<selects;i++){
-            if(i==0){
-                outputBeginningFirstShooting.setText(begins[0]);
-            }
-            else if(i==1){
-                outputBeginningSecondShooting.setText(begins[1]);
-            }
-            else if(i==2){
-                outputBeginningThirdShooting.setText(begins[2]);
-            }
-            else if(i==3){
-                outputBeginningFourthShooting.setText(begins[3]);
-            }
-            else if(i==4){
-                outputBeginningFifthShooting.setText(begins[4]);
-            }
-            else if(i==5){
-                outputBeginningSixthShooting.setText(begins[5]);
-            }
-            else if(i==6){
-                outputBeginningSeventhShooting.setText(begins[6]);
-            }
-            else if(i==7){
-                outputBeginningEighthShooting.setText(begins[7]);
-            }
-            else if(i==8){
-                outputBeginningNinthShooting.setText(begins[8]);
-            }
-            else if(i==9){
-                outputBeginningTenthShooting.setText(begins[9]);
-            }
-            else if(i==10){
-                outputBeginningEleventhShooting.setText(begins[10]);
-            }
-            else if(i==11){
-                outputBeginningTwenlthShooting.setText(begins[11]);
-            }
-        }
-    }
-    private void printEnds(){
-        for(int i=0;i<selects;i++){
-            if(i==0){
-                outputEndFirstShooting.setText(ends[0]);
-            }
-            else if(i==1){
-                outputEndSecondShooting.setText(ends[1]);
-            }
-            else if(i==2){
-                outputEndThirdShooting.setText(ends[2]);
-            }
-            else if(i==3){
-                outputEndFourthShooting.setText(ends[3]);
-            }
-            else if(i==4){
-                outputEndFifthShooting.setText(ends[4]);
-            }
-            else if(i==5){
-                outputEndSixthShooting.setText(ends[5]);
-            }
-            else if(i==6){
-                outputEndSeventhShooting.setText(ends[6]);
-            }
-            else if(i==7){
-                outputEndEighthShooting.setText(ends[7]);
-            }
-            else if(i==8){
-                outputEndNinthShooting.setText(ends[8]);
-            }
-            else if(i==9){
-                outputEndTenthShooting.setText(ends[9]);
-            }
-            else if(i==10){
-                outputEndEleventhShooting.setText(ends[10]);
-            }
-            else if(i==11){
-                outputEndTwenlthShooting.setText(ends[11]);
-            }
         }
     }
     /**
@@ -198,44 +104,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         imageAfter = new javax.swing.JLabel();
         inputDateFilter = new javax.swing.JFormattedTextField();
         buttonFilter = new javax.swing.JButton();
-        txtTenthShooting = new javax.swing.JLabel();
-        txtEleventhShooting = new javax.swing.JLabel();
-        txtTwelfthShooting = new javax.swing.JLabel();
-        txtFirstShooting = new javax.swing.JLabel();
-        txtSecondShooting = new javax.swing.JLabel();
-        txtThirdShooting = new javax.swing.JLabel();
-        txtFourthShooting = new javax.swing.JLabel();
-        txtFifthShooting = new javax.swing.JLabel();
-        txtSixthShooting = new javax.swing.JLabel();
-        txtSeventhShooting = new javax.swing.JLabel();
-        txtEighthShooting = new javax.swing.JLabel();
-        txtNinthShooting = new javax.swing.JLabel();
-        txtBeginning = new javax.swing.JLabel();
-        txtEnd = new javax.swing.JLabel();
-        outputBeginningFirstShooting = new javax.swing.JTextField();
-        outputEndFirstShooting = new javax.swing.JTextField();
-        outputBeginningSecondShooting = new javax.swing.JTextField();
-        outputEndSecondShooting = new javax.swing.JTextField();
-        outputBeginningThirdShooting = new javax.swing.JTextField();
-        outputEndThirdShooting = new javax.swing.JTextField();
-        outputBeginningFourthShooting = new javax.swing.JTextField();
-        outputEndFourthShooting = new javax.swing.JTextField();
-        outputBeginningFifthShooting = new javax.swing.JTextField();
-        outputEndFifthShooting = new javax.swing.JTextField();
-        outputBeginningSixthShooting = new javax.swing.JTextField();
-        outputEndSixthShooting = new javax.swing.JTextField();
-        outputBeginningSeventhShooting = new javax.swing.JTextField();
-        outputEndSeventhShooting = new javax.swing.JTextField();
-        outputBeginningEighthShooting = new javax.swing.JTextField();
-        outputEndEighthShooting = new javax.swing.JTextField();
-        outputBeginningNinthShooting = new javax.swing.JTextField();
-        outputEndNinthShooting = new javax.swing.JTextField();
-        outputBeginningTenthShooting = new javax.swing.JTextField();
-        outputEndTenthShooting = new javax.swing.JTextField();
-        outputBeginningEleventhShooting = new javax.swing.JTextField();
-        outputEndEleventhShooting = new javax.swing.JTextField();
-        outputBeginningTwenlthShooting = new javax.swing.JTextField();
-        outputEndTwenlthShooting = new javax.swing.JTextField();
+        tableExistingPlan = new javax.swing.JScrollPane();
+        tablePlanning = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Histórico de Rodagens");
@@ -286,95 +156,23 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             }
         });
 
-        txtTenthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtTenthShooting.setText("10º RODAGEM");
+        tablePlanning.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        txtEleventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtEleventhShooting.setText("11º RODAGEM");
+            },
+            new String [] {
+                "Rodagem", "Começo", "Fim"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        txtTwelfthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtTwelfthShooting.setText("12º RODAGEM");
-
-        txtFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtFirstShooting.setText("1º RODAGEM");
-
-        txtSecondShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtSecondShooting.setText("2º RODAGEM");
-
-        txtThirdShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtThirdShooting.setText("3º RODAGEM");
-
-        txtFourthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtFourthShooting.setText("4º RODAGEM");
-
-        txtFifthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtFifthShooting.setText("5º RODAGEM");
-
-        txtSixthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtSixthShooting.setText("6º RODAGEM");
-
-        txtSeventhShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtSeventhShooting.setText("7º RODAGEM");
-
-        txtEighthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtEighthShooting.setText("8º RODAGEM");
-
-        txtNinthShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtNinthShooting.setText("9º RODAGEM");
-
-        txtBeginning.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtBeginning.setText("INÍCIO");
-
-        txtEnd.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        txtEnd.setText("FIM");
-
-        outputBeginningFirstShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndFirstShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningSecondShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndSecondShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningThirdShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndThirdShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningFourthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndFourthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningFifthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndFifthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningSixthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndSixthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningSeventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndSeventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningEighthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndEighthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningNinthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndNinthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningTenthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndTenthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningEleventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndEleventhShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputBeginningTwenlthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        outputEndTwenlthShooting.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableExistingPlan.setViewportView(tablePlanning);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -384,52 +182,12 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtShotHistoric)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtSecondShooting)
-                                .addComponent(txtFirstShooting)
-                                .addComponent(txtThirdShooting)
-                                .addComponent(txtFourthShooting)
-                                .addComponent(txtSeventhShooting)
-                                .addComponent(txtEighthShooting)
-                                .addComponent(txtFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtSixthShooting))
-                            .addComponent(txtNinthShooting)
-                            .addComponent(txtTenthShooting)
-                            .addComponent(txtEleventhShooting)
-                            .addComponent(txtTwelfthShooting))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputBeginningFirstShooting)
-                            .addComponent(outputBeginningSecondShooting)
-                            .addComponent(outputBeginningThirdShooting)
-                            .addComponent(outputBeginningFourthShooting)
-                            .addComponent(outputBeginningFifthShooting)
-                            .addComponent(outputBeginningSeventhShooting)
-                            .addComponent(outputBeginningEighthShooting)
-                            .addComponent(outputBeginningNinthShooting)
-                            .addComponent(outputBeginningTenthShooting)
-                            .addComponent(outputBeginningEleventhShooting)
-                            .addComponent(outputBeginningTwenlthShooting)
-                            .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputEndSixthShooting)))
+                        .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imageBefore)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -438,106 +196,26 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                         .addComponent(imageAfter)
                         .addGap(56, 56, 56)
                         .addComponent(buttonFilter)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(txtBeginning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(182, 182, 182)
-                        .addComponent(txtEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(73, 73, 73)))
-                .addGap(15, 15, 15))
+                        .addGap(15, 377, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addComponent(txtShotHistoric)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtBeginning, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtEnd, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFirstShooting)
-                            .addComponent(outputBeginningFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndFirstShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputBeginningSecondShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndSecondShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSecondShooting))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(outputBeginningThirdShooting, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtThirdShooting)
-                                .addComponent(outputEndThirdShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFourthShooting)
-                            .addComponent(outputBeginningFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputEndFourthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFifthShooting)
-                        .addComponent(outputBeginningFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(outputEndFifthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSixthShooting)
-                    .addComponent(outputBeginningSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndSixthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSeventhShooting)
-                    .addComponent(outputBeginningSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndSeventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEighthShooting)
-                    .addComponent(outputBeginningEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndEighthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNinthShooting)
-                    .addComponent(outputBeginningNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndNinthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTenthShooting)
-                    .addComponent(outputBeginningTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndTenthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEleventhShooting)
-                    .addComponent(outputBeginningEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndEleventhShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTwelfthShooting)
-                    .addComponent(outputBeginningTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(outputEndTwenlthShooting, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imageBefore)
-                    .addComponent(imageAfter)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(buttonFilter)))
-                .addGap(81, 81, 81))
+                    .addComponent(buttonFilter, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(imageBefore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(inputDateFilter)
+                        .addComponent(imageAfter, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
 
-        outputBeginningSecondShooting.getAccessibleContext().setAccessibleDescription("");
-        outputEndSecondShooting.getAccessibleContext().setAccessibleDescription("");
-        outputBeginningThirdShooting.getAccessibleContext().setAccessibleDescription("");
-        outputBeginningFourthShooting.getAccessibleContext().setAccessibleName("");
-
-        setSize(new java.awt.Dimension(572, 651));
+        setSize(new java.awt.Dimension(777, 506));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -578,9 +256,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             GetDate getDate = new GetDate();
             inputDateFilter.setText(getDate.informDate());
             getBegin();
-            printBegins();
             getEnd();
-            printEnds();
+            insertInTable();
         }
     }//GEN-LAST:event_formWindowActivated
 
@@ -660,44 +337,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     private javax.swing.JLabel imageAfter;
     private javax.swing.JLabel imageBefore;
     private javax.swing.JFormattedTextField inputDateFilter;
-    private javax.swing.JTextField outputBeginningEighthShooting;
-    private javax.swing.JTextField outputBeginningEleventhShooting;
-    private javax.swing.JTextField outputBeginningFifthShooting;
-    private javax.swing.JTextField outputBeginningFirstShooting;
-    private javax.swing.JTextField outputBeginningFourthShooting;
-    private javax.swing.JTextField outputBeginningNinthShooting;
-    private javax.swing.JTextField outputBeginningSecondShooting;
-    private javax.swing.JTextField outputBeginningSeventhShooting;
-    private javax.swing.JTextField outputBeginningSixthShooting;
-    private javax.swing.JTextField outputBeginningTenthShooting;
-    private javax.swing.JTextField outputBeginningThirdShooting;
-    private javax.swing.JTextField outputBeginningTwenlthShooting;
-    private javax.swing.JTextField outputEndEighthShooting;
-    private javax.swing.JTextField outputEndEleventhShooting;
-    private javax.swing.JTextField outputEndFifthShooting;
-    private javax.swing.JTextField outputEndFirstShooting;
-    private javax.swing.JTextField outputEndFourthShooting;
-    private javax.swing.JTextField outputEndNinthShooting;
-    private javax.swing.JTextField outputEndSecondShooting;
-    private javax.swing.JTextField outputEndSeventhShooting;
-    private javax.swing.JTextField outputEndSixthShooting;
-    private javax.swing.JTextField outputEndTenthShooting;
-    private javax.swing.JTextField outputEndThirdShooting;
-    private javax.swing.JTextField outputEndTwenlthShooting;
-    private javax.swing.JLabel txtBeginning;
-    private javax.swing.JLabel txtEighthShooting;
-    private javax.swing.JLabel txtEleventhShooting;
-    private javax.swing.JLabel txtEnd;
-    private javax.swing.JLabel txtFifthShooting;
-    private javax.swing.JLabel txtFirstShooting;
-    private javax.swing.JLabel txtFourthShooting;
-    private javax.swing.JLabel txtNinthShooting;
-    private javax.swing.JLabel txtSecondShooting;
-    private javax.swing.JLabel txtSeventhShooting;
+    private javax.swing.JScrollPane tableExistingPlan;
+    private javax.swing.JTable tablePlanning;
     private javax.swing.JLabel txtShotHistoric;
-    private javax.swing.JLabel txtSixthShooting;
-    private javax.swing.JLabel txtTenthShooting;
-    private javax.swing.JLabel txtThirdShooting;
-    private javax.swing.JLabel txtTwelfthShooting;
     // End of variables declaration//GEN-END:variables
 }

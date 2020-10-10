@@ -18,7 +18,6 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 /**
  *
@@ -32,6 +31,8 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     ResultSet rs2 = null;
     boolean error = false;
     boolean hasYesterday = false;
+    GetDate getDate = new GetDate();
+    int manyShotting;
    
     public DailyPlanningScreen() {
         initComponents();
@@ -41,8 +42,6 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
-    GetDate getDate = new GetDate();
-    int manyShotting;
     private void add(int numberShotting, String start, String end){
         String sql = "insert into planning(dats,shooting,beginning,ending)values(?,?,?,?)";
         try {
@@ -56,21 +55,6 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
             error = true;
         }
-    }
-    private ArrayList getIds(){
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        String sql = "select id from planning";
-        try {
-            pst2 = connection.prepareStatement(sql);
-            rs2=pst2.executeQuery();
-            while(rs2.next()){
-                list.add(rs2.getInt(1));
-            }
-            return list;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
-        }
-        return null;
     }
     private void delete(){
         String sql = "delete from planning where dats = ?";
