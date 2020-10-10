@@ -38,9 +38,18 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         this.setIconImage(icon);
     }
     private void filter(){
+        clearTable();
+        begins.clear();
+        ends.clear();
         getBegin();
         getEnd();
         insertInTable();
+    }
+    private void clearTable(){
+        DefaultTableModel table = (DefaultTableModel) tablePlanning.getModel();
+        for(int i=table.getRowCount()-1; i >= 0; i--){
+            table.removeRow(i);
+        }
     }
     private void insertInTable(){
         DefaultTableModel table = (DefaultTableModel) tablePlanning.getModel();
@@ -184,19 +193,18 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(imageBefore)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imageAfter)
-                        .addGap(56, 56, 56)
-                        .addComponent(buttonFilter)
-                        .addGap(15, 377, Short.MAX_VALUE))))
+                .addComponent(imageBefore)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imageAfter)
+                .addGap(56, 56, 56)
+                .addComponent(buttonFilter)
+                .addGap(15, 377, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tableExistingPlan)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

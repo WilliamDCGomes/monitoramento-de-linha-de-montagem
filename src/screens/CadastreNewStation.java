@@ -65,10 +65,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
             pst = connection.prepareStatement(sqlnome);
             rs = pst.executeQuery();
             if (rs.next()) {
-                outputNumberOfStation.setText(Integer.toString(Integer.parseInt(rs.getString(1))+1));
+                if(!rs.getString(1).equals(null)){
+                    outputNumberOfStation.setText(Integer.toString(Integer.parseInt(rs.getString(1))+1));
+                }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
         }
     }
     /**
@@ -89,7 +90,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
         inputPassword = new javax.swing.JPasswordField();
         inputConfirmPassword = new javax.swing.JPasswordField();
         buttonSave = new javax.swing.JButton();
-        outputNumberOfStation = new javax.swing.JFormattedTextField();
+        outputNumberOfStation = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Estação");
@@ -147,13 +148,9 @@ public class CadastreNewStation extends javax.swing.JFrame {
             }
         });
 
-        try {
-            outputNumberOfStation.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        outputNumberOfStation.setEnabled(false);
         outputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        outputNumberOfStation.setText("1");
+        outputNumberOfStation.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,11 +183,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(txtNewStation)
-                .addGap(33, 33, 33)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumberOfStation)
-                    .addComponent(outputNumberOfStation, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
+                    .addComponent(outputNumberOfStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLogin)
                     .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -328,7 +325,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
     private javax.swing.JPasswordField inputConfirmPassword;
     private javax.swing.JTextField inputLogin;
     private javax.swing.JPasswordField inputPassword;
-    private javax.swing.JFormattedTextField outputNumberOfStation;
+    private javax.swing.JTextField outputNumberOfStation;
     private javax.swing.JLabel txtConfirmPassword;
     private javax.swing.JLabel txtLogin;
     private javax.swing.JLabel txtNewStation;
