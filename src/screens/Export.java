@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import functions.ExportDataCSV;
@@ -18,13 +13,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alunos
+ * @author willi
  */
 public class Export extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Export
-     */
+    int x = 0;
+    
     public Export() {
         initComponents();
         URL adress = getClass().getResource("/images/icon.png");
@@ -32,7 +25,6 @@ public class Export extends javax.swing.JFrame {
         this.setIconImage(icon);
         fileChooser.setVisible(false);
     }
-    int x=0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,9 +110,7 @@ public class Export extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputDateFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDateFilterKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
-            
-        }
+        
     }//GEN-LAST:event_inputDateFilterKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

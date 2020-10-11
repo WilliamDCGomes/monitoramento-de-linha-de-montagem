@@ -16,9 +16,7 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    /**
-     * Creates new form ChangePasswordControlPanel
-     */
+    
     public ChangePasswordControlPanel() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();

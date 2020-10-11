@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import functions.GetDate;
@@ -27,9 +22,11 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    /**
-     * Creates new form HourHistoricScreen
-     */
+    int x=0;
+    int selects=0;
+    String[] begins = new String [12];
+    String[] ends = new String [12];
+    
     public HourHistoricScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -38,10 +35,6 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
-    int x=0;
-    int selects=0;
-    String[] begins = new String [12];
-    String[] ends = new String [12];
     private void filter(){
         clearShots();
         getBegin();

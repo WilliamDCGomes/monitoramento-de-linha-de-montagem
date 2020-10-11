@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import javax.swing.JOptionPane;
@@ -15,17 +10,16 @@ import java.awt.Toolkit;
 import java.net.URL;
 /**
  *
- * @author Alunos
+ * @author willi
  */
 public class DelayScreen extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     public WorkerScreen workerScreen;
+    public String station;
+    boolean addAuxDelay=false;
     
-    /**
-     * Creates new form DelayScreen
-     */
     public DelayScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -34,8 +28,7 @@ public class DelayScreen extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
-    public String station;
-    boolean addAuxDelay=false;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

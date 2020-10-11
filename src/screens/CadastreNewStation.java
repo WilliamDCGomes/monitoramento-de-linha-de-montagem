@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import commands.Hash;
@@ -25,9 +20,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement pst2 = null;
     ResultSet rs2 = null;
-    /**
-     * Creates new form CadastreNewLine
-     */
+    
     public CadastreNewStation() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();

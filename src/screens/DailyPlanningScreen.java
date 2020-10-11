@@ -1,7 +1,6 @@
 package screens;
 
 import functions.MinuteToHour;
-import functions.CheckInputDailyPlanning;
 import javax.swing.JOptionPane;
 import connectionbd.ConnectionModule;
 import functions.AuxShot;
@@ -33,9 +32,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
     ResultSet rs2 = null;
     boolean error = false;
     boolean hasYesterday = false;
-    /**
-     * Creates new form DailyPlanningScreen
-     */
+   
     public DailyPlanningScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -75,25 +72,15 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
         return null;
     }
-    private void update(int numberShotting, String start, String end, int id){
-        String sql = "update planning set beginning=?,ending=?,shooting=? where id=?";
+    private void delete(){
+        String sql = "delete from planning where dats = ?";
         try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1,start);
-            pst.setString(2,end);
-            pst.setInt(3,numberShotting);
-            pst.setInt(4,id);
-            pst.executeUpdate();
-            manyShotting--;
-            if(manyShotting==0){
-                ExistingPlanning existingPlanning = new ExistingPlanning();
-                JOptionPane.showMessageDialog(null,"PLANEJAMENTO DIÁRIO ATUALIZADO COM SUCESSO");
-                this.dispose();
-                existingPlanning.setVisible(true);
+                pst=connection.prepareStatement(sql);
+                pst.setString(1, getDate.informDate());
+                pst.executeUpdate();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }
     private String hasYesterdayTime(){
         GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
@@ -111,7 +98,6 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         return null;
     }
     private void beforeAdd(){
-        CheckInputDailyPlanning checkInputDailyPlanning = new CheckInputDailyPlanning();
         if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndLastShooting.getText().equals("  :  ")){
             JOptionPane.showMessageDialog(null, "INSIRA AO MENOS UMA RODAGEM!");
         }
@@ -189,12 +175,11 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         }
     }
     private void beforeUpdate(){
-        ArrayList<Integer> list = getIds();
-        CheckInputDailyPlanning checkInputDailyPlanning = new CheckInputDailyPlanning();
         if(inputBeginningFirstShooting.getText().equals("  :  ")||inputEndLastShooting.getText().equals("  :  ")){
             JOptionPane.showMessageDialog(null, "INSIRA AO MENOS UMA RODAGEM!");
         }
         else{
+            delete();
             AuxShot auxShot = new AuxShot();
             HourToMinute hourToMinute = new HourToMinute();
             HourToMinuteFromWhile hourToMinuteComparable = new HourToMinuteFromWhile();
@@ -220,14 +205,12 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 if(hasYesterday==true){
                     hasYesterday=false;
                     end = auxShot.time(hasYesterdayTime(), begin);
-                    update(aux, begin, minuteToHour.getHour(end), list.get(0));
-                    list.remove(0);
+                    add(aux, begin, minuteToHour.getHour(end));
                     aux++;
                     begin = minuteToHour.getHour(end);
                     end = auxShot.time(begin, inputShootingDuration.getText());
                 }
-                update(aux, begin, minuteToHour.getHour(end), list.get(0));
-                list.remove(0);
+                add(aux, begin, minuteToHour.getHour(end));
                 aux++;
                 begin = minuteToHour.getHour(end);
                 end = auxShot.time(begin, inputShootingDuration.getText());
@@ -242,8 +225,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                         begin = minuteToHour.getHour(end);
                         String duration = minuteToHour.getHour(time);
                         end = auxShot.time(minuteToHour.getHour(end), duration);
-                        update(aux, begin, minuteToHour.getHour(end), list.get(0));
-                        list.remove(0);
+                        add(aux, begin, minuteToHour.getHour(end));
                         int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()), timeDifferences);
                         if(lessTime!=0){
                             nextDay(minuteToHour.getHour(lessTime));
@@ -296,7 +278,6 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         }
         else{
-            StartShotting startShotting = new StartShotting();
             if(moreThan24Hour.check(inputBeginningFirstShooting.getText())||moreThan24Hour.check(inputEndLastShooting.getText())||moreThan24Hour.check(inputBeginningLanchTime.getText())||moreThan24Hour.check(inputEndLanchTime.getText())||moreThan24Hour.check(inputShootingDuration.getText())||moreThan24Hour.check(inputStopLine.getText())){
                 JOptionPane.showMessageDialog(null, "ENTRADA DE DADOS INCORRETA!");
             }

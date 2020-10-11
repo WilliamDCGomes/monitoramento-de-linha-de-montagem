@@ -10,15 +10,16 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Alunos
+ * @author willi
  */
 public class ShowDelay extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    /**
-     * Creates new form ShowDelay
-     */
+    int x=0;
+    public int idDelay;
+    TimeDifference timeDifference = new TimeDifference();
+    
     public ShowDelay() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -27,9 +28,6 @@ public class ShowDelay extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
-    int x=0;
-    public int idDelay;
-    TimeDifference timeDifference = new TimeDifference();
     private void getDelay(){
         String sql = "select reasonDelay, shot, dats from delay where id = ?";
         try {
@@ -339,9 +337,9 @@ public class ShowDelay extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(43, 43, 43)
                 .addComponent(txtDelay)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

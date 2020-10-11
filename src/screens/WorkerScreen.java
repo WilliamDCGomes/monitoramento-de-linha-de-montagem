@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import java.awt.Frame;
@@ -33,7 +28,7 @@ import java.util.TimerTask;
 
 /**
  *
- * @author Alunos
+ * @author willi
  */
 public class WorkerScreen extends javax.swing.JFrame {
     Connection connection = null;
@@ -41,17 +36,6 @@ public class WorkerScreen extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement pst2 = null;
     ResultSet rs2 = null;
-    /**
-     * Creates new form WorkerScreen
-     */
-    public WorkerScreen() {
-        initComponents();
-        ConnectionModule connect = new ConnectionModule();
-        connection = connect.getConnectionMySQL();
-        URL adress = getClass().getResource("/images/icon.png");
-        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
-        this.setIconImage(icon);
-    }
     TimeToSet timeToSet = new TimeToSet(this);
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();
@@ -66,6 +50,15 @@ public class WorkerScreen extends javax.swing.JFrame {
     public int x = 0;
     public boolean informMoreShots=false;
     String beginNoMoreShots;
+    
+    public WorkerScreen() {
+        initComponents();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
+        URL adress = getClass().getResource("/images/icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
+    }
     public void setTime(){
         TimeDifference timeDifference = new TimeDifference();
         BarProgress barProgress = new BarProgress(this);

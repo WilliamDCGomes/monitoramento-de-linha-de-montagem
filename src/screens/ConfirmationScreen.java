@@ -9,15 +9,13 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Alunos
+ * @author willi
  */
 public class ConfirmationScreen extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    /**
-     * Creates new form ConfirmationScreen
-     */
+    
     public ConfirmationScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();

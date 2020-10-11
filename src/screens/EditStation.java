@@ -17,9 +17,8 @@ public class EditStation extends javax.swing.JFrame {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    /**
-     * Creates new form EditStation
-     */
+    boolean stationValid = false;
+    
     public EditStation() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -28,7 +27,7 @@ public class EditStation extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
-    boolean stationValid = false;
+    
     private void remove(){
         int confirma = JOptionPane.showConfirmDialog(null, "TEM CERTEZA QUE DESEJA APAGAR ESSA ESTAÇÃO?","ATENÇÃO",JOptionPane.YES_NO_OPTION);
         if(confirma==JOptionPane.YES_OPTION){
