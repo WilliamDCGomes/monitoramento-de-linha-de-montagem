@@ -91,6 +91,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                     if(getShot()!=timeToSet.shotting){
                         groupWorkFinish.clearSelection();
                         groupDelay.clearSelection();
+                        outputShot.setText(Integer.toString(getShot()));
+                        open();
                     }
                 }
             }
@@ -538,21 +540,20 @@ public class WorkerScreen extends javax.swing.JFrame {
             groupWorkFinish.clearSelection();
         }
         else{
-            StartShotting startShotting = new StartShotting();
-            startShotting.startProduction();
             addService();
         }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
+            x++;
+            StartShotting startShotting = new StartShotting();
+            startShotting.startProduction();
             BeginProdution beginProdution = new BeginProdution();
             beginTime = beginProdution.getProduction(getShot());
-            timeToSet.timeSet(getShot());
             setTime();
             open();
             outputShot.setText(Integer.toString(getShot()));
-            x++;
         }
         if(hasProduction()){
             inputWorkFinish.setSelected(true);

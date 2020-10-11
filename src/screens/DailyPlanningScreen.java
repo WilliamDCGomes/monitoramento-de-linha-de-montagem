@@ -495,7 +495,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         getContentPane().add(inputStopLine);
         inputStopLine.setBounds(280, 215, 73, 24);
 
-        setSize(new java.awt.Dimension(522, 330));
+        setSize(new java.awt.Dimension(522, 342));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

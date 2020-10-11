@@ -2,6 +2,7 @@ package screens;
 import commands.Hash;
 import connectionbd.ConnectionModule;
 import functions.InputJustNumbers;
+import functions.UpperLetter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -28,6 +29,7 @@ public class EditStation extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
         inputNumberOfStation.setDocument(new InputJustNumbers());
+        inputLogin.setDocument(new UpperLetter());
     }
     
     private void remove(){

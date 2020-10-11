@@ -2,6 +2,7 @@ package screens;
 
 import commands.Hash;
 import connectionbd.ConnectionModule;
+import functions.UpperLetter;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -28,6 +29,7 @@ public class CadastreNewStation extends javax.swing.JFrame {
         URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
+        inputLogin.setDocument(new UpperLetter());
     }
     int x =0;
     private void add(){

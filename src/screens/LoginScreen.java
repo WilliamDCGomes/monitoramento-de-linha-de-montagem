@@ -193,9 +193,6 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonControlPanelActionPerformed
 
     private void buttonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoginActionPerformed
-        StartShotting startShotting = new StartShotting();
-        startShotting.startProduction();
-        
         if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
             JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
         }
@@ -207,9 +204,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void inputPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputPasswordKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            StartShotting startShotting = new StartShotting();
-            startShotting.startProduction();
-
             if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
             }
@@ -222,9 +216,6 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void buttonLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonLoginKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            StartShotting startShotting = new StartShotting();
-            startShotting.startProduction();
-
             if(inputLogin.getSelectedItem().toString().equals("Selecionar")||inputPassword.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "PREENCHA TODOS OS CAMPOS");
             }
