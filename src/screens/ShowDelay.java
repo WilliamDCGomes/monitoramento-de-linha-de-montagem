@@ -45,7 +45,7 @@ public class ShowDelay extends javax.swing.JFrame {
         }
     }
     private void getPreviusDelay(){
-        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MAX(id) FROM delay WHERE id < ?)";
+        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay, dats FROM delay WHERE id = (SELECT MAX(id) FROM delay WHERE id < ?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1,idDelay);
@@ -58,6 +58,7 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputBeginDelay.setText(rs.getString(5));
                 outputEndDelay.setText(rs.getString(6));
                 outputReasonDelay.setText(rs.getString(7));
+                outputDayOfDelay.setText(rs.getString(8));
                 outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
             }
             else{
@@ -69,7 +70,7 @@ public class ShowDelay extends javax.swing.JFrame {
         }
     }
     private void getNextDelay(){
-        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay FROM delay WHERE id = (SELECT MIN(id) FROM delay WHERE id > ?)";
+        String sql = "SELECT id, localeOfDelay, typeDelay, shot, beginningDelay, endingDelay, reasonDelay, dats FROM delay WHERE id = (SELECT MIN(id) FROM delay WHERE id > ?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1,idDelay);
@@ -82,6 +83,7 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputBeginDelay.setText(rs.getString(5));
                 outputEndDelay.setText(rs.getString(6));
                 outputReasonDelay.setText(rs.getString(7));
+                outputDayOfDelay.setText(rs.getString(8));
                 outputDurationDelay.setText(timeDifference.getDifference(outputBeginDelay.getText(), outputEndDelay.getText()));
             }
             else{
@@ -334,7 +336,7 @@ public class ShowDelay extends javax.swing.JFrame {
                             .addComponent(txtTypeDelay)
                             .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtDelay)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -342,9 +344,9 @@ public class ShowDelay extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(25, 25, 25)
                 .addComponent(txtDelay)
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -26,13 +26,15 @@ public class TimeToSet {
     public void timeSet(int shot){
         shotting = shot;
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 60000;  // intervalo no qual a tarefa será executada.
+        int interval = 5000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 if(workerScreen.informMoreShots==true){
                     workerScreen.outputBarTime.setValue(0);
                     workerScreen.outputTime.setForeground(Color.green);
+                    workerScreen.groupWorkFinish.clearSelection();
+                    workerScreen.groupDelay.clearSelection();
                     workerScreen.outputTime.setText("00:00");
                     timer.cancel();
                 }
