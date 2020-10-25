@@ -169,7 +169,12 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         });
 
         inputDelayReason.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONAR", "M1", "M2", "M3", "M4" }));
+        inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "M1", "M2", "M3", "M4" }));
+        inputDelayReason.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputDelayReasonActionPerformed(evt);
+            }
+        });
         inputDelayReason.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 inputDelayReasonKeyPressed(evt);
@@ -261,7 +266,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void buttonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFilterActionPerformed
-        if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+        if(inputDelayReason.getSelectedItem().equals("TODOS")){
             searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
         }
         else{
@@ -306,7 +311,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
 
     private void inputDelayReasonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputDelayReasonKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+            if(inputDelayReason.getSelectedItem().equals("TODOS")){
                 searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
             }
             else{
@@ -317,7 +322,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
 
     private void buttonFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonFilterKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            if(inputDelayReason.getSelectedItem().equals("SELECIONAR")){
+            if(inputDelayReason.getSelectedItem().equals("TODOS")){
                 searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
             }
             else{
@@ -344,6 +349,15 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             searchDelays(getDate.informDate(), getDate.informDate());
         }
     }//GEN-LAST:event_buttonRefreshKeyPressed
+
+    private void inputDelayReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDelayReasonActionPerformed
+        if(inputDelayReason.getSelectedItem().equals("TODOS")){
+            searchDelays(inputFirstDateFilter.getText(), inputSecondDateFilter.getText());
+        }
+        else{
+            searchDelaysFilter();
+        }
+    }//GEN-LAST:event_inputDelayReasonActionPerformed
 
     /**
      * @param args the command line arguments

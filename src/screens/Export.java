@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -17,13 +20,12 @@ import javax.swing.JOptionPane;
  */
 public class Export extends javax.swing.JFrame {
     int x = 0;
-    
+    public JFileChooser fileChooser = new JFileChooser();
     public Export() {
         initComponents();
         URL adress = getClass().getResource("/images/icon.png");
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
-        fileChooser.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +38,6 @@ public class Export extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         inputDateFilter = new javax.swing.JFormattedTextField();
-        fileChooser = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -66,14 +67,6 @@ public class Export extends javax.swing.JFrame {
         getContentPane().add(inputDateFilter);
         inputDateFilter.setBounds(153, 78, 114, 28);
 
-        fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-        fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Alunos\\Desktop"));
-        fileChooser.setDialogTitle("");
-        fileChooser.setFileFilter(null);
-        fileChooser.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
-        getContentPane().add(fileChooser);
-        fileChooser.setBounds(0, 10, 730, 326);
-
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         jLabel1.setText("INFORME O DIA QUE DESEJA EXPORTAR");
         getContentPane().add(jLabel1);
@@ -91,19 +84,19 @@ public class Export extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(161, 164, 93, 32);
+        jButton1.setBounds(151, 164, 110, 25);
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jRadioButton1.setText("Excel");
         getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(102, 124, 71, 28);
+        jRadioButton1.setBounds(102, 124, 64, 28);
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         jRadioButton2.setText("Bloco de Notas");
         getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(203, 124, 140, 28);
+        jRadioButton2.setBounds(203, 124, 133, 28);
 
         setSize(new java.awt.Dimension(461, 242));
         setLocationRelativeTo(null);
@@ -204,7 +197,6 @@ public class Export extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    public static javax.swing.JFileChooser fileChooser;
     private javax.swing.JFormattedTextField inputDateFilter;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

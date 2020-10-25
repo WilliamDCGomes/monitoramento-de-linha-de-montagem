@@ -9,7 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import screens.Export;
 
 public class ExportDataTXT {
@@ -25,6 +29,17 @@ public class ExportDataTXT {
         connection = connect.getConnectionMySQL();
         date = dateInformed;
         export = exportData;
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ExportDataTXT.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ExportDataTXT.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ExportDataTXT.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(ExportDataTXT.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public void export() throws IOException{
         String userDir = System.getProperty("user.home");

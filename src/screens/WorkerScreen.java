@@ -365,6 +365,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         txtTimeToNextWork.setText("TEMPO RESTANTE ATÉ A RODAGEM");
 
         outputTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        outputTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         outputTime.setText("00:00");
 
         outputBarTime.setBackground(new java.awt.Color(128, 128, 128));
@@ -460,8 +461,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                         .addComponent(outputStation))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtTimeToNextWork)
-                        .addGap(69, 69, 69)
-                        .addComponent(outputTime)))
+                        .addGap(63, 63, 63)
+                        .addComponent(outputTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
