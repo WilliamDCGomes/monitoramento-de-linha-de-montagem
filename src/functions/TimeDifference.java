@@ -3,11 +3,18 @@ public class TimeDifference {
     public String delay;
     public String getDifference(String begin, String end){
         delay="false";
+        System.out.println(begin);
+        System.out.println(end);
         String[] vetB = begin.split(":");
         String[] vetE = end.split(":");
+        System.out.println();
+        System.out.println(vetB);
+        System.out.println(vetE);
         int minutesB = (Integer.parseInt(vetB[0])*60) + Integer.parseInt(vetB[1]);
         int minutesE = (Integer.parseInt(vetE[0])*60) + Integer.parseInt(vetE[1]);
         int dif = minutesE - minutesB;
+        System.out.println();
+        System.out.println(dif);
         int hour = 0;
         if(dif<0){
             dif *= (-1);

@@ -347,7 +347,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSave);
-        buttonSave.setBounds(30, 260, 80, 32);
+        buttonSave.setBounds(30, 260, 80, 25);
 
         buttonCancele.setText("CANCELAR");
         buttonCancele.addActionListener(new java.awt.event.ActionListener() {
@@ -361,7 +361,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonCancele);
-        buttonCancele.setBounds(150, 260, 120, 32);
+        buttonCancele.setBounds(150, 260, 120, 25);
 
         txtBeginning.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtBeginning.setText("INÍCIO");
@@ -378,6 +378,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        inputEndLastShooting.setText("16:00");
         inputEndLastShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputEndLastShooting.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -397,6 +398,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        inputBeginningFirstShooting.setText("08:00");
         inputBeginningFirstShooting.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputBeginningFirstShooting.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -436,6 +438,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        inputShootingDuration.setText("00:50");
         inputShootingDuration.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputShootingDuration.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

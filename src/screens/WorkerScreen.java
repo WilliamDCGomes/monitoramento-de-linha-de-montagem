@@ -3,15 +3,19 @@ package screens;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import connectionbd.ConnectionModule;
+import functions.AuxShot;
 import functions.BarProgress;
+import functions.BeginPresentShot;
 import functions.BeginProdution;
 import functions.GetBeginOfDelay;
 import functions.GetDate;
+import functions.GetDurationShot;
 import functions.GetHour;
 import functions.GetYesterdayDate;
 import functions.HourDefault;
 import functions.HourToMinute;
 import functions.InputDelay;
+import functions.MinuteToHour;
 import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
@@ -69,7 +73,11 @@ public class WorkerScreen extends javax.swing.JFrame {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                String endTime2 = getBeginOfDelay.getBegin(getShot());
+                GetDurationShot getDurationShot = new GetDurationShot();
+                BeginPresentShot beginPresentShot = new BeginPresentShot();
+                AuxShot auxShot = new AuxShot();
+                MinuteToHour minuteToHour = new MinuteToHour();
+                String endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
                 if(informMoreShots==true){
                     outputBarTime.setValue(0);
                     outputTime.setForeground(Color.green);
@@ -78,6 +86,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                     timer.cancel();
                 }
                 else{
+        System.out.println("HEEEERREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                     String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
                     if(timeDifference.delay=="true"){
                         outputTime.setForeground(Color.red);
