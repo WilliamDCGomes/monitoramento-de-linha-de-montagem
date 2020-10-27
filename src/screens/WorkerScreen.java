@@ -86,7 +86,6 @@ public class WorkerScreen extends javax.swing.JFrame {
                     timer.cancel();
                 }
                 else{
-        System.out.println("HEEEERREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                     String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
                     if(timeDifference.delay=="true"){
                         outputTime.setForeground(Color.red);

@@ -81,7 +81,6 @@ public class TimeToSet {
         GetDurationShot getDurationShot = new GetDurationShot();
         MinuteToHour minuteToHour = new MinuteToHour();
         String endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
-        System.out.println("HEEEERREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
         if(timeDifference.delay=="true"){
             workerScreen.outputTime.setForeground(Color.red);
