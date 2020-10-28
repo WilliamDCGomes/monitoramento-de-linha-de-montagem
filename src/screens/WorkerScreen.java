@@ -187,6 +187,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                         getDelay();
                         InputDelay inputDelay = new InputDelay();
                         inputDelay.makeInput(reasonDelay,typeDelay);
+                        insertDelayAux();
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
@@ -217,6 +218,9 @@ public class WorkerScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    private void insertDelayAux(){
+        
     }
     private boolean hasOtherPlanning(){
         GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
