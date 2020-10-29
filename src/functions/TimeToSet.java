@@ -74,14 +74,23 @@ public class TimeToSet {
     }
     private void setTime(){
         TimeDifference timeDifference = new TimeDifference();
-        BeginProdution beginProdution = new BeginProdution();
+        GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
         BarProgress barProgress = new BarProgress(workerScreen);
         BeginPresentShot beginPresentShot = new BeginPresentShot();
         AuxShot auxShot = new AuxShot();
         GetDurationShot getDurationShot = new GetDurationShot();
         MinuteToHour minuteToHour = new MinuteToHour();
-        String endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+        WasDelay wasDelay = new WasDelay();
+        String endTime2 = "";
+        if(wasDelay.check(getShot() - 1)){
+            endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+        }
+        else{
+            ManyTime manyTime = new ManyTime();
+            endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
+        }
         String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
+        JOptionPane.showMessageDialog(null, "SetTime: " + getHour.informHour());
         if(timeDifference.delay=="true"){
             workerScreen.outputTime.setForeground(Color.red);
             workerScreen.outputTime.setText(difference);
@@ -90,7 +99,7 @@ public class TimeToSet {
         else{
             workerScreen.outputTime.setForeground(Color.black);
             workerScreen.outputTime.setText(difference);
-            barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
+            barProgress.setBar(beginPresentShot.getBegin(getShot()), endTime2);
         }
     }
 }

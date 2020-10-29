@@ -70,3 +70,17 @@ create table nextDay(
     duration varchar(8) not null,
     PRIMARY KEY (`id`)
 );
+
+create table insertAuxDelay(
+	`id` int NOT NULL AUTO_INCREMENT,
+	`dats` varchar(10) DEFAULT NULL,
+    `shot` int DEFAULT NULL,
+    PRIMARY KEY (`id`)
+);
+
+create table manyTime(
+	`id` int NOT NULL AUTO_INCREMENT,
+	`dats` varchar(10) DEFAULT NULL,
+    `quantity` int DEFAULT NULL,
+    PRIMARY KEY (`id`)
+);

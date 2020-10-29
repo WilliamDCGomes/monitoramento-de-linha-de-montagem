@@ -15,12 +15,15 @@ import functions.GetYesterdayDate;
 import functions.HourDefault;
 import functions.HourToMinute;
 import functions.InputDelay;
+import functions.InsertManyTime;
+import functions.ManyTime;
 import functions.MinuteToHour;
 import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
 import functions.TimeDifference;
 import functions.TimeToSet;
+import functions.WasDelay;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -40,6 +43,8 @@ public class WorkerScreen extends javax.swing.JFrame {
     ResultSet rs = null;
     PreparedStatement pst2 = null;
     ResultSet rs2 = null;
+    PreparedStatement pst3 = null;
+    ResultSet rs3 = null;
     TimeToSet timeToSet = new TimeToSet(this);
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();
@@ -54,7 +59,8 @@ public class WorkerScreen extends javax.swing.JFrame {
     public int x = 0;
     public boolean informMoreShots=false;
     String beginNoMoreShots;
-    
+    public String beginDelay;
+    public String endWork;
     public WorkerScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -68,6 +74,7 @@ public class WorkerScreen extends javax.swing.JFrame {
         BarProgress barProgress = new BarProgress(this);
         BeginProdution beginProdution = new BeginProdution();
         GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
+        BeginPresentShot beginShot = new BeginPresentShot();
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 30000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
@@ -77,7 +84,15 @@ public class WorkerScreen extends javax.swing.JFrame {
                 BeginPresentShot beginPresentShot = new BeginPresentShot();
                 AuxShot auxShot = new AuxShot();
                 MinuteToHour minuteToHour = new MinuteToHour();
-                String endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+                WasDelay wasDelay = new WasDelay();
+                String endTime2 = "";
+                if(wasDelay.check(getShot() - 1)){
+                    endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+                }
+                else{
+                    ManyTime manyTime = new ManyTime();
+                    endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
+                }
                 if(informMoreShots==true){
                     outputBarTime.setValue(0);
                     outputTime.setForeground(Color.green);
@@ -87,6 +102,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 }
                 else{
                     String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
+                    JOptionPane.showMessageDialog(null, "WorkerScreen: " + getHour.informHour());
                     if(timeDifference.delay=="true"){
                         outputTime.setForeground(Color.red);
                         outputTime.setText(difference);
@@ -95,7 +111,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                     else{
                         outputTime.setForeground(Color.black);
                         outputTime.setText(difference);
-                        barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
+                        barProgress.setBar(beginShot.getBegin(getShot()), endTime2);
                     }
                 }
             }
@@ -177,9 +193,22 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2.executeUpdate();
             JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
             if(informMoreShots==false){
+                BeginPresentShot beginPresentShot = new BeginPresentShot();
+                AuxShot auxShot = new AuxShot();
                 GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-                String beginDelay = getBeginOfDelay.getBegin(getShot());
-                String endWork = getHour.informHour();
+                GetDurationShot getDurationShot = new GetDurationShot();
+                MinuteToHour minuteToHour = new MinuteToHour();
+                WasDelay wasDelay = new WasDelay();
+                String endTime2 = "";
+                if(wasDelay.check(getShot() - 1)){
+                    endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+                }
+                else{
+                    ManyTime manyTime = new ManyTime();
+                    endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
+                }
+                beginDelay = endTime2;
+                endWork = getHour.informHour();
                 if(inputDelay.isSelected()){
                     TimeDifference timeDifference = new TimeDifference();
                     HourToMinute hourToMinute = new HourToMinute();
@@ -188,8 +217,34 @@ public class WorkerScreen extends javax.swing.JFrame {
                         InputDelay inputDelay = new InputDelay();
                         inputDelay.makeInput(reasonDelay,typeDelay);
                         insertDelayAux();
+                        if(stationWorking.hasStation()==false){
+                            ManyTime manyTime = new ManyTime();
+                            if(manyTime.check()>0){
+                                InsertManyTime insertManyTime = new InsertManyTime();
+                                insertManyTime.update(0);
+                            }
+                        }
                     }
                     else{
+                        if(stationWorking.hasStation()==false){
+                            TimeDifference times = new TimeDifference();
+                            times.delay="true";
+                            if(!(hourToMinute.getMinute(times.getDifference(beginDelay, endWork), times)<0)){
+                                InsertManyTime insertManyTime = new InsertManyTime();
+                                ManyTime manyTime = new ManyTime();
+                                int timeThatHas = hourToMinute.getMinute(outputTime.getText(), times);
+                                int time = manyTime.check();
+                                if(timeDifference.delay.equals("true")){
+                                    timeThatHas *= -1;
+                                }
+                                if(time==0){
+                                    insertManyTime.add(timeThatHas);
+                                }
+                                else{
+                                    insertManyTime.update(timeThatHas + time);
+                                }
+                            }
+                        }
                         JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
                         groupDelay.clearSelection();
                     }
@@ -220,7 +275,15 @@ public class WorkerScreen extends javax.swing.JFrame {
         }
     }
     private void insertDelayAux(){
-        
+        String sql = "insert into insertAuxDelay(dats,shot) values(?,?)";
+        try {
+            pst3 = connection.prepareStatement(sql);
+            pst3.setString(1,getDate.informDate());
+            pst3.setInt(2,getShot());
+            pst3.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     private boolean hasOtherPlanning(){
         GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
@@ -544,9 +607,21 @@ public class WorkerScreen extends javax.swing.JFrame {
         if(informMoreShots==false){
             TimeDifference timeDifference = new TimeDifference();
             GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-            String endTime2 = getBeginOfDelay.getBegin(getShot());
+            String endTime2 = "";
+            BeginPresentShot beginPresentShot = new BeginPresentShot();
+            AuxShot auxShot = new AuxShot();
+            GetDurationShot getDurationShot = new GetDurationShot();
+            MinuteToHour minuteToHour = new MinuteToHour();
+            WasDelay wasDelay = new WasDelay();
+            if(wasDelay.check(getShot() - 1)){
+                endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+            }
+            else{
+                ManyTime manyTime = new ManyTime();
+                endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
+            }
             timeDifference.getDifference(getHour.informHour(), endTime2);
-            if(timeDifference.delay=="true"&&inputDelay.isSelected()==false&&informMoreShots==false){
+            if(timeDifference.delay.equals("true")&&inputDelay.isSelected()==false&&informMoreShots==false){
                 JOptionPane.showMessageDialog(null, "ADICIONE O MOTIVO DO ATRASO ANTES DE SALVAR!");
                 groupWorkFinish.clearSelection();
             }
@@ -635,7 +710,19 @@ public class WorkerScreen extends javax.swing.JFrame {
             BarProgress barProgress = new BarProgress(this);
             BeginProdution beginProdution = new BeginProdution();
             GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
-            String endTime2 = getBeginOfDelay.getBegin(getShot());
+            String endTime2 = "";
+            BeginPresentShot beginPresentShot = new BeginPresentShot();
+            AuxShot auxShot = new AuxShot();
+            GetDurationShot getDurationShot = new GetDurationShot();
+            MinuteToHour minuteToHour = new MinuteToHour();
+            WasDelay wasDelay = new WasDelay();
+            if(wasDelay.check(getShot() - 1)){
+                endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
+            }
+            else{
+                ManyTime manyTime = new ManyTime();
+                endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
+            }
             if(informMoreShots==true){
                 outputBarTime.setValue(0);
                 outputTime.setForeground(Color.green);
@@ -651,7 +738,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                 else{
                     outputTime.setForeground(Color.black);
                     outputTime.setText(difference);
-                    barProgress.setBar(beginProdution.getProduction(getShot()), endTime2);
+                    barProgress.setBar(beginPresentShot.getBegin(getShot()), endTime2);
                 }
             }
         }
