@@ -102,7 +102,6 @@ public class WorkerScreen extends javax.swing.JFrame {
                 }
                 else{
                     String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
-                    JOptionPane.showMessageDialog(null, "WorkerScreen: " + getHour.informHour());
                     if(timeDifference.delay=="true"){
                         outputTime.setForeground(Color.red);
                         outputTime.setText(difference);
@@ -212,7 +211,11 @@ public class WorkerScreen extends javax.swing.JFrame {
                 if(inputDelay.isSelected()){
                     TimeDifference timeDifference = new TimeDifference();
                     HourToMinute hourToMinute = new HourToMinute();
-                    if(hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork), timeDifference)<0){
+                    int minuteComparable = hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork));
+                    if(timeDifference.delay.equals("false")){
+                        minuteComparable *= -1;
+                    }
+                    if(minuteComparable<0){
                         getDelay();
                         InputDelay inputDelay = new InputDelay();
                         inputDelay.makeInput(reasonDelay,typeDelay);
@@ -228,11 +231,10 @@ public class WorkerScreen extends javax.swing.JFrame {
                     else{
                         if(stationWorking.hasStation()==false){
                             TimeDifference times = new TimeDifference();
-                            times.delay="true";
-                            if(!(hourToMinute.getMinute(times.getDifference(beginDelay, endWork), times)<0)){
+                            if(!(hourToMinute.getMinute(times.getDifference(beginDelay, endWork))<0)){
                                 InsertManyTime insertManyTime = new InsertManyTime();
                                 ManyTime manyTime = new ManyTime();
-                                int timeThatHas = hourToMinute.getMinute(outputTime.getText(), times);
+                                int timeThatHas = hourToMinute.getMinute(outputTime.getText());
                                 int time = manyTime.check();
                                 if(timeDifference.delay.equals("true")){
                                     timeThatHas *= -1;

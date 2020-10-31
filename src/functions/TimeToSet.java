@@ -90,7 +90,6 @@ public class TimeToSet {
             endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
         }
         String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
-        JOptionPane.showMessageDialog(null, "SetTime: " + getHour.informHour());
         if(timeDifference.delay=="true"){
             workerScreen.outputTime.setForeground(Color.red);
             workerScreen.outputTime.setText(difference);

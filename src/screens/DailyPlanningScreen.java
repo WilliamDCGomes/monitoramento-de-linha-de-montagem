@@ -122,17 +122,17 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 end = auxShot.time(begin, inputShootingDuration.getText());
             }
             end = saveEnd;
+            System.out.println(error);
             if(error==false){
                 ExistingPlanning existingPlanning = new ExistingPlanning();
-                TimeDifference timeDifferences = new TimeDifference();
-                if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()), timeDifferences)>0){
-                    int time = hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputStopLine.getText()), timeDifferences);
+                if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()))>0){
+                    int time = hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputStopLine.getText()));
                     if(timeDifference.delay.equals("false")){
                         begin = minuteToHour.getHour(end);
                         String duration = minuteToHour.getHour(time);
                         end = auxShot.time(minuteToHour.getHour(end), duration);
                         add(aux, begin, minuteToHour.getHour(end));
-                        int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()), timeDifferences);
+                        int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()));
                         if(lessTime!=0){
                             nextDay(minuteToHour.getHour(lessTime));
                         }
@@ -202,15 +202,14 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             end = saveEnd;
             if(error==false){
                 ExistingPlanning existingPlanning = new ExistingPlanning();
-                TimeDifference timeDifferences = new TimeDifference();
-                if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()), timeDifferences)>0){
-                    int time = hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputStopLine.getText()), timeDifferences);
+                if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()))>0){
+                    int time = hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputStopLine.getText()));
                     if(timeDifference.delay.equals("false")){
                         begin = minuteToHour.getHour(end);
                         String duration = minuteToHour.getHour(time);
                         end = auxShot.time(minuteToHour.getHour(end), duration);
                         add(aux, begin, minuteToHour.getHour(end));
-                        int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()), timeDifferences);
+                        int lessTime = hourToMinute.getMinute(timeDifference.getDifference(timeDifference.getDifference(begin, minuteToHour.getHour(end)), inputShootingDuration.getText()));
                         if(lessTime!=0){
                             nextDay(minuteToHour.getHour(lessTime));
                         }
