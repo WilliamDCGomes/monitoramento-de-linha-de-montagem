@@ -22,8 +22,10 @@ public class StartShotting {
     }
     public void startProduction(){
         String begin = null;
+        String end = null;
+        String[]beginDefault;
         if(hasAProgramming(getDate.informDate())){
-            String sql = "select beginning from planning where dats = ? and shooting=? order by id asc limit 1";
+            String sql = "select beginning, ending from planning where dats = ? and shooting=? order by id asc limit 1";
             try {
                 pst=connection.prepareStatement(sql);
                 pst.setString(1, getDate.informDate());
@@ -31,6 +33,7 @@ public class StartShotting {
                 rs= pst.executeQuery();
                 if(rs.next()){
                     begin = rs.getString(1);
+                    end = rs.getString(2);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -38,7 +41,7 @@ public class StartShotting {
             insertShot(begin, 1);
         }
         else if(hasAProgramming(getYesterdayDate.informDate())){
-            String sql = "select beginning from planning where dats = ? and shooting=? order by id asc limit 1";
+            String sql = "select beginning, ending from planning where dats = ? and shooting=? order by id asc limit 1";
             try {
                 pst=connection.prepareStatement(sql);
                 pst.setString(1, getYesterdayDate.informDate());
@@ -46,6 +49,7 @@ public class StartShotting {
                 rs= pst.executeQuery();
                 if(rs.next()){
                     begin = rs.getString(1);
+                    end = rs.getString(2);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
@@ -53,8 +57,17 @@ public class StartShotting {
             insertShot(begin, 1);
         }
         else{
-            String[]beginDefault = hourDefault.getHour(1).split("/");
+            beginDefault = hourDefault.getHour(1).split("/");
             insertShot(beginDefault[0], 1);
+            begin = beginDefault[0];
+            end = beginDefault[1];
+        }
+        ManyTime manyTime = new ManyTime();
+        if(manyTime.check()==-1){
+            InsertManyTime insertManyTime = new InsertManyTime();
+            TimeDifference timedifference = new TimeDifference();
+            HourToMinute hourToMinute = new HourToMinute();
+            insertManyTime.add(hourToMinute.getMinute(timedifference.getDifference(begin, end)));
         }
     }
     private void insertShot(String begin, int shot){

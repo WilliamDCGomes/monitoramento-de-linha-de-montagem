@@ -74,23 +74,15 @@ public class TimeToSet {
     }
     private void setTime(){
         TimeDifference timeDifference = new TimeDifference();
-        GetBeginOfDelay getBeginOfDelay = new GetBeginOfDelay();
         BarProgress barProgress = new BarProgress(workerScreen);
         BeginPresentShot beginPresentShot = new BeginPresentShot();
         AuxShot auxShot = new AuxShot();
-        GetDurationShot getDurationShot = new GetDurationShot();
         MinuteToHour minuteToHour = new MinuteToHour();
-        WasDelay wasDelay = new WasDelay();
         String endTime2 = "";
-        if(wasDelay.check(getShot() - 1)){
-            endTime2 = minuteToHour.getHour(auxShot.time(beginPresentShot.getBegin(getShot()), getDurationShot.getDurationShot(getShot())));
-        }
-        else{
-            ManyTime manyTime = new ManyTime();
-            endTime2 = minuteToHour.getHour(auxShot.time(getBeginOfDelay.getBegin(getShot()), minuteToHour.getHour(manyTime.check())));
-        }
+        ManyTime manyTime = new ManyTime();
+        endTime2 = minuteToHour.getHour(auxShot.time( beginPresentShot.getBegin(getShot()), minuteToHour.getHour(manyTime.check()) ));
         String difference = timeDifference.getDifference(getHour.informHour(), endTime2);
-        if(timeDifference.delay=="true"){
+        if(timeDifference.delay.equals("true")){
             workerScreen.outputTime.setForeground(Color.red);
             workerScreen.outputTime.setText(difference);
             workerScreen.outputBarTime.setValue(100);

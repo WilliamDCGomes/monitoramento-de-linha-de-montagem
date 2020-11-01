@@ -12,12 +12,12 @@ public class InsertManyTime {
         connection = connect.getConnectionMySQL();
     }
     public void add(int quantity){
-        String sql ="insert into manyTime (dats, quantity) values (?,?)";
+        String sql ="insert into manyTime(dats, quantity) values(?,?)";
         try {
             pst=connection.prepareStatement(sql);
             pst.setString(1, getDate.informDate());
             pst.setInt(2, quantity);
-            pst.executeQuery();
+            pst.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
