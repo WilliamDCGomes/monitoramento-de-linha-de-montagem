@@ -122,7 +122,6 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
                 end = auxShot.time(begin, inputShootingDuration.getText());
             }
             end = saveEnd;
-            System.out.println(error);
             if(error==false){
                 ExistingPlanning existingPlanning = new ExistingPlanning();
                 if(hourToMinute.getMinute(timeDifference.getDifference(minuteToHour.getHour(end), inputEndLastShooting.getText()))>0){

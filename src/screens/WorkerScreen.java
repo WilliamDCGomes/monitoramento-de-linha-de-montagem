@@ -201,10 +201,13 @@ public class WorkerScreen extends javax.swing.JFrame {
                     inputDelay.makeInput(reasonDelay,typeDelay);
                     insertDelayAux();
                     if(stationWorking.hasStation()==false){
-                        if(manyTime.check()>=0){
-                            InsertManyTime insertManyTime = new InsertManyTime();
-                            GetTimeOfShot getTimeOfShot = new GetTimeOfShot();
+                        InsertManyTime insertManyTime = new InsertManyTime();
+                        GetTimeOfShot getTimeOfShot = new GetTimeOfShot();
+                        if(hourToMinute.getMinute(outputTime.getText()) >= manyTime.check()){
                             insertManyTime.update(getTimeOfShot.getTime(getShot() + 1));
+                        }
+                        else{
+                            insertManyTime.update(getTimeOfShot.getTime(getShot() + 1) + manyTime.check() - hourToMinute.getMinute(outputTime.getText()));
                         }
                     }
                 }
@@ -214,12 +217,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                         if(!(hourToMinute.getMinute(times.getDifference(beginDelay, endWork))<0)){
                             InsertManyTime insertManyTime = new InsertManyTime();
                             int timeThatHas = hourToMinute.getMinute(outputTime.getText());
-                            int time = manyTime.check();
-                            if(timeDifference.delay.equals("true")){
-                                timeThatHas *= -1;
-                            }
                             GetTimeOfShot getTimeOfShot = new GetTimeOfShot();
-                            insertManyTime.update(timeThatHas + time + getTimeOfShot.getTime(getShot() + 1));
+                            insertManyTime.update(timeThatHas + getTimeOfShot.getTime(getShot() + 1));
                         }
                     }
                     if(inputDelay.isSelected()){
