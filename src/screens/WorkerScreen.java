@@ -203,12 +203,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                     if(stationWorking.hasStation()==false){
                         InsertManyTime insertManyTime = new InsertManyTime();
                         GetTimeOfShot getTimeOfShot = new GetTimeOfShot();
-                        if(hourToMinute.getMinute(outputTime.getText()) >= manyTime.check()){
-                            insertManyTime.update(getTimeOfShot.getTime(getShot() + 1));
-                        }
-                        else{
-                            insertManyTime.update(getTimeOfShot.getTime(getShot() + 1) + manyTime.check() - hourToMinute.getMinute(outputTime.getText()));
-                        }
+                        insertManyTime.update(getTimeOfShot.getTime(getShot() + 1));
                     }
                 }
                 else{
@@ -611,6 +606,10 @@ public class WorkerScreen extends javax.swing.JFrame {
             BeginProdution beginProdution = new BeginProdution();
             beginTime = beginProdution.getProduction(getShot());
             outputShot.setText(Integer.toString(getShot()));
+            if(aux==false){
+                setTime();
+                open();
+            }
             if(!hasOtherPlanning()){
                 aux = true;
                 beginNoMoreShots = getHour.informHour();
@@ -630,10 +629,6 @@ public class WorkerScreen extends javax.swing.JFrame {
                     inputDelay.setSelected(true);
                 }
                 finish();
-            }
-            if(aux==false){
-                setTime();
-                open();
             }
         }
     }//GEN-LAST:event_formWindowActivated
