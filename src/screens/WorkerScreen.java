@@ -20,6 +20,7 @@ import functions.MinuteToHour;
 import functions.RemoveDelay;
 import functions.StartShotting;
 import functions.StationWorking;
+import functions.ThisStationIsWorking;
 import functions.TimeDifference;
 import functions.TimeToSet;
 import java.awt.Color;
@@ -36,6 +37,7 @@ import java.util.TimerTask;
  * @author willi
  */
 public class WorkerScreen extends javax.swing.JFrame {
+    public String login = "";
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -180,7 +182,11 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2.executeUpdate();
             JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
             finish();
-            if(informMoreShots==false){
+            if(inputDelay.isSelected()){
+                JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
+                groupDelay.clearSelection();
+            }
+            if(informMoreShots==false && hasOtherPlanning()){
                 BeginPresentShot beginPresentShot = new BeginPresentShot();
                 AuxShot auxShot = new AuxShot();
                 MinuteToHour minuteToHour = new MinuteToHour();
@@ -189,10 +195,10 @@ public class WorkerScreen extends javax.swing.JFrame {
                 endTime2 = minuteToHour.getHour(auxShot.time( beginPresentShot.getBegin(getShot()), minuteToHour.getHour(manyTime.check()) ));
                 beginDelay = endTime2;
                 endWork = getHour.informHour();
-                TimeDifference timeDifference = new TimeDifference();
+                TimeDifference timeDifferences = new TimeDifference();
                 HourToMinute hourToMinute = new HourToMinute();
-                int minuteComparable = hourToMinute.getMinute(timeDifference.getDifference(beginDelay, endWork));
-                if(timeDifference.delay.equals("false")){
+                int minuteComparable = hourToMinute.getMinute(timeDifferences.getDifference(beginDelay, endWork));
+                if(timeDifferences.delay.equals("false")){
                     minuteComparable *= -1;
                 }
                 if(minuteComparable<0){
@@ -216,13 +222,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                             insertManyTime.update(timeThatHas + getTimeOfShot.getTime(getShot() + 1));
                         }
                     }
-                    if(inputDelay.isSelected()){
-                        JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
-                        groupDelay.clearSelection();
-                    }
                 }
-            }
-            if(hasOtherPlanning()){
                 timeToSet.timeSet(getShot());
             }
             else{
@@ -548,9 +548,16 @@ public class WorkerScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inputDelayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDelayActionPerformed
-        DelayScreen delayScreen = new DelayScreen();
-        delayScreen.workerScreen = this;
-        delayScreen.setVisible(true);
+        ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
+        if(thisStationIsWorking.isWorking(login)){
+            DelayScreen delayScreen = new DelayScreen();
+            delayScreen.workerScreen = this;
+            delayScreen.setVisible(true);
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
+        }
     }//GEN-LAST:event_inputDelayActionPerformed
 
     private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
@@ -575,25 +582,31 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLogoutActionPerformed
 
     private void inputWorkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWorkFinishActionPerformed
-        if(informMoreShots==false){
-            TimeDifference timeDifference = new TimeDifference();
-            String endTime2 = "";
-            BeginPresentShot beginPresentShot = new BeginPresentShot();
-            AuxShot auxShot = new AuxShot();
-            MinuteToHour minuteToHour = new MinuteToHour();
-            ManyTime manyTime = new ManyTime();
-            endTime2 = minuteToHour.getHour(auxShot.time( beginPresentShot.getBegin(getShot()), minuteToHour.getHour(manyTime.check()) ));
-            timeDifference.getDifference(getHour.informHour(), endTime2);
-            if(timeDifference.delay.equals("true")&&inputDelay.isSelected()==false&&informMoreShots==false){
-                JOptionPane.showMessageDialog(null, "ADICIONE O MOTIVO DO ATRASO ANTES DE SALVAR!");
-                groupWorkFinish.clearSelection();
+        ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
+        if(thisStationIsWorking.isWorking(login)){
+            if(informMoreShots==false){
+                TimeDifference timeDifference = new TimeDifference();
+                String endTime2 = "";
+                BeginPresentShot beginPresentShot = new BeginPresentShot();
+                AuxShot auxShot = new AuxShot();
+                MinuteToHour minuteToHour = new MinuteToHour();
+                ManyTime manyTime = new ManyTime();
+                endTime2 = minuteToHour.getHour(auxShot.time( beginPresentShot.getBegin(getShot()), minuteToHour.getHour(manyTime.check()) ));
+                timeDifference.getDifference(getHour.informHour(), endTime2);
+                if(timeDifference.delay.equals("true")&&inputDelay.isSelected()==false&&informMoreShots==false){
+                    JOptionPane.showMessageDialog(null, "ADICIONE O MOTIVO DO ATRASO ANTES DE SALVAR!");
+                    groupWorkFinish.clearSelection();
+                }
+                else{
+                    addService();
+                }
             }
             else{
                 addService();
             }
         }
         else{
-            addService();
+            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
         }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 

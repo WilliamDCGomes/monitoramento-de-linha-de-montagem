@@ -48,10 +48,11 @@ public class CadastreNewStation extends javax.swing.JFrame {
         }
     }
     private boolean hasStation(){
-        String sqlnome = "select * from stations where id = ?";
+        String sqlnome = "select * from stations where id = ? or login = ?";
         try {
             pst2 = connection.prepareStatement(sqlnome);
             pst2.setString(1,outputNumberOfStation.getText());
+            pst2.setString(2,inputLogin.getText());
             rs2 = pst2.executeQuery();
             if (rs2.next()) {
                 return true;

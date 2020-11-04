@@ -39,6 +39,7 @@ public class LoginScreen extends javax.swing.JFrame {
             if(rs.next()){
                 int id = rs.getInt(1);
                 WorkerScreen workerScreen = new WorkerScreen();
+                workerScreen.login = inputLogin.getSelectedItem().toString();
                 this.dispose();
                 connection.close();
                 workerScreen.setVisible(true);

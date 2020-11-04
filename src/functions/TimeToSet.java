@@ -39,19 +39,19 @@ public class TimeToSet {
                     timer.cancel();
                 }
                 if(getShot()!=shot){
-                    setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
+                    setTime();
                     workerScreen.open();
                     timer.cancel();
                 }
                 else if(stationWorking.hasStation()==false){
-                    startShotting.keepProduction(getShot()+1, getHour.informHour());
-                    setTime();
                     workerScreen.groupWorkFinish.clearSelection();
                     workerScreen.groupDelay.clearSelection();
+                    startShotting.keepProduction(getShot()+1, getHour.informHour());
                     workerScreen.outputShot.setText(Integer.toString(getShot()));
+                    setTime();
                     workerScreen.open();
                     timer.cancel();
                 }
