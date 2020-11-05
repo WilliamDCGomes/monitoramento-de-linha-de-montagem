@@ -69,6 +69,15 @@ public class WorkerScreen extends javax.swing.JFrame {
         Image icon = Toolkit.getDefaultToolkit().getImage(adress);
         this.setIconImage(icon);
     }
+    private void increaseConnections(){
+        String sql = "set global max_connections = 100000;";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     public void setTime(){
         TimeDifference timeDifference = new TimeDifference();
         BarProgress barProgress = new BarProgress(this);
@@ -182,10 +191,6 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2.executeUpdate();
             JOptionPane.showMessageDialog(null,"SERVIÇO ADICIONADO COM SUCESSO");
             finish();
-            if(inputDelay.isSelected()){
-                JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
-                groupDelay.clearSelection();
-            }
             if(informMoreShots==false && hasOtherPlanning()){
                 BeginPresentShot beginPresentShot = new BeginPresentShot();
                 AuxShot auxShot = new AuxShot();
@@ -197,8 +202,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 endWork = getHour.informHour();
                 TimeDifference timeDifferences = new TimeDifference();
                 HourToMinute hourToMinute = new HourToMinute();
-                int minuteComparable = hourToMinute.getMinute(timeDifferences.getDifference(beginDelay, endWork));
-                if(timeDifferences.delay.equals("false")){
+                int minuteComparable = hourToMinute.getMinute(timeDifferences.getDifference(endWork, beginDelay));
+                if(timeDifferences.delay.equals("true")){
                     minuteComparable *= -1;
                 }
                 if(minuteComparable<0){
@@ -213,6 +218,10 @@ public class WorkerScreen extends javax.swing.JFrame {
                     }
                 }
                 else{
+                    if(inputDelay.isSelected()){
+                        JOptionPane.showMessageDialog(null, "O ATRASO NÃO FOI ADICIONADO PELO FATO QUE TER FINALIZADO O SERVIÇO DENTRO DO HORÁRIO");
+                        groupDelay.clearSelection();
+                    }
                     if(stationWorking.hasStation()==false){
                         TimeDifference times = new TimeDifference();
                         if(!(hourToMinute.getMinute(times.getDifference(beginDelay, endWork))<0)){
@@ -232,14 +241,12 @@ public class WorkerScreen extends javax.swing.JFrame {
                 if(informMoreShots==false){
                     informMoreShots=true;
                     JOptionPane.showMessageDialog(null, "NÃO HÁ MAIS PLANEJAMENTO PARA SER SEGUIDO!");
-                    groupWorkFinish.clearSelection();
-                    groupDelay.clearSelection();
                     outputBarTime.setValue(0);
                     outputTime.setForeground(Color.green);
                     outputTime.setText("00:00");
                 }
                 outputShot.setText(Integer.toString(Integer.parseInt(outputShot.getText())+1));
-                startShotting.keepProduction(Integer.parseInt(outputShot.getText()), getHour.informHour());
+                //startShotting.keepProduction(Integer.parseInt(outputShot.getText()), getHour.informHour());
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -549,14 +556,13 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void inputDelayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDelayActionPerformed
         ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
-        if(thisStationIsWorking.isWorking(login)){
+        if(informMoreShots==false&&thisStationIsWorking.isWorking(login)==false){
+            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
+        }
+        else{
             DelayScreen delayScreen = new DelayScreen();
             delayScreen.workerScreen = this;
             delayScreen.setVisible(true);
-        }
-        
-        else{
-            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
         }
     }//GEN-LAST:event_inputDelayActionPerformed
 
@@ -583,7 +589,10 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void inputWorkFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputWorkFinishActionPerformed
         ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
-        if(thisStationIsWorking.isWorking(login)){
+        if(informMoreShots==false&&thisStationIsWorking.isWorking(login)==false){
+            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
+        }
+        else{
             if(informMoreShots==false){
                 TimeDifference timeDifference = new TimeDifference();
                 String endTime2 = "";
@@ -605,13 +614,11 @@ public class WorkerScreen extends javax.swing.JFrame {
                 addService();
             }
         }
-        else{
-            JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
-        }
     }//GEN-LAST:event_inputWorkFinishActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
+            increaseConnections();
             boolean aux = false;
             x++;
             StartShotting startShotting = new StartShotting();
