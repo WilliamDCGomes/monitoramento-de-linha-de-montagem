@@ -63,6 +63,7 @@ public class ExportDataCSV {
         try{
             file.createNewFile();
             getPlannning();
+            int isEmpty = 0;
             getProduction();
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter write = new BufferedWriter(fileWriter);
@@ -73,6 +74,9 @@ public class ExportDataCSV {
                 if(planning.isEmpty()==false){
                     write.write(planning.get(aux));
                     planning.remove(aux);
+                    if(planning.isEmpty()&&isEmpty==0){
+                        isEmpty++;
+                    }
                     if(production.isEmpty()){
                         write.write("\n");
                     }
@@ -85,10 +89,14 @@ public class ExportDataCSV {
                         write.write(production.get(aux));
                         aux2=true;
                     }
-                    if(planning.isEmpty()){
-                        write.write(";;;;;;;;");
+                    if(planning.isEmpty()&&isEmpty==1){
+                        isEmpty++;
+                        write.write(production.get(aux));
                     }
-                    if(aux2==false){
+                    else if(planning.isEmpty()&&isEmpty==2){
+                        write.write(";;;;;;;" + production.get(aux));
+                    }
+                    else if(aux2==false){
                         write.write(production.get(aux));
                     }
                     production.remove(aux);

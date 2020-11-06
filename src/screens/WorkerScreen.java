@@ -18,6 +18,7 @@ import functions.InsertManyTime;
 import functions.ManyTime;
 import functions.MinuteToHour;
 import functions.RemoveDelay;
+import functions.ShotAfterPlanning;
 import functions.StartShotting;
 import functions.StationWorking;
 import functions.ThisStationIsWorking;
@@ -45,6 +46,8 @@ public class WorkerScreen extends javax.swing.JFrame {
     ResultSet rs2 = null;
     PreparedStatement pst3 = null;
     ResultSet rs3 = null;
+    PreparedStatement pst4 = null;
+    ResultSet rs4 = null;
     TimeToSet timeToSet = new TimeToSet(this);
     StationWorking stationWorking = new StationWorking();
     StartShotting startShotting = new StartShotting();
@@ -61,6 +64,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     String beginNoMoreShots;
     public String beginDelay;
     public String endWork;
+    ShotAfterPlanning shotAfterPlanning = new ShotAfterPlanning();
     public WorkerScreen() {
         initComponents();
         ConnectionModule connect = new ConnectionModule();
@@ -86,6 +90,11 @@ public class WorkerScreen extends javax.swing.JFrame {
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
+                if(thisStationIsWorking.isWorking(login)&&(inputWorkFinish.isSelected()||inputDelay.isSelected())){
+                    groupWorkFinish.clearSelection();
+                    groupDelay.clearSelection();
+                }
                 BeginPresentShot beginPresentShot = new BeginPresentShot();
                 AuxShot auxShot = new AuxShot();
                 MinuteToHour minuteToHour = new MinuteToHour();
@@ -246,7 +255,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                     outputTime.setText("00:00");
                 }
                 outputShot.setText(Integer.toString(Integer.parseInt(outputShot.getText())+1));
-                //startShotting.keepProduction(Integer.parseInt(outputShot.getText()), getHour.informHour());
+                shotAfterPlanning.insertShotAfterPlanning(Integer.parseInt(outputShot.getText()), login, beginNoMoreShots);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -556,8 +565,23 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void inputDelayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputDelayActionPerformed
         ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
-        if(informMoreShots==false&&thisStationIsWorking.isWorking(login)==false){
+        if(informMoreShots==true){
+            groupDelay.clearSelection();
+            JOptionPane.showMessageDialog(null, "NÃO É NECESSÁRIO ADICIONAR UM ATRASO POIS VOCÊ NÃO ESTÁ MAIS SEGUINDO UM PLANEJAMENTO");
+        }
+        else if(informMoreShots==false&&thisStationIsWorking.isWorking(login)==false){
             JOptionPane.showMessageDialog(null, "O SERVIÇO JÁ FOI FINALIZADO, CASO NECESSÁRIO CLIQUE NO BOTÃO RESET PARA FINALIIZAR O SERVIÇO NOVAMENTE");
+            TimeDifference timeDifference = new TimeDifference();
+            BeginPresentShot beginPresentShot = new BeginPresentShot();
+            AuxShot auxShot = new AuxShot();
+            MinuteToHour minuteToHour = new MinuteToHour();
+            String endTime2 = "";
+            ManyTime manyTime = new ManyTime();
+            endTime2 = minuteToHour.getHour(auxShot.time( beginPresentShot.getBegin(getShot()), minuteToHour.getHour(manyTime.check()) ));
+            timeDifference.getDifference(getHour.informHour(), endTime2);
+            if(timeDifference.delay.equals("false")){
+                groupDelay.clearSelection();
+            }
         }
         else{
             DelayScreen delayScreen = new DelayScreen();
@@ -641,6 +665,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                     outputBarTime.setValue(0);
                     outputTime.setForeground(Color.green);
                     outputTime.setText("00:00");
+                    outputShot.setText(Integer.toString(shotAfterPlanning.getShotAfterPlanning(login)));
+                    beginNoMoreShots = shotAfterPlanning.beginNoMoreshots;
                 }
             }
             else if(hasProduction()){

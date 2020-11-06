@@ -84,9 +84,6 @@ public class ExportDataTXT {
                         write.write(production.get(aux));
                         aux2=true;
                     }
-                    if(planning.isEmpty()){
-                        write.write("        ");
-                    }
                     if(aux2==false){
                         write.write(production.get(aux));
                     }
@@ -137,7 +134,7 @@ public class ExportDataTXT {
                     production.add("         " + rs.getString(1) + "   " + rs.getString(2) + "         " + rs.getString(3) + "    " + rs.getString(4)+"\n");
                 }
                 else{
-                    production.add("         " + rs.getString(1) + "   " + rs.getString(2) + "        " + rs.getString(3) + "    " + rs.getString(4)+"\n");
+                    production.add("                                                  " + rs.getString(1) + "   " + rs.getString(2) + "        " + rs.getString(3) + "    " + rs.getString(4)+"\n");
                 }
             }
         } catch (Exception e) {
