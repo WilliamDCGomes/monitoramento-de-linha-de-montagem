@@ -3,6 +3,7 @@ package screens;
 import commands.Hash;
 import connectionbd.ConnectionModule;
 import functions.StartShotting;
+import functions.ThisStationIsWorking;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -37,13 +38,19 @@ public class LoginScreen extends javax.swing.JFrame {
             pst.setString(2, password);
             rs= pst.executeQuery();
             if(rs.next()){
-                int id = rs.getInt(1);
-                WorkerScreen workerScreen = new WorkerScreen();
-                workerScreen.login = inputLogin.getSelectedItem().toString();
-                this.dispose();
-                connection.close();
-                workerScreen.setVisible(true);
-                workerScreen.outputStation.setText(Integer.toString(id));
+                ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
+                if(thisStationIsWorking.isWorking(login)){
+                    JOptionPane.showMessageDialog(null, "ESSE LOGIN JÁ ESTÁ ABERTO EM ALGUMA OUTRA MÁQUINA, POR FAVOR FAÇO O LOGOUT ANTES DE ABRIR NOVAMENTE");
+                }
+                else{
+                    int id = rs.getInt(1);
+                    WorkerScreen workerScreen = new WorkerScreen();
+                    workerScreen.login = inputLogin.getSelectedItem().toString();
+                    this.dispose();
+                    connection.close();
+                    workerScreen.setVisible(true);
+                    workerScreen.outputStation.setText(Integer.toString(id));
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null, "LOGIN OU SENHA INCORRETOS, REVISE OS CAMPOS DIGITADOS!");

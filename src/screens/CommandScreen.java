@@ -32,6 +32,7 @@ public class CommandScreen extends javax.swing.JFrame {
         txtCadastreNewStation = new javax.swing.JLabel();
         txtControlPanel = new javax.swing.JLabel();
         txtEditStation = new javax.swing.JLabel();
+        txtOnlineStation = new javax.swing.JLabel();
         txtChangePasswordControlPanel = new javax.swing.JLabel();
         txtDayPlan = new javax.swing.JLabel();
         txtDelay = new javax.swing.JLabel();
@@ -42,6 +43,7 @@ public class CommandScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Paínel de Controle");
         setResizable(false);
+        getContentPane().setLayout(null);
 
         txtCadastreNewStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtCadastreNewStation.setText("CADASTRAR UMA NOVA ESTAÇÃO");
@@ -50,9 +52,13 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtCadastreNewStationMouseClicked(evt);
             }
         });
+        getContentPane().add(txtCadastreNewStation);
+        txtCadastreNewStation.setBounds(388, 79, 248, 20);
 
         txtControlPanel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtControlPanel.setText("PAÍNEL DE CONTROLE");
+        getContentPane().add(txtControlPanel);
+        txtControlPanel.setBounds(227, 20, 268, 32);
 
         txtEditStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtEditStation.setText("EDITAR ESTAÇÕES");
@@ -61,6 +67,18 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtEditStationMouseClicked(evt);
             }
         });
+        getContentPane().add(txtEditStation);
+        txtEditStation.setBounds(388, 129, 248, 20);
+
+        txtOnlineStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        txtOnlineStation.setText("ESTAÇÕES ONLINE");
+        txtOnlineStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtOnlineStationMouseClicked(evt);
+            }
+        });
+        getContentPane().add(txtOnlineStation);
+        txtOnlineStation.setBounds(390, 176, 143, 20);
 
         txtChangePasswordControlPanel.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtChangePasswordControlPanel.setText("MUDAR SENHA DO PAÍNEL DE CONTROLE");
@@ -69,6 +87,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtChangePasswordControlPanelMouseClicked(evt);
             }
         });
+        getContentPane().add(txtChangePasswordControlPanel);
+        txtChangePasswordControlPanel.setBounds(390, 223, 309, 20);
 
         txtDayPlan.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtDayPlan.setText("PLANEJAMENTO DIÁRIO");
@@ -77,6 +97,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtDayPlanMouseClicked(evt);
             }
         });
+        getContentPane().add(txtDayPlan);
+        txtDayPlan.setBounds(27, 79, 177, 20);
 
         txtDelay.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtDelay.setText("ATRASOS");
@@ -85,6 +107,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtDelayMouseClicked(evt);
             }
         });
+        getContentPane().add(txtDelay);
+        txtDelay.setBounds(27, 129, 71, 20);
 
         txtExportTable.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtExportTable.setText("EXPORTAR TABELA COMPARATIVA");
@@ -93,6 +117,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtExportTableMouseClicked(evt);
             }
         });
+        getContentPane().add(txtExportTable);
+        txtExportTable.setBounds(27, 223, 256, 20);
 
         txtHourHistoric.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtHourHistoric.setText("HISTÓRICO DE HORÁRIOS");
@@ -101,6 +127,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 txtHourHistoricMouseClicked(evt);
             }
         });
+        getContentPane().add(txtHourHistoric);
+        txtHourHistoric.setBounds(27, 176, 221, 20);
 
         buttonLogout.setText("LOGOUT");
         buttonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -113,58 +141,8 @@ public class CommandScreen extends javax.swing.JFrame {
                 buttonLogoutKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtControlPanel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonLogout)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDelay)
-                            .addComponent(txtExportTable)
-                            .addComponent(txtDayPlan)
-                            .addComponent(txtHourHistoric, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtChangePasswordControlPanel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtEditStation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCadastreNewStation)))
-                        .addContainerGap(25, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(txtControlPanel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDayPlan)
-                    .addComponent(txtCadastreNewStation))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDelay)
-                    .addComponent(txtEditStation))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHourHistoric)
-                    .addComponent(txtChangePasswordControlPanel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(txtExportTable)
-                .addGap(27, 27, 27)
-                .addComponent(buttonLogout)
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
+        getContentPane().add(buttonLogout);
+        buttonLogout.setBounds(27, 270, 90, 25);
 
         setSize(new java.awt.Dimension(738, 347));
         setLocationRelativeTo(null);
@@ -231,6 +209,11 @@ public class CommandScreen extends javax.swing.JFrame {
         export.setVisible(true);
     }//GEN-LAST:event_txtExportTableMouseClicked
 
+    private void txtOnlineStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtOnlineStationMouseClicked
+        OnlineStation onlineStation = new OnlineStation();
+        onlineStation.setVisible(true);
+    }//GEN-LAST:event_txtOnlineStationMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -276,5 +259,6 @@ public class CommandScreen extends javax.swing.JFrame {
     private javax.swing.JLabel txtEditStation;
     private javax.swing.JLabel txtExportTable;
     private javax.swing.JLabel txtHourHistoric;
+    private javax.swing.JLabel txtOnlineStation;
     // End of variables declaration//GEN-END:variables
 }

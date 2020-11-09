@@ -32,6 +32,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -59,13 +63,14 @@ public class WorkerScreen extends javax.swing.JFrame {
     private int id;
     String beginTime;
     String endTime;
+    boolean finished = false;
     public int x = 0;
     public boolean informMoreShots=false;
     String beginNoMoreShots;
     public String beginDelay;
     public String endWork;
     ShotAfterPlanning shotAfterPlanning = new ShotAfterPlanning();
-    public WorkerScreen() {
+    public WorkerScreen(){
         initComponents();
         ConnectionModule connect = new ConnectionModule();
         connection = connect.getConnectionMySQL();
@@ -91,9 +96,10 @@ public class WorkerScreen extends javax.swing.JFrame {
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
-                if(thisStationIsWorking.isWorking(login)&&(inputWorkFinish.isSelected()||inputDelay.isSelected())){
+                if(finished==true && thisStationIsWorking.isWorking(login)&&(inputWorkFinish.isSelected()||inputDelay.isSelected())){
                     groupWorkFinish.clearSelection();
                     groupDelay.clearSelection();
+                    finished=false;
                 }
                 BeginPresentShot beginPresentShot = new BeginPresentShot();
                 AuxShot auxShot = new AuxShot();
@@ -130,6 +136,7 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2=connection.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
+            finished=true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
@@ -140,6 +147,7 @@ public class WorkerScreen extends javax.swing.JFrame {
             pst2=connection.prepareStatement(sql);
             pst2.setInt(1,Integer.parseInt(outputStation.getText()));
             pst2.executeUpdate();
+            finished=false;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
@@ -418,6 +426,9 @@ public class WorkerScreen extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -432,6 +443,7 @@ public class WorkerScreen extends javax.swing.JFrame {
 
         outputBarTime.setBackground(new java.awt.Color(128, 128, 128));
         outputBarTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        outputBarTime.setForeground(new java.awt.Color(0, 0, 0));
         outputBarTime.setStringPainted(true);
 
         groupWorkFinish.add(inputWorkFinish);
@@ -559,7 +571,7 @@ public class WorkerScreen extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        setSize(new java.awt.Dimension(560, 258));
+        setSize(new java.awt.Dimension(568, 258));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -743,6 +755,10 @@ public class WorkerScreen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_buttonRefreshActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        finish();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

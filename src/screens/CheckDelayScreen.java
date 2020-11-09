@@ -96,9 +96,12 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtDelay.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtDelay.setText("ATRASOS");
+        getContentPane().add(txtDelay);
+        txtDelay.setBounds(231, 20, 116, 32);
 
         tableDelay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,6 +125,9 @@ public class CheckDelayScreen extends javax.swing.JFrame {
         ));
         allTableDelay.setViewportView(tableDelay);
 
+        getContentPane().add(allTableDelay);
+        allTableDelay.setBounds(17, 70, 545, 255);
+
         try {
             inputFirstDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -138,6 +144,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 inputFirstDateFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(inputFirstDateFilter);
+        inputFirstDateFilter.setBounds(17, 339, 104, 26);
 
         try {
             inputSecondDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -155,6 +163,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 inputSecondDateFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(inputSecondDateFilter);
+        inputSecondDateFilter.setBounds(17, 378, 104, 26);
 
         buttonFilter.setText("FILTRAR");
         buttonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +177,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 buttonFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonFilter);
+        buttonFilter.setBounds(17, 420, 80, 23);
 
         inputDelayReason.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "M1", "M2", "M3", "M4" }));
@@ -180,6 +192,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 inputDelayReasonKeyPressed(evt);
             }
         });
+        getContentPane().add(inputDelayReason);
+        inputDelayReason.setBounds(180, 337, 85, 26);
 
         buttonShow.setText("MOSTRAR");
         buttonShow.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +206,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 buttonShowKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonShow);
+        buttonShow.setBounds(111, 420, 90, 23);
 
         buttonRefresh.setText("ATUALIZAR");
         buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -204,55 +220,8 @@ public class CheckDelayScreen extends javax.swing.JFrame {
                 buttonRefreshKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDelay)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonFilter)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonShow)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonRefresh)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputSecondDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(allTableDelay, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(inputFirstDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(inputDelayReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtDelay)
-                .addGap(18, 18, 18)
-                .addComponent(allTableDelay, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputFirstDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputDelayReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputSecondDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonFilter)
-                    .addComponent(buttonShow)
-                    .addComponent(buttonRefresh))
-                .addGap(29, 29, 29))
-        );
+        getContentPane().add(buttonRefresh);
+        buttonRefresh.setBounds(220, 420, 100, 23);
 
         setSize(new java.awt.Dimension(595, 513));
         setLocationRelativeTo(null);
