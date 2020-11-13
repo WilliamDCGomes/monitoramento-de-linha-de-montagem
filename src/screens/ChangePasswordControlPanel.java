@@ -105,23 +105,33 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Mudar Senha do Paínel de Controle");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtChangePassword.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtChangePassword.setText("MUDAR SENHA");
+        getContentPane().add(txtChangePassword);
+        txtChangePassword.setBounds(137, 21, 173, 32);
 
         txtOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtOldPassword.setText("SENHA ANTIGA");
+        getContentPane().add(txtOldPassword);
+        txtOldPassword.setBounds(54, 84, 104, 20);
 
         txtNewPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNewPassword.setText("NOVA SENHA");
+        getContentPane().add(txtNewPassword);
+        txtNewPassword.setBounds(54, 136, 93, 20);
 
         txtConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtConfirmPassword.setText("CONFIRMAR SENHA");
+        getContentPane().add(txtConfirmPassword);
+        txtConfirmPassword.setBounds(54, 192, 140, 20);
 
         inputOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputOldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -129,6 +139,8 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
                 inputOldPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputOldPassword);
+        inputOldPassword.setBounds(240, 82, 153, 24);
 
         inputNewPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputNewPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -136,6 +148,8 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
                 inputNewPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputNewPassword);
+        inputNewPassword.setBounds(240, 134, 153, 24);
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -143,6 +157,8 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
                 inputConfirmPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputConfirmPassword);
+        inputConfirmPassword.setBounds(240, 190, 153, 24);
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -155,56 +171,10 @@ public class ChangePasswordControlPanel extends javax.swing.JFrame {
                 buttonSaveKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(54, 249, 78, 25);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtChangePassword)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonSave)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNewPassword)
-                            .addComponent(txtOldPassword)
-                            .addComponent(txtConfirmPassword))
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputOldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(inputNewPassword)
-                            .addComponent(inputConfirmPassword))
-                        .addGap(54, 54, 54))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(txtChangePassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtOldPassword)
-                    .addComponent(inputOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNewPassword)
-                    .addComponent(inputNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtConfirmPassword)
-                    .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(buttonSave)
-                .addGap(26, 26, 26))
-        );
-
-        setSize(new java.awt.Dimension(463, 339));
+        setSize(new java.awt.Dimension(463, 326));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -93,3 +93,11 @@ create table saveShotAfterPlanning(
     `begin` varchar(5) NOT NULL,
     PRIMARY KEY (`id`)
 );
+
+create table disconnectStation(
+	`id` int NOT NULL AUTO_INCREMENT,
+	`dats` varchar(10) NOT NULL,
+    `station` varchar(50) NOT NULL,
+    statusStation int not null,
+    PRIMARY KEY (`id`)
+);

@@ -51,14 +51,18 @@ public class DelayScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atraso");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtReasonDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtReasonDelay.setText("MOTIVO DO ATRASO");
+        getContentPane().add(txtReasonDelay);
+        txtReasonDelay.setBounds(23, 14, 185, 24);
 
         inputReasonDelay.setColumns(20);
         inputReasonDelay.setRows(5);
@@ -69,8 +73,13 @@ public class DelayScreen extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(inputReasonDelay);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(23, 56, 517, 175);
+
         txtTypeDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtTypeDelay.setText("TIPO DO ATRASO");
+        getContentPane().add(txtTypeDelay);
+        txtTypeDelay.setBounds(23, 243, 155, 24);
 
         buttonGroup1.add(inputType1);
         inputType1.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -80,6 +89,8 @@ public class DelayScreen extends javax.swing.JFrame {
                 inputType1KeyPressed(evt);
             }
         });
+        getContentPane().add(inputType1);
+        inputType1.setBounds(23, 285, 46, 28);
 
         buttonGroup1.add(inputType2);
         inputType2.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -89,6 +100,8 @@ public class DelayScreen extends javax.swing.JFrame {
                 inputType2KeyPressed(evt);
             }
         });
+        getContentPane().add(inputType2);
+        inputType2.setBounds(23, 316, 46, 28);
 
         buttonGroup1.add(inputType3);
         inputType3.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -98,6 +111,8 @@ public class DelayScreen extends javax.swing.JFrame {
                 inputType3KeyReleased(evt);
             }
         });
+        getContentPane().add(inputType3);
+        inputType3.setBounds(158, 285, 46, 28);
 
         buttonGroup1.add(inputType4);
         inputType4.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -107,6 +122,8 @@ public class DelayScreen extends javax.swing.JFrame {
                 inputType4KeyPressed(evt);
             }
         });
+        getContentPane().add(inputType4);
+        inputType4.setBounds(158, 316, 46, 28);
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -119,49 +136,8 @@ public class DelayScreen extends javax.swing.JFrame {
                 buttonSaveKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSave)
-                    .addComponent(txtTypeDelay)
-                    .addComponent(txtReasonDelay)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputType1)
-                            .addComponent(inputType2))
-                        .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputType4)
-                            .addComponent(inputType3))))
-                .addGap(25, 25, 25))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(txtReasonDelay)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTypeDelay)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputType1)
-                    .addComponent(inputType3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputType2)
-                    .addComponent(inputType4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonSave)
-                .addGap(14, 14, 14))
-        );
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(23, 351, 90, 25);
 
         setSize(new java.awt.Dimension(581, 429));
         setLocationRelativeTo(null);

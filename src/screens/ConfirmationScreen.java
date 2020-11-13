@@ -76,14 +76,18 @@ public class ConfirmationScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtInsertAccessPassword.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         txtInsertAccessPassword.setText("INSIRA A SENHA DE ACESSO");
+        getContentPane().add(txtInsertAccessPassword);
+        txtInsertAccessPassword.setBounds(27, 20, 342, 32);
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
         inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -91,6 +95,8 @@ public class ConfirmationScreen extends javax.swing.JFrame {
                 inputPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputPassword);
+        inputPassword.setBounds(27, 80, 342, 30);
 
         buttonEnter.setText("ENTRAR");
         buttonEnter.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +109,8 @@ public class ConfirmationScreen extends javax.swing.JFrame {
                 buttonEnterKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonEnter);
+        buttonEnter.setBounds(27, 128, 90, 25);
 
         buttonCancel.setText("CANCELAR");
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -115,36 +123,8 @@ public class ConfirmationScreen extends javax.swing.JFrame {
                 buttonCancelKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonEnter)
-                        .addGap(46, 46, 46)
-                        .addComponent(buttonCancel))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtInsertAccessPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(inputPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(txtInsertAccessPassword)
-                .addGap(28, 28, 28)
-                .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonEnter)
-                    .addComponent(buttonCancel))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
+        getContentPane().add(buttonCancel);
+        buttonCancel.setBounds(148, 128, 110, 25);
 
         setSize(new java.awt.Dimension(391, 177));
         setLocationRelativeTo(null);

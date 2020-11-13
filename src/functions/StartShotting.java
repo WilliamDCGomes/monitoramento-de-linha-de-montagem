@@ -12,7 +12,6 @@ public class StartShotting {
     GetYesterdayDate getYesterdayDate = new GetYesterdayDate();
     GetHour getHour = new GetHour();
     HourDefault hourDefault = new HourDefault();
-    
     public StartShotting(){
         ConnectionModule connect = new ConnectionModule();
         connection = connect.getConnectionMySQL();
@@ -20,31 +19,29 @@ public class StartShotting {
     public void keepProduction(int shot, String begin){
         insertShot(begin, shot);
     }
+    private String getLastProgramming(){
+        String sql = "select dats from planning order by id desc limit 1";
+        try {
+            pst=connection.prepareStatement(sql);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return "01/01/1900";
+    }
     public void startProduction(){
         String begin = null;
         String end = null;
         String[]beginDefault;
-        if(hasAProgramming(getDate.informDate())){
+        String date = getLastProgramming();
+        if(hasAProgramming(date)){
             String sql = "select beginning, ending from planning where dats = ? and shooting=? order by id asc limit 1";
             try {
                 pst=connection.prepareStatement(sql);
-                pst.setString(1, getDate.informDate());
-                pst.setInt(2, 1);
-                rs= pst.executeQuery();
-                if(rs.next()){
-                    begin = rs.getString(1);
-                    end = rs.getString(2);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-            insertShot(begin, 1);
-        }
-        else if(hasAProgramming(getYesterdayDate.informDate())){
-            String sql = "select beginning, ending from planning where dats = ? and shooting=? order by id asc limit 1";
-            try {
-                pst=connection.prepareStatement(sql);
-                pst.setString(1, getYesterdayDate.informDate());
+                pst.setString(1, date);
                 pst.setInt(2, 1);
                 rs= pst.executeQuery();
                 if(rs.next()){

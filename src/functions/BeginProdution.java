@@ -16,26 +16,26 @@ public class BeginProdution {
         ConnectionModule connect = new ConnectionModule();
         connection = connect.getConnectionMySQL();
     }
+    private String getLastProgramming(){
+        String sql = "select dats from planning order by id desc limit 1";
+        try {
+            pst=connection.prepareStatement(sql);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return "01/01/1900";
+    }
     public String getProduction(int shot){
-        if(hasAProgramming(getDate.informDate())){
+        String date = getLastProgramming();
+        if(hasAProgramming(date)){
             String sql = "select beginning from planning where dats = ? and shooting=? order by id asc limit 1";
             try {
                 pst=connection.prepareStatement(sql);
                 pst.setString(1, getDate.informDate());
-                pst.setInt(2, shot);
-                rs= pst.executeQuery();
-                if(rs.next()){
-                    return rs.getString(1);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-        }
-        else if(hasAProgramming(getYesterdayDate.informDate())){
-            String sql = "select beginning from planning where dats = ? and shooting=? order by id asc limit 1";
-            try {
-                pst=connection.prepareStatement(sql);
-                pst.setString(1, getYesterdayDate.informDate());
                 pst.setInt(2, shot);
                 rs= pst.executeQuery();
                 if(rs.next()){

@@ -97,23 +97,33 @@ public class CadastreNewStation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Estação");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtNewStation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtNewStation.setText("NOVA ESTAÇÃO");
+        getContentPane().add(txtNewStation);
+        txtNewStation.setBounds(100, 42, 185, 32);
 
         txtNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNumberOfStation.setText("NÚMERO DA ESTAÇÃO");
+        getContentPane().add(txtNumberOfStation);
+        txtNumberOfStation.setBounds(24, 112, 162, 20);
 
         txtLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtLogin.setText("LOGIN");
+        getContentPane().add(txtLogin);
+        txtLogin.setBounds(24, 166, 44, 20);
 
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtPassword.setText("SENHA");
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(24, 215, 49, 20);
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -121,9 +131,13 @@ public class CadastreNewStation extends javax.swing.JFrame {
                 inputLoginKeyPressed(evt);
             }
         });
+        getContentPane().add(inputLogin);
+        inputLogin.setBounds(231, 164, 129, 24);
 
         txtConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtConfirmPassword.setText("CONFIRMAR SENHA");
+        getContentPane().add(txtConfirmPassword);
+        txtConfirmPassword.setBounds(24, 263, 140, 20);
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -131,6 +145,8 @@ public class CadastreNewStation extends javax.swing.JFrame {
                 inputPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputPassword);
+        inputPassword.setBounds(231, 213, 129, 24);
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -138,6 +154,8 @@ public class CadastreNewStation extends javax.swing.JFrame {
                 inputConfirmPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputConfirmPassword);
+        inputConfirmPassword.setBounds(231, 261, 129, 24);
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -150,64 +168,16 @@ public class CadastreNewStation extends javax.swing.JFrame {
                 buttonSaveKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(24, 306, 78, 25);
 
         outputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputNumberOfStation.setText("1");
         outputNumberOfStation.setEnabled(false);
+        getContentPane().add(outputNumberOfStation);
+        outputNumberOfStation.setBounds(231, 110, 129, 24);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtNewStation)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonSave)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLogin)
-                            .addComponent(txtNumberOfStation, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPassword)
-                            .addComponent(txtConfirmPassword))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(inputLogin)
-                            .addComponent(inputConfirmPassword)
-                            .addComponent(outputNumberOfStation, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addGap(25, 25, 25))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(txtNewStation)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumberOfStation)
-                    .addComponent(outputNumberOfStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogin)
-                    .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword)
-                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtConfirmPassword)
-                    .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(buttonSave)
-                .addGap(40, 40, 40))
-        );
-
-        setSize(new java.awt.Dimension(401, 421));
+        setSize(new java.awt.Dimension(401, 383));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

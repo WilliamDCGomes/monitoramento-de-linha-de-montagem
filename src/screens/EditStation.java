@@ -130,15 +130,23 @@ public class EditStation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Estação");
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         txtNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtNumberOfStation.setText("NÚMERO DA ESTAÇÃO");
+        getContentPane().add(txtNumberOfStation);
+        txtNumberOfStation.setBounds(24, 99, 162, 20);
 
         txtLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtLogin.setText("LOGIN");
+        getContentPane().add(txtLogin);
+        txtLogin.setBounds(24, 175, 44, 20);
 
         txtPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtPassword.setText("NOVA SENHA");
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(24, 271, 93, 20);
 
         inputLogin.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputLogin.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -146,9 +154,13 @@ public class EditStation extends javax.swing.JFrame {
                 inputLoginKeyPressed(evt);
             }
         });
+        getContentPane().add(inputLogin);
+        inputLogin.setBounds(231, 173, 144, 24);
 
         txtConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtConfirmPassword.setText("CONFIRMAR SENHA");
+        getContentPane().add(txtConfirmPassword);
+        txtConfirmPassword.setBounds(24, 319, 140, 20);
 
         inputPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -156,6 +168,8 @@ public class EditStation extends javax.swing.JFrame {
                 inputPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputPassword);
+        inputPassword.setBounds(231, 269, 144, 24);
 
         inputConfirmPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,9 +177,13 @@ public class EditStation extends javax.swing.JFrame {
                 inputConfirmPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputConfirmPassword);
+        inputConfirmPassword.setBounds(231, 317, 144, 24);
 
         txtNewStation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtNewStation.setText("EDITAR ESTAÇÃO");
+        getContentPane().add(txtNewStation);
+        txtNewStation.setBounds(90, 30, 204, 32);
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +196,8 @@ public class EditStation extends javax.swing.JFrame {
                 buttonSaveKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonSave);
+        buttonSave.setBounds(24, 367, 78, 25);
 
         buttonLocale.setText("LOCALIZAR");
         buttonLocale.addActionListener(new java.awt.event.ActionListener() {
@@ -190,9 +210,13 @@ public class EditStation extends javax.swing.JFrame {
                 buttonLocaleKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonLocale);
+        buttonLocale.setBounds(24, 127, 93, 25);
 
         txtOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         txtOldPassword.setText("ANTIGA SENHA");
+        getContentPane().add(txtOldPassword);
+        txtOldPassword.setBounds(24, 223, 104, 20);
 
         inputOldPassword.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputOldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -200,6 +224,8 @@ public class EditStation extends javax.swing.JFrame {
                 inputOldPasswordKeyPressed(evt);
             }
         });
+        getContentPane().add(inputOldPassword);
+        inputOldPassword.setBounds(231, 221, 144, 24);
 
         buttonDelete.setText("APAGAR");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -212,82 +238,14 @@ public class EditStation extends javax.swing.JFrame {
                 buttonDeleteKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonDelete);
+        buttonDelete.setBounds(146, 367, 79, 25);
 
         inputNumberOfStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        getContentPane().add(inputNumberOfStation);
+        inputNumberOfStation.setBounds(231, 97, 144, 24);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtNewStation)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonLocale)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonSave)
-                                .addGap(44, 44, 44)
-                                .addComponent(buttonDelete)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtLogin)
-                                        .addComponent(txtNumberOfStation, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtPassword)
-                                        .addComponent(txtConfirmPassword))
-                                    .addComponent(txtOldPassword))
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(inputPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                    .addComponent(inputLogin)
-                                    .addComponent(inputConfirmPassword)
-                                    .addComponent(inputOldPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputNumberOfStation, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGap(25, 25, 25))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(txtNewStation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumberOfStation)
-                    .addComponent(inputNumberOfStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonLocale)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLogin)
-                    .addComponent(inputLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtOldPassword)
-                    .addComponent(inputOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtConfirmPassword)
-                    .addComponent(inputConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonSave)
-                    .addComponent(buttonDelete))
-                .addGap(45, 45, 45))
-        );
-
-        setSize(new java.awt.Dimension(416, 476));
+        setSize(new java.awt.Dimension(416, 451));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

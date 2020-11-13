@@ -345,7 +345,7 @@ public class DailyPlanningScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonSave);
-        buttonSave.setBounds(30, 260, 80, 25);
+        buttonSave.setBounds(30, 260, 90, 25);
 
         buttonCancele.setText("CANCELAR");
         buttonCancele.addActionListener(new java.awt.event.ActionListener() {

@@ -151,17 +151,23 @@ public class ShowDelay extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Atraso");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtDelay.setFont(new java.awt.Font("Dialog", 1, 25)); // NOI18N
         txtDelay.setText("ATRASO");
+        getContentPane().add(txtDelay);
+        txtDelay.setBounds(290, 30, 103, 33);
 
         txtStation.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtStation.setText("Estação");
+        getContentPane().add(txtStation);
+        txtStation.setBounds(46, 88, 69, 24);
 
         outputStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputStation.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -169,9 +175,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputStationKeyPressed(evt);
             }
         });
+        getContentPane().add(outputStation);
+        outputStation.setBounds(46, 118, 69, 24);
 
         txtTypeDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtTypeDelay.setText("Tipo do Atraso");
+        getContentPane().add(txtTypeDelay);
+        txtTypeDelay.setBounds(251, 88, 127, 24);
 
         outputTypeDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputTypeDelay.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -179,9 +189,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputTypeDelayKeyPressed(evt);
             }
         });
+        getContentPane().add(outputTypeDelay);
+        outputTypeDelay.setBounds(251, 118, 104, 24);
 
         txtDurationDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay.setText("Duração do Atraso");
+        getContentPane().add(txtDurationDelay);
+        txtDurationDelay.setBounds(487, 154, 161, 24);
 
         try {
             outputDurationDelay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -194,9 +208,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputDurationDelayKeyPressed(evt);
             }
         });
+        getContentPane().add(outputDurationDelay);
+        outputDurationDelay.setBounds(487, 184, 106, 24);
 
         txtReasonDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtReasonDelay.setText("Motivo do Atraso");
+        getContentPane().add(txtReasonDelay);
+        txtReasonDelay.setBounds(46, 224, 148, 24);
 
         outputReasonDelay.setColumns(20);
         outputReasonDelay.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
@@ -208,12 +226,17 @@ public class ShowDelay extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(outputReasonDelay);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(46, 257, 602, 156);
+
         previousDelay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
         previousDelay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 previousDelayMouseClicked(evt);
             }
         });
+        getContentPane().add(previousDelay);
+        previousDelay.setBounds(46, 419, 48, 48);
 
         nextDelay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
         nextDelay.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -221,9 +244,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 nextDelayMouseClicked(evt);
             }
         });
+        getContentPane().add(nextDelay);
+        nextDelay.setBounds(123, 419, 48, 48);
 
         txtShot.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtShot.setText("Rodagem");
+        getContentPane().add(txtShot);
+        txtShot.setBounds(487, 88, 84, 24);
 
         outputShot.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         outputShot.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -231,9 +258,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputShotKeyPressed(evt);
             }
         });
+        getContentPane().add(outputShot);
+        outputShot.setBounds(487, 118, 84, 24);
 
         txtDurationDelay1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay1.setText("Começo do Atraso");
+        getContentPane().add(txtDurationDelay1);
+        txtDurationDelay1.setBounds(46, 158, 162, 24);
 
         try {
             outputBeginDelay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -246,9 +277,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputBeginDelayKeyPressed(evt);
             }
         });
+        getContentPane().add(outputBeginDelay);
+        outputBeginDelay.setBounds(46, 188, 106, 24);
 
         txtDurationDelay2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDurationDelay2.setText("Finalização do Serviço");
+        getContentPane().add(txtDurationDelay2);
+        txtDurationDelay2.setBounds(252, 158, 196, 24);
 
         try {
             outputEndDelay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
@@ -261,9 +296,13 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputEndDelayKeyPressed(evt);
             }
         });
+        getContentPane().add(outputEndDelay);
+        outputEndDelay.setBounds(252, 188, 106, 24);
 
         txtDayOfDelay.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtDayOfDelay.setText("Dia do Atraso");
+        getContentPane().add(txtDayOfDelay);
+        txtDayOfDelay.setBounds(252, 224, 117, 24);
 
         try {
             outputDayOfDelay.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -276,6 +315,8 @@ public class ShowDelay extends javax.swing.JFrame {
                 outputDayOfDelayKeyPressed(evt);
             }
         });
+        getContentPane().add(outputDayOfDelay);
+        outputDayOfDelay.setBounds(387, 225, 106, 24);
 
         buttonDelete.setText("APAGAR");
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -288,111 +329,8 @@ public class ShowDelay extends javax.swing.JFrame {
                 buttonDeleteKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtReasonDelay)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(previousDelay)
-                        .addGap(29, 29, 29)
-                        .addComponent(nextDelay)
-                        .addGap(27, 27, 27)
-                        .addComponent(buttonDelete))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDurationDelay1)
-                                .addComponent(outputBeginDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(44, 44, 44)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtDurationDelay2)
-                                        .addComponent(outputEndDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtDurationDelay)
-                                        .addComponent(outputDurationDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(outputShot, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtShot, javax.swing.GroupLayout.Alignment.LEADING))))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtDayOfDelay)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(outputDayOfDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(outputStation, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(136, 136, 136)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTypeDelay)
-                            .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDelay)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(txtDelay)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtStation)
-                            .addComponent(txtTypeDelay))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(outputStation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputTypeDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtShot)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outputShot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtDurationDelay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outputDurationDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDurationDelay2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(outputEndDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDurationDelay1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(outputBeginDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtReasonDelay)
-                    .addComponent(txtDayOfDelay)
-                    .addComponent(outputDayOfDelay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(previousDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nextDelay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(buttonDelete)))
-                .addGap(12, 12, 12))
-        );
+        getContentPane().add(buttonDelete);
+        buttonDelete.setBounds(198, 427, 90, 25);
 
         setSize(new java.awt.Dimension(710, 518));
         setLocationRelativeTo(null);

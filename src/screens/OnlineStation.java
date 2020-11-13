@@ -1,23 +1,107 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
-
-/**
- *
- * @author willi
- */
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import connectionbd.ConnectionModule;
+import functions.DesconectStation;
+import javax.swing.table.DefaultTableModel;
 public class OnlineStation extends javax.swing.JFrame {
-
-    /**
-     * Creates new form OnlineStation
-     */
+    Connection connection = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int x = 0;
     public OnlineStation() {
         initComponents();
+        ConnectionModule connect = new ConnectionModule();
+        connection = connect.getConnectionMySQL();
+        inputStatusStation.setSelectedIndex(1);
     }
-
+    private void clearTable(){
+        DefaultTableModel table = (DefaultTableModel) tableOnlineStation.getModel();
+        for(int i=table.getRowCount()-1; i >= 0; i--){
+            table.removeRow(i);
+        }
+    }
+    private void getStations(){
+        DefaultTableModel table = (DefaultTableModel) tableOnlineStation.getModel();
+        String sql = "select id, login as 'Login', working as 'Em Operação' from stations";
+        try {
+            pst = connection.prepareStatement(sql);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt(1));
+                String login = rs.getString(2);
+                String status = "NÃO DEFINIDO";
+                if(rs.getInt(3)==0){
+                    status = "NÃO";
+                }
+                else if(rs.getInt(3)==1){
+                    status = "SIM";
+                }
+                String[] data = {id, login, status};
+                table.addRow(data);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getStationsOnline(){
+        DefaultTableModel table = (DefaultTableModel) tableOnlineStation.getModel();
+        String sql = "select id, login as 'Login', working as 'Em Operação' from stations where working = 1";
+        try {
+            pst = connection.prepareStatement(sql);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt(1));
+                String login = rs.getString(2);
+                String status = "NÃO DEFINIDO";
+                if(rs.getInt(3)==0){
+                    status = "NÃO";
+                }
+                else if(rs.getInt(3)==1){
+                    status = "SIM";
+                }
+                String[] data = {id, login, status};
+                table.addRow(data);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void getStationsOffline(){
+        DefaultTableModel table = (DefaultTableModel) tableOnlineStation.getModel();
+        String sql = "select id, login as 'Login', working as 'Em Operação' from stations where working = 0";
+        try {
+            pst = connection.prepareStatement(sql);
+            rs=pst.executeQuery();
+            while(rs.next()){
+                String id = Integer.toString(rs.getInt(1));
+                String login = rs.getString(2);
+                String status = "NÃO DEFINIDO";
+                if(rs.getInt(3)==0){
+                    status = "NÃO";
+                }
+                else if(rs.getInt(3)==1){
+                    status = "SIM";
+                }
+                String[] data = {id, login, status};
+                table.addRow(data);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }
+    private void desconectStation(String login){
+        try{
+            DesconectStation desconectStation = new DesconectStation();
+            desconectStation.disconect(login, 1);
+            JOptionPane.showMessageDialog(null, "ESTAÇÃO DESCONECTADA COM SUCESSO");
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,9 +117,15 @@ public class OnlineStation extends javax.swing.JFrame {
         buttonFilter = new javax.swing.JButton();
         inputStatusStation = new javax.swing.JComboBox<>();
         buttonDesconect = new javax.swing.JButton();
+        buttonRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estações Online");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         txtOnlineStation.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -84,6 +174,11 @@ public class OnlineStation extends javax.swing.JFrame {
 
         inputStatusStation.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputStatusStation.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ONLINE", "OFFLINE" }));
+        inputStatusStation.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                inputStatusStationItemStateChanged(evt);
+            }
+        });
         inputStatusStation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputStatusStationActionPerformed(evt);
@@ -109,19 +204,51 @@ public class OnlineStation extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonDesconect);
-        buttonDesconect.setBounds(310, 340, 120, 30);
+        buttonDesconect.setBounds(300, 340, 120, 30);
+
+        buttonRefresh.setText("ATUALIZAR");
+        buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRefreshActionPerformed(evt);
+            }
+        });
+        buttonRefresh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonRefreshKeyPressed(evt);
+            }
+        });
+        getContentPane().add(buttonRefresh);
+        buttonRefresh.setBounds(440, 340, 120, 30);
 
         setSize(new java.awt.Dimension(587, 422));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFilterActionPerformed
-        
+        clearTable();
+        if(inputStatusStation.getSelectedItem().equals("TODOS")){
+            getStations();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+            getStationsOnline();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+            getStationsOffline();
+        }
     }//GEN-LAST:event_buttonFilterActionPerformed
 
     private void buttonFilterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonFilterKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-
+            clearTable();
+            if(inputStatusStation.getSelectedItem().equals("TODOS")){
+                getStations();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+                getStationsOnline();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+                getStationsOffline();
+            }
         }
     }//GEN-LAST:event_buttonFilterKeyPressed
 
@@ -131,19 +258,89 @@ public class OnlineStation extends javax.swing.JFrame {
 
     private void inputStatusStationKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_inputStatusStationKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            clearTable();
+            if(inputStatusStation.getSelectedItem().equals("TODOS")){
+                getStations();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+                getStationsOnline();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+                getStationsOffline();
+            }
         }
     }//GEN-LAST:event_inputStatusStationKeyPressed
 
     private void buttonDesconectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDesconectActionPerformed
-        
+        int set=tableOnlineStation.getSelectedRow();
+        String login = tableOnlineStation.getModel().getValueAt(set,1).toString();
+        desconectStation(login);
     }//GEN-LAST:event_buttonDesconectActionPerformed
 
     private void buttonDesconectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonDesconectKeyPressed
         if(evt.getKeyCode() == evt.VK_ENTER){
-            
+            int set=tableOnlineStation.getSelectedRow();
+            String login = tableOnlineStation.getModel().getValueAt(set,1).toString();
+            desconectStation(login);
         }
     }//GEN-LAST:event_buttonDesconectKeyPressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if(x==0){
+            x++;
+            clearTable();
+            if(inputStatusStation.getSelectedItem().equals("TODOS")){
+                getStations();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+                getStationsOnline();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+                getStationsOffline();
+            }
+        }
+    }//GEN-LAST:event_formWindowActivated
+
+    private void inputStatusStationItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_inputStatusStationItemStateChanged
+        clearTable();
+        if(inputStatusStation.getSelectedItem().equals("TODOS")){
+            getStations();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+            getStationsOnline();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+            getStationsOffline();
+        }
+    }//GEN-LAST:event_inputStatusStationItemStateChanged
+
+    private void buttonRefreshKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonRefreshKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            clearTable();
+            if(inputStatusStation.getSelectedItem().equals("TODOS")){
+                getStations();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+                getStationsOnline();
+            }
+            else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+                getStationsOffline();
+            }
+        }
+    }//GEN-LAST:event_buttonRefreshKeyPressed
+
+    private void buttonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefreshActionPerformed
+        clearTable();
+        if(inputStatusStation.getSelectedItem().equals("TODOS")){
+            getStations();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("ONLINE")){
+            getStationsOnline();
+        }
+        else if(inputStatusStation.getSelectedItem().equals("OFFLINE")){
+            getStationsOffline();
+        }
+    }//GEN-LAST:event_buttonRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,7 +381,7 @@ public class OnlineStation extends javax.swing.JFrame {
     private javax.swing.JScrollPane allTableOnlineStation;
     private javax.swing.JButton buttonDesconect;
     private javax.swing.JButton buttonFilter;
-    private javax.swing.JFormattedTextField inputFirstDateFilter;
+    private javax.swing.JButton buttonRefresh;
     private javax.swing.JComboBox<String> inputStatusStation;
     private javax.swing.JTable tableOnlineStation;
     private javax.swing.JLabel txtOnlineStation;

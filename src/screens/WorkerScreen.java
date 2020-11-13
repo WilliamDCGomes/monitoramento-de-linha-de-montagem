@@ -3,10 +3,12 @@ package screens;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import connectionbd.ConnectionModule;
+import functions.AutomaticPlanning;
 import functions.AuxShot;
 import functions.BarProgress;
 import functions.BeginPresentShot;
 import functions.BeginProdution;
+import functions.DesconectStation;
 import functions.GetDate;
 import functions.GetHour;
 import functions.GetTimeOfShot;
@@ -31,11 +33,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -64,6 +63,7 @@ public class WorkerScreen extends javax.swing.JFrame {
     String beginTime;
     String endTime;
     boolean finished = false;
+    boolean desconected = false;
     public int x = 0;
     public boolean informMoreShots=false;
     String beginNoMoreShots;
@@ -91,10 +91,34 @@ public class WorkerScreen extends javax.swing.JFrame {
         TimeDifference timeDifference = new TimeDifference();
         BarProgress barProgress = new BarProgress(this);
         int delay = 100;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 30000;  // intervalo no qual a tarefa será executada.
+        int interval = 15000;  // intervalo no qual a tarefa será executada.
         java.util.Timer timer = new java.util.Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
+                DesconectStation desconectStation = new DesconectStation();
+                if(desconectStation.isWorking(login)==1 && x>1){
+                    finish();
+                    desconectStation.removeDisconect(login);
+                    JOptionPane.showMessageDialog(null, "VOCÊ FOI DESCONECTADO REMOTAMENTE PELO SEU SUPERVISOR!");
+                    LoginScreen loginScreen = new LoginScreen();
+                    Frame[] frames = getFrames(); 
+                    for (int i = 0; i < frames.length; i++){ 
+                        frames[i].dispose(); 
+                    }
+                    loginScreen.setVisible(true);
+                }
+                else if(desconectStation.isWorking(login)==2 && x>1){
+                    desconectStation.removeDisconect(login);
+                    desconected = true;
+                    JOptionPane.showMessageDialog(null, "VOCÊ FOI DESCONECTADO PELO ACESSO DESSE LOGIN EM OUTRA MÁQUINA!");
+                    LoginScreen loginScreen = new LoginScreen();
+                    Frame[] frames = getFrames(); 
+                    for (int i = 0; i < frames.length; i++){ 
+                        frames[i].dispose(); 
+                    }
+                    loginScreen.setVisible(true);
+                }
+                x++;
                 ThisStationIsWorking thisStationIsWorking = new ThisStationIsWorking();
                 if(finished==true && thisStationIsWorking.isWorking(login)&&(inputWorkFinish.isSelected()||inputDelay.isSelected())){
                     groupWorkFinish.clearSelection();
@@ -433,18 +457,25 @@ public class WorkerScreen extends javax.swing.JFrame {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtTimeToNextWork.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtTimeToNextWork.setText("TEMPO RESTANTE ATÉ A RODAGEM");
+        getContentPane().add(txtTimeToNextWork);
+        txtTimeToNextWork.setBounds(40, 24, 324, 24);
 
         outputTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         outputTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         outputTime.setText("00:00");
+        getContentPane().add(outputTime);
+        outputTime.setBounds(427, 24, 56, 24);
 
         outputBarTime.setBackground(new java.awt.Color(128, 128, 128));
         outputBarTime.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         outputBarTime.setForeground(new java.awt.Color(0, 0, 0));
         outputBarTime.setStringPainted(true);
+        getContentPane().add(outputBarTime);
+        outputBarTime.setBounds(382, 54, 148, 27);
 
         groupWorkFinish.add(inputWorkFinish);
         inputWorkFinish.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -454,6 +485,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 inputWorkFinishActionPerformed(evt);
             }
         });
+        getContentPane().add(inputWorkFinish);
+        inputWorkFinish.setBounds(40, 99, 182, 28);
 
         groupDelay.add(inputDelay);
         inputDelay.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -463,6 +496,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 inputDelayActionPerformed(evt);
             }
         });
+        getContentPane().add(inputDelay);
+        inputDelay.setBounds(40, 139, 86, 28);
 
         buttonReset.setText("RESET");
         buttonReset.addActionListener(new java.awt.event.ActionListener() {
@@ -475,6 +510,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 buttonResetKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonReset);
+        buttonReset.setBounds(382, 102, 80, 25);
 
         buttonLogout.setText("LOGOUT");
         buttonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -487,18 +524,28 @@ public class WorkerScreen extends javax.swing.JFrame {
                 buttonLogoutKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonLogout);
+        buttonLogout.setBounds(382, 142, 90, 25);
 
         txtStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         txtStation.setText("ESTAÇÃO");
+        getContentPane().add(txtStation);
+        txtStation.setBounds(40, 189, 71, 20);
 
         outputStation.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         outputStation.setText("1");
+        getContentPane().add(outputStation);
+        outputStation.setBounds(117, 189, 8, 20);
 
         outputShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         outputShot.setText("1");
+        getContentPane().add(outputShot);
+        outputShot.setBounds(382, 190, 8, 19);
 
         txtShot.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtShot.setText("º   RODAGEM");
+        getContentPane().add(txtShot);
+        txtShot.setBounds(396, 190, 90, 19);
 
         buttonRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
         buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -506,70 +553,8 @@ public class WorkerScreen extends javax.swing.JFrame {
                 buttonRefreshActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inputWorkFinish)
-                            .addComponent(inputDelay))
-                        .addGap(160, 160, 160)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(outputShot)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtShot)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonReset)
-                            .addComponent(buttonLogout)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtStation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(outputStation))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTimeToNextWork)
-                        .addGap(63, 63, 63)
-                        .addComponent(outputTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimeToNextWork)
-                    .addComponent(outputTime))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(outputBarTime, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputWorkFinish)
-                    .addComponent(buttonReset))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputDelay)
-                    .addComponent(buttonLogout))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtStation)
-                            .addComponent(outputStation)
-                            .addComponent(outputShot)
-                            .addComponent(txtShot))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonRefresh)
-                        .addContainerGap())))
-        );
+        getContentPane().add(buttonRefresh);
+        buttonRefresh.setBounds(498, 180, 51, 42);
 
         setSize(new java.awt.Dimension(568, 258));
         setLocationRelativeTo(null);
@@ -654,10 +639,21 @@ public class WorkerScreen extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if(x==0){
+            StartShotting startShotting = new StartShotting();
+            if(!startShotting.hasAProgramming(getDate.informDate())){
+                AutomaticPlanning automaticPlanning = new AutomaticPlanning();
+                ArrayList<String> lastPlanning = automaticPlanning.getLastPlanning();
+                for(int i=0;i<lastPlanning.size();i++){
+                    String[] data = lastPlanning.get(i).split(";");
+                    String begin = data[0];
+                    String end = data[1];
+                    int shot = Integer.parseInt(data[2]);
+                    automaticPlanning.add(begin, end, shot);
+                }
+            }
             increaseConnections();
             boolean aux = false;
             x++;
-            StartShotting startShotting = new StartShotting();
             startShotting.startProduction();
             BeginProdution beginProdution = new BeginProdution();
             beginTime = beginProdution.getProduction(getShot());
@@ -692,7 +688,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        finish();
+        if(desconected==false){
+            finish();
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void buttonResetKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonResetKeyPressed
@@ -757,7 +755,9 @@ public class WorkerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonRefreshActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        finish();
+        if(desconected==false){
+            finish();
+        }
     }//GEN-LAST:event_formWindowClosed
 
     /**

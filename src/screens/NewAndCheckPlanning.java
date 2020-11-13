@@ -32,9 +32,13 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Selecionar");
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         txtChooseAOption.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtChooseAOption.setText("ESCOLHA A OPÇÃO DESEJADA");
+        getContentPane().add(txtChooseAOption);
+        txtChooseAOption.setBounds(20, 13, 358, 29);
 
         buttonNewPlanning.setText("NOVO PLANEJAMENTO");
         buttonNewPlanning.addActionListener(new java.awt.event.ActionListener() {
@@ -47,6 +51,8 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
                 buttonNewPlanningKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonNewPlanning);
+        buttonNewPlanning.setBounds(94, 61, 197, 25);
 
         buttonCheckPlanning.setText("VERIFICAR PLANEJAMENTO EXISTENTE");
         buttonCheckPlanning.addActionListener(new java.awt.event.ActionListener() {
@@ -59,36 +65,8 @@ public class NewAndCheckPlanning extends javax.swing.JFrame {
                 buttonCheckPlanningKeyPressed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonCheckPlanning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(buttonNewPlanning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(46, 46, 46)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(txtChooseAOption)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtChooseAOption)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(buttonNewPlanning)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonCheckPlanning)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        getContentPane().add(buttonCheckPlanning);
+        buttonCheckPlanning.setBounds(60, 97, 277, 25);
 
         setSize(new java.awt.Dimension(414, 173));
         setLocationRelativeTo(null);

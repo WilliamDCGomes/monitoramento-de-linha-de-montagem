@@ -145,7 +145,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(inputFirstDateFilter);
-        inputFirstDateFilter.setBounds(17, 339, 104, 26);
+        inputFirstDateFilter.setBounds(17, 339, 104, 24);
 
         try {
             inputSecondDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -164,7 +164,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(inputSecondDateFilter);
-        inputSecondDateFilter.setBounds(17, 378, 104, 26);
+        inputSecondDateFilter.setBounds(17, 378, 104, 24);
 
         buttonFilter.setText("FILTRAR");
         buttonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +178,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonFilter);
-        buttonFilter.setBounds(17, 420, 80, 23);
+        buttonFilter.setBounds(17, 420, 80, 25);
 
         inputDelayReason.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         inputDelayReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "M1", "M2", "M3", "M4" }));
@@ -193,7 +193,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(inputDelayReason);
-        inputDelayReason.setBounds(180, 337, 85, 26);
+        inputDelayReason.setBounds(180, 337, 110, 29);
 
         buttonShow.setText("MOSTRAR");
         buttonShow.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonShow);
-        buttonShow.setBounds(111, 420, 90, 23);
+        buttonShow.setBounds(111, 420, 90, 25);
 
         buttonRefresh.setText("ATUALIZAR");
         buttonRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -221,7 +221,7 @@ public class CheckDelayScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonRefresh);
-        buttonRefresh.setBounds(220, 420, 100, 23);
+        buttonRefresh.setBounds(220, 420, 110, 25);
 
         setSize(new java.awt.Dimension(595, 513));
         setLocationRelativeTo(null);

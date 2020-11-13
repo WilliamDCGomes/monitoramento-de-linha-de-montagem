@@ -75,14 +75,18 @@ public class ExistingPlanning extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Planejamento Existente");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtShotHistoric.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtShotHistoric.setText("PLANEJAMENTO EXISTENTE");
+        getContentPane().add(txtShotHistoric);
+        txtShotHistoric.setBounds(166, 17, 326, 32);
 
         imageBefore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
         imageBefore.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -90,6 +94,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 imageBeforeMouseClicked(evt);
             }
         });
+        getContentPane().add(imageBefore);
+        imageBefore.setBounds(16, 441, 48, 28);
 
         imageAfter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
         imageAfter.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,6 +103,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 imageAfterMouseClicked(evt);
             }
         });
+        getContentPane().add(imageAfter);
+        imageAfter.setBounds(196, 441, 48, 28);
 
         try {
             inputDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -109,6 +117,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 inputDateFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(inputDateFilter);
+        inputDateFilter.setBounds(76, 441, 114, 28);
 
         buttonFilter.setText("FILTRAR");
         buttonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +131,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 buttonFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonFilter);
+        buttonFilter.setBounds(262, 441, 90, 25);
 
         buttonEdit.setText("EDITAR");
         buttonEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +145,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
                 buttonEditKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonEdit);
+        buttonEdit.setBounds(380, 441, 90, 25);
 
         tablePlanning.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,50 +161,8 @@ public class ExistingPlanning extends javax.swing.JFrame {
             tablePlanning.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtShotHistoric)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(imageBefore)
-                        .addGap(12, 12, 12)
-                        .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(imageAfter)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonFilter)
-                        .addGap(33, 33, 33)
-                        .addComponent(buttonEdit)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
-                        .addGap(8, 8, 8))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(txtShotHistoric)
-                .addGap(31, 31, 31)
-                .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonEdit)
-                    .addComponent(buttonFilter)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(imageAfter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(imageBefore, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(inputDateFilter, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap())
-        );
+        getContentPane().add(tableExistingPlan);
+        tableExistingPlan.setBounds(10, 80, 640, 349);
 
         setSize(new java.awt.Dimension(674, 520));
         setLocationRelativeTo(null);

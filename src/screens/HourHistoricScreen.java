@@ -118,14 +118,18 @@ public class HourHistoricScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Histórico de Rodagens");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         txtShotHistoric.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtShotHistoric.setText("HISTÓRICO DE RODAGENS");
+        getContentPane().add(txtShotHistoric);
+        txtShotHistoric.setBounds(223, 12, 314, 32);
 
         imageBefore.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LeftArrow.png"))); // NOI18N
         imageBefore.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,6 +137,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 imageBeforeMouseClicked(evt);
             }
         });
+        getContentPane().add(imageBefore);
+        imageBefore.setBounds(17, 420, 48, 28);
 
         imageAfter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/RightArrow.png"))); // NOI18N
         imageAfter.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,6 +146,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 imageAfterMouseClicked(evt);
             }
         });
+        getContentPane().add(imageAfter);
+        imageAfter.setBounds(215, 420, 48, 28);
 
         try {
             inputDateFilter.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -152,6 +160,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 inputDateFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(inputDateFilter);
+        inputDateFilter.setBounds(83, 420, 114, 28);
 
         buttonFilter.setText("FILTRAR");
         buttonFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +174,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
                 buttonFilterKeyPressed(evt);
             }
         });
+        getContentPane().add(buttonFilter);
+        buttonFilter.setBounds(319, 423, 90, 25);
 
         tablePlanning.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -183,45 +195,8 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         });
         tableExistingPlan.setViewportView(tablePlanning);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtShotHistoric)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(imageBefore)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inputDateFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(imageAfter)
-                .addGap(56, 56, 56)
-                .addComponent(buttonFilter)
-                .addGap(15, 377, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tableExistingPlan)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtShotHistoric)
-                .addGap(18, 18, 18)
-                .addComponent(tableExistingPlan, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonFilter, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(imageBefore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(inputDateFilter)
-                        .addComponent(imageAfter, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19))
-        );
+        getContentPane().add(tableExistingPlan);
+        tableExistingPlan.setBounds(12, 62, 737, 346);
 
         setSize(new java.awt.Dimension(777, 506));
         setLocationRelativeTo(null);
