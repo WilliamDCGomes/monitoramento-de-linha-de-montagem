@@ -42,7 +42,7 @@ public class AutomaticPlanning {
             pst2.setString(1, date);
             rs2= pst2.executeQuery();
             while(rs2.next()){
-                list.add(rs.getString(1) + ";" + rs.getString(2) + ";" + rs.getInt(3));
+                list.add(rs2.getString(1) + ";" + rs2.getString(2) + ";" + rs2.getInt(3));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

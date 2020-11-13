@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ConnectionModule {
-    private String host = "192.168.1.107";
+    private String host = "localhost";
     private String port = "3306";
     private String db = "linha_de_montagem";
     private String user = "glassbyte";
