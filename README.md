@@ -1,5 +1,15 @@
-# Maratona de Programação da ICPC
+# Sistema de Automatização de uma Linha de Montagem
 
-## Repositório dedicado a guardar os exercícios que resolvi durante as minhas participações na maratona de programação oferecida pela ICPC
+## Sistema criado com o intuito de automatizar o controle de produção de uma linha de montagem real
 
-![](https://github.com/WilliamDCGomes/Maratona-de-Programa-o-ICPC/blob/main/ArquivosReadme/dormrm.gif)
+### Paínel de Controle do Supervisor da Linha
+
+![Painel de Controle](https://github.com/WilliamDCGomes/Automatizacao-Linha-De-Montagem/blob/master/ArquivosReadme/Gif1.gif)
+
+### Acesso do operário
+
+![Acesso Operario](https://github.com/WilliamDCGomes/Automatizacao-Linha-De-Montagem/blob/master/ArquivosReadme/Gif2.gif)
+
+### Exemplo de Controle de Atraso
+
+![Controle de Acesso](https://github.com/WilliamDCGomes/Automatizacao-Linha-De-Montagem/blob/master/ArquivosReadme/Gif3.gif)
