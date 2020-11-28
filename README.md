@@ -1,4 +1,4 @@
-# Sistema de Automatização de uma Linha de Montagem
+# Sistema de Monitoramento de uma Linha de Montagem
 
 ## Sistema criado com o intuito de automatizar o controle de produção de uma linha de montagem real
 
