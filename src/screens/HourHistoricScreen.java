@@ -25,7 +25,6 @@ public class HourHistoricScreen extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     int x=0;
-    int selects=0;
     ArrayList<String> begins = new ArrayList<String>();
     ArrayList<String> ends = new ArrayList<String>();
     
@@ -70,7 +69,6 @@ public class HourHistoricScreen extends javax.swing.JFrame {
         }
     }
     private void getBegin(){
-        selects=0;
         String sqlnome = "select min(beginning) from presentshotting where dats = ? group by shot";
         try {
             pst = connection.prepareStatement(sqlnome);
@@ -78,14 +76,12 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             rs = pst.executeQuery();
             while (rs.next()) {
                 begins.add(rs.getString(1));
-                selects++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
         }
     }
     private void getEnd(){
-        selects=0;
         String sqlnome = "select max(ending) from workfinish where dats = ? group by shot";
         try {
             pst = connection.prepareStatement(sqlnome);
@@ -93,7 +89,6 @@ public class HourHistoricScreen extends javax.swing.JFrame {
             rs = pst.executeQuery();
             while (rs.next()) {
                 ends.add(rs.getString(1));
-                selects++;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e);
