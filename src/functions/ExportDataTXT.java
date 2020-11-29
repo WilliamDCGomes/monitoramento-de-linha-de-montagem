@@ -20,8 +20,8 @@ public class ExportDataTXT {
     Connection connection = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    ArrayList<String> planning = new ArrayList<String>();
-    ArrayList<String> production = new ArrayList<String>();
+    ArrayList<String> planning = new ArrayList<>();
+    ArrayList<String> production = new ArrayList<>();
     Export export;
     String date;
     public ExportDataTXT(String dateInformed, Export exportData){

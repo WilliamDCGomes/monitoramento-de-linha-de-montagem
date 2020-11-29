@@ -1,5 +1,6 @@
 package screens;
 
+import connectionbd.SetAndGetIP;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -39,6 +40,7 @@ public class CommandScreen extends javax.swing.JFrame {
         txtExportTable = new javax.swing.JLabel();
         txtHourHistoric = new javax.swing.JLabel();
         buttonLogout = new javax.swing.JButton();
+        buttonConfigIP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Paínel de Controle");
@@ -144,6 +146,20 @@ public class CommandScreen extends javax.swing.JFrame {
         getContentPane().add(buttonLogout);
         buttonLogout.setBounds(27, 270, 90, 25);
 
+        buttonConfigIP.setText("CONFIGURAR IP");
+        buttonConfigIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonConfigIPActionPerformed(evt);
+            }
+        });
+        buttonConfigIP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buttonConfigIPKeyPressed(evt);
+            }
+        });
+        getContentPane().add(buttonConfigIP);
+        buttonConfigIP.setBounds(150, 270, 150, 25);
+
         setSize(new java.awt.Dimension(738, 347));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -214,6 +230,15 @@ public class CommandScreen extends javax.swing.JFrame {
         onlineStation.setVisible(true);
     }//GEN-LAST:event_txtOnlineStationMouseClicked
 
+    private void buttonConfigIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfigIPActionPerformed
+        SetAndGetIP setAndGetIP = new SetAndGetIP();
+        setAndGetIP.setVisible(true);
+    }//GEN-LAST:event_buttonConfigIPActionPerformed
+
+    private void buttonConfigIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buttonConfigIPKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonConfigIPKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -250,6 +275,7 @@ public class CommandScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonConfigIP;
     private javax.swing.JButton buttonLogout;
     private javax.swing.JLabel txtCadastreNewStation;
     private javax.swing.JLabel txtChangePasswordControlPanel;
