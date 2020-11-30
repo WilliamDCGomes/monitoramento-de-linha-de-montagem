@@ -183,7 +183,7 @@ public class EditStation extends javax.swing.JFrame {
         txtNewStation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         txtNewStation.setText("EDITAR ESTAÇÃO");
         getContentPane().add(txtNewStation);
-        txtNewStation.setBounds(90, 30, 204, 32);
+        txtNewStation.setBounds(100, 30, 204, 32);
 
         buttonSave.setText("SALVAR");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {

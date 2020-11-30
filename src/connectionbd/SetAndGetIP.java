@@ -1,12 +1,15 @@
 package connectionbd;
 
 import functions.MaskJustNumbers;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +24,9 @@ public class SetAndGetIP extends javax.swing.JFrame {
     public SetAndGetIP() {
         initComponents();
         inputIP.setDocument(new MaskJustNumbers());
+        URL adress = getClass().getResource("/images/icon.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage(adress);
+        this.setIconImage(icon);
     }
     private void setFile() throws IOException{
         String userDir = System.getProperty("user.home");
